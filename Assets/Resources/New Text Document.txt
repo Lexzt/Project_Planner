@@ -1,0 +1,36 @@
+{
+  "Personals": [
+    {
+      "Name":"Keith Fong",
+      "IC":"S9434749A",
+      "DOB":"",
+      "Roles":[
+         "Sentry","Checker","Console"
+      ]
+    },
+    {
+      "Name":"Keith Fong",
+      "IC":"S9434749A",
+      "DOB":"",
+      "Roles":[
+         "Sentry","Checker","Console"
+      ]
+    }
+  ],
+  "Emplacements":{
+    "Viper 1 Checker":"Checker",
+    "Viper 1 Sentry":"Sentry",
+    "Viper 2 Checker":"Checker",
+    "Viper 2 Sentry":"Sentry",
+    "Giro":"Pass Office",
+    "East Control":"Console",
+    "Duty Driver":"Driver"
+  },
+  "StaticVars": {
+    "MaxNoPerMountWeekDay": 8,
+    "MaxNoPerMountWeekEnd": 10,
+    "MaxNoOfDutyInARow": 2,
+    "StickInHours": 2,
+    "RestAfterSticks": 2
+  }
+}

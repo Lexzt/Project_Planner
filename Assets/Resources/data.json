@@ -1,0 +1,94 @@
+{
+   "Batches":[
+      {
+         "BatchName":"Team Brian",
+         "ORD Month And Year":"05/17",
+         "Personnels":[
+            {
+               "Name":"Keith Fong",
+               "IC":"S9434749A",
+               "DOB":"779673600",
+               "ORD":"",
+               "Roles":[
+                  "Sentry",
+                  "Checker",
+                  "Console"
+               ]
+            },
+            {
+               "Name":"Brian Cheong",
+               "IC":"S1234567B",
+               "DOB":"779673600",
+               "ORD":"",
+               "Roles":[
+                  "Sentry",
+                  "Checker"
+               ]
+            }
+         ]
+      },
+      {
+         "BatchName":"SYG",
+         "ORD Month And Year":"12/16",
+         "Personnels":[
+            {
+               "Name":"Sean",
+               "IC":"S1234567C",
+               "DOB":"779673600",
+               "ORD":"",
+               "Roles":[
+                  "Sentry",
+                  "Checker"
+               ]
+            },
+            {
+               "Name":"Yi Chong",
+               "IC":"S1234567D",
+               "DOB":"779673600",
+               "ORD":"",
+               "Roles":[
+                  "Sentry",
+                  "Checker"
+               ]
+            }
+         ]
+      }
+   ],
+   "Emplacements":{
+      "Viper 1 Checker":{
+         "Name":"Viper 1 Checker",
+         "Role":"Checker"
+      },
+      "Viper 1 Sentry":{
+         "Name":"Viper 1 Sentry",
+         "Role":"Sentry"
+      },
+      "Viper 2 Checker":{
+         "Name":"Viper 2 Checker",
+         "Role":"Checker"
+      },
+      "Viper 2 Sentry":{
+         "Name":"Viper 2 Sentry",
+         "Role":"Sentry"
+      },
+      "Giro":{
+         "Name":"Giro",
+         "Role":"Pass Office"
+      },
+      "East Control":{
+         "Name":"East Control",
+         "Role":"Console"
+      },
+      "Mystic":{
+         "Name":"Mystic",
+         "Role":"Driver"
+      }
+   },
+   "StaticVars":{
+      "MaxNoPerMountWeekDay":8,
+      "MaxNoPerMountWeekEnd":10,
+      "MaxNoOfDutyInARow":2,
+      "StickInHours":2,
+      "RestAfterSticks":2
+   }
+}

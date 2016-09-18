@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using SimpleJSON;
 
 public class ChangiAirBaseEast : Base {
 
@@ -17,63 +18,63 @@ public class ChangiAirBaseEast : Base {
 	public GameObject SearchInputField;
 
 	// Use this for initialization
-	void Start () {
-		Debug.Log ("No Of Hours: " + (StaticVars.EndDate - StaticVars.StartDate).TotalHours);
+	void Start () 
+    {
+        Debug.Log("No Of Hours: " + (StaticVars.EndDate - StaticVars.StartDate).TotalHours);
+        
+        GameObject BatchParents = new GameObject("Batches");
+        GameObject EmplacementParents = new GameObject("Emplacements");
+        
+        TextAsset Json = Resources.Load("data") as TextAsset;
+        JSONNode root = JSON.Parse(Json.text);
+        
+        for (int j = 0; j < root["Batches"].Count; j++)
+        {
+            GameObject BatchObj = new GameObject();
+            BatchObj.transform.parent = BatchParents.transform;
+            Batch tempBatch = BatchObj.AddComponent<Batch>();
+            tempBatch.BatchName = root["Batches"][j]["BatchName"];
+            BatchObj.name = root["Batches"][j]["BatchName"];
+            base.Batches.Add(tempBatch);
 
+            for (int i = 0; i < root["Batches"][j]["Personnels"].Count; i++)
+            {
+                Debug.Log(root["Batches"][j]["Personnels"][i]);
+                GameObject Person = new GameObject();
+                Person.transform.parent = BatchObj.transform;
+                Person tempPerson = Person.AddComponent<Person>();
+                tempPerson.Set(root["Batches"][j]["Personnels"][i]["Name"], root["Batches"][j]["Personnels"][i]["IC"], new DateTime(root["Batches"][j]["Personnels"][i]["DOB"].AsInt));
+                Person.name = tempPerson.Name;
+                tempBatch.AddPersonal(tempPerson);
+            }
+        }
 
-//		Person Keith = new Person("Keith","S9434749A",new DateTime(1994,9,16));
-//		Batch Batch1 = gameObject.AddComponent<Batch> ();
-//		Batch1.BatchName = "Team Brian";
-//		Batch1.AddPersonal (Keith);
-//
-//		Person Minghan = new Person("Minghan","S938283C",new DateTime(1993,4,09));
-//		Batch Batch2 = gameObject.AddComponent<Batch>();
-//		Batch2.BatchName = "2 Man Solo";
-//		Batch2.AddPersonal (Minghan);
-//
-//		Person YC = new Person("YC","S9651234N",new DateTime(1996,6,23));
-//		Batch Batch3 = gameObject.AddComponent<Batch>();
-//		Batch3.BatchName = "IDontevenKnow";
-//		Batch3.AddPersonal (YC);
-//
-//		base.Batches.Add (Batch1);
-//		base.Batches.Add (Batch2);
-//		base.Batches.Add (Batch3);
+        for (int i = 0; i < root["Emplacements"].Count; i++)
+        {
+            Debug.Log(root["Emplacements"][i]["Name"].Value + " - " + root["Emplacements"][i]["Role"].Value);
+            GameObject EmpObj = new GameObject();
+            EmpObj.transform.parent = EmplacementParents.transform;
+            Emplacement Emp1 = EmpObj.AddComponent<Emplacement>();
+            Emp1.NameOfEmplacement = root["Emplacements"][i]["Name"];
+            EmpObj.name = Emp1.NameOfEmplacement;
+            Emp1.GenerateSticks(ParentObject, StickGameObject,RolesParseJson(root["Emplacements"][i]["Role"]) ,i);
+        }
 
-		GameObject PersonObjects = new GameObject ("People");
-		GameObject Person = new GameObject ();
-		Person.transform.parent = PersonObjects.transform;
-		Person Keith = Person.AddComponent<Person> ();
-		Keith.Set("Keith","S9434749A",new DateTime(1994,9,16));
-		Person.name = Keith.Name;
+        //GameObject EmpObj = new GameObject ();
+        //EmpObj.transform.parent = EmplacementParents.transform;
+        //Emplacement Emp1 = EmpObj.AddComponent<Emplacement>();
+        //Emp1.NameOfEmplacement = "Viper 1 Checker";
+        //EmpObj.name = Emp1.NameOfEmplacement;
+        //Emp1.GenerateSticks (ParentObject,StickGameObject,0);
+        //Emp1.RemoveStick (new DateTime (2016, 8, 15, 18, 00, 00));
+        //Emp1.RemoveStick (new DateTime (2016, 8, 16, 22, 00, 00));
 
-		GameObject BatchParents = new GameObject ("Batches");
-		GameObject BatchObj = new GameObject ();
-		BatchObj.transform.parent = BatchParents.transform;
-
-		Batch Batch1 = BatchObj.AddComponent<Batch> ();
-		Batch1.BatchName = "Team Brian";
-		Batch1.AddPersonal (Keith);
-		base.Batches.Add (Batch1);
-
-		GameObject EmplacementParents = new GameObject ("Emplacements");
-
-		GameObject EmpObj = new GameObject ();
-		EmpObj.transform.parent = EmplacementParents.transform;
-		Emplacement Emp1 = EmpObj.AddComponent<Emplacement>();
-		Emp1.NameOfEmplacement = "Viper 1 Checker";
-		EmpObj.name = Emp1.NameOfEmplacement;
-		Emp1.GenerateSticks (ParentObject,StickGameObject,0);
-		Emp1.RemoveStick (new DateTime (2016, 8, 15, 18, 00, 00));
-		Emp1.RemoveStick (new DateTime (2016, 8, 16, 22, 00, 00));
-
-
-		EmpObj = new GameObject ();
-		EmpObj.transform.parent = EmplacementParents.transform;
-		Emplacement Emp2 = EmpObj.AddComponent<Emplacement>();
-		Emp2.NameOfEmplacement = "Viper 1 Sentry";
-		EmpObj.name = Emp2.NameOfEmplacement;
-		Emp2.GenerateSticks (ParentObject,StickGameObject,1);
+        //EmpObj = new GameObject ();
+        //EmpObj.transform.parent = EmplacementParents.transform;
+        //Emplacement Emp2 = EmpObj.AddComponent<Emplacement>();
+        //Emp2.NameOfEmplacement = "Viper 1 Sentry";
+        //EmpObj.name = Emp2.NameOfEmplacement;
+        //Emp2.GenerateSticks (ParentObject,StickGameObject,1);
 
 		GenerateDictionary ();
 	}
@@ -91,7 +92,32 @@ public class ChangiAirBaseEast : Base {
 		}
 		return OutputDictionary.ToArray ();
 	}
-	
+
+    Roles RolesParseJson(string Json)
+    {
+        switch (Json)
+        {
+            case "Checker":
+                return Roles.eCHECKER;
+                break;
+            case "Sentry":
+                return Roles.eSENTRY;
+                break;
+            case "Pass Office":
+                return Roles.ePASS_OFFICE;
+                break;
+            case "Console":
+                return Roles.eCONSOLE;
+                break;
+            case "Driver":
+                return Roles.eDRIVER;
+                break;
+            default:
+                return Roles.eNONE;
+                break;
+        }
+    }
+
 	// Update is called once per frame
 	void Update () {
 	

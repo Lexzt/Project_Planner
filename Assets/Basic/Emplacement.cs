@@ -4,6 +4,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+public enum Roles
+{
+    eNONE,
+    eSENTRY,
+    eCHECKER,
+    ePASS_OFFICE,
+    eCONSOLE,
+    eDRIVER,
+};
+
 public class Emplacement : MonoBehaviour {
 
 	public string NameOfEmplacement;
@@ -11,6 +21,7 @@ public class Emplacement : MonoBehaviour {
 	public int TotalAmtOfStick;
 	public int Pirority;
 	public bool StickUnique = false;
+    public Roles CurrentRole = Roles.eNONE;
 
 	// Use this for initialization
 	void Start () 
@@ -24,10 +35,10 @@ public class Emplacement : MonoBehaviour {
 	
 	}
 
-	public void GenerateSticks (GameObject Parent,GameObject StickGameObject,int index) 
+	public void GenerateSticks (GameObject Parent,GameObject StickGameObject,Roles EmplacementType,int index) 
 	{
 		TotalAmtOfStick = (int)(StaticVars.EndDate - StaticVars.StartDate).TotalHours / StaticVars.StickInHours;
-
+        CurrentRole = EmplacementType; 
 		GameObject EmplacementObject = new GameObject (NameOfEmplacement);
 		EmplacementObject.transform.parent = Parent.transform;
 		ListOfSticks = new List<Stick> ();

@@ -12,7 +12,7 @@ public class BatchClass
 	public BatchClass(int tBatchAmount, int tNoOfPeronals, string tBatchName, bool tXZ = false)
 	{
 		BatchStick = new List<int[]> ();
-		BatchStick.Add (new int[] { tNoOfPeronals, tBatchAmount });
+		BatchStick.Add (new int[] { tBatchAmount, tNoOfPeronals });
 		NoOfPersonals = tNoOfPeronals;
 		BatchName = tBatchName;
 		XZ = tXZ;
@@ -148,7 +148,7 @@ public class ChangiAirBaseEast : Base {
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
 			// Parameters for the function
-			int NoOfSticks = 59;
+			int NoOfSticks = 48;
 			bool MaxXZ = true;
 
 			// First, We need to pull out the personal who are not standing sticks.
@@ -202,7 +202,7 @@ public class ChangiAirBaseEast : Base {
 			int CurrentNoOfBatches = subNode ["Batches"].Count;
 
 			// Currently, I am going to hard code the variable of number of stick for xz.
-			int XZBaseStick = 6;
+			int XZBaseStick = 7;
 
 			// Define the stick count list, not the finalize number
 			List<BatchClass> StickCount = new List<BatchClass> ();
@@ -258,78 +258,142 @@ public class ChangiAirBaseEast : Base {
 
 			bool loop = true;
 			int breakpoint = 0;
-			while (loop && breakpoint != 10) 
+
+			Debug.Log ("Diff: " + diff);
+			// Here, I do my condition checks. 
+			if (diff == 0) 
 			{
-				Debug.Log ("Diff: " + diff);
-				// Here, I do my condition checks. 
-				if (diff == 0) 
+				// Yay! We dont need to calculate anymore
+				Debug.Log ("Finalized");
+				loop = false;
+
+			} 
+			else 
+			{
+				// Okay, So we are now cant return the value yet. Cause our configuration is wrong.
+				// We need to change a specific one.
+				foreach (BatchClass temp in StickCount) 
 				{
-					// Yay! We dont need to calculate anymore
-					Debug.Log ("Finalized");
-					loop = false;
-
-				} 
-				else 
-				{
-					// Okay, So we are now cant return the value yet. Cause our configuration is wrong.
-					// We need to change a specific one.
-					foreach (BatchClass temp in StickCount) 
+					if (Mathf.Abs(diff) == temp.NoOfPersonals && temp.XZ != MaxXZ) 
 					{
-						if (Mathf.Abs(diff) == temp.NoOfPersonals && temp.XZ != MaxXZ) 
+						Debug.Log ("Diff == BatchNo!");
+						// We can increase that batch total amount of stick, 
+						if (diff > 0) 
 						{
-							Debug.Log ("Diff == BatchNo!");
-							// We can increase that batch total amount of stick, 
-							if (diff > 0) 
-							{
-								temp.BatchStick [0] [1]++;
-								loop = false;
-								break;
-							}
-							else if(diff < 0)
-							{
-								temp.BatchStick [0] [1]--;
-								loop = false;
-								break;
-							}
-							//Random.Range(0,temp.NoOfPersonals);
+							temp.BatchStick [0] [1]++;
+							loop = false;
+							break;
 						}
-					}
-
-					// Okay, so when we reach here, it means that the avail manpower does not equals to the diff sticks.
-					// So with this, It means, we have to have uneven stick for one batch.
-					if (diff > 0) 
-					{
-						// Okay, This means we need the value is positive. 
-						// This means we have to Increase the amount of sticks
-						// So we can match the amount of stick.
-						foreach (BatchClass temp in StickCount) 
+						else if(diff < 0)
 						{
-							if (temp.XZ != MaxXZ) 
-							{
-								// This is for max xz
-
-							}
-							else
-							{
-								// This is for not max xz
-
-							}
+							temp.BatchStick [0] [1]--;
+							loop = false;
+							break;
 						}
-					} 
-					else if (diff < 0) 
-					{
-						// Okay, This means we need the value is negative. 
-						// This means we have to too much stick with our current configuration.
-						// So we have to decrease our previous configuration. 
+						//Random.Range(0,temp.NoOfPersonals);
 					}
 				}
-				breakpoint++;
+
+				// Okay, so when we reach here, it means that the avail manpower does not equals to the diff sticks.
+				// So with this, It means, we have to have uneven stick for one batch.
+
+				// Okay, This means we need the value is negative. 
+				// This means we have to too much stick with our current configuration.
+				// So we have to decrease our previous configuration. 
+				while (loop && breakpoint != 10) 
+				{
+					int sticksLeft = Mathf.Abs(diff);
+					for(int i = StickCount.Count - 1; i > 0; i--)
+					{
+						BatchClass temp = StickCount [i];
+						if (temp.XZ != MaxXZ) 
+						{
+							// This is for max xz
+							Debug.Log(sticksLeft + " - " + temp.BatchName + " - " + temp.NoOfPersonals + " - " + diff);
+							if (sticksLeft > temp.NoOfPersonals && temp.NoOfPersonals > 0) 
+							{
+								// Now, I will minus the amount of sticks left.
+								sticksLeft -= temp.NoOfPersonals;
+								if (diff < 0) 
+								{
+									Debug.Log ("Minus");
+									// Now, I reconfigure the sticks for when we need less manpower.
+									temp.BatchStick [0] [0]--;
+								}
+								else if (diff > 0) 
+								{
+									Debug.Log ("Plus");
+									// Now, I reconfigure the sticks for when we need more manpower.
+									temp.BatchStick [0] [0]++;
+								}
+							}
+							else if(temp.NoOfPersonals > 0)
+							{
+								Debug.Log ("No of sticks left = " + sticksLeft);
+								// This means we do not have enough manpower. 
+								// This means we need to uneven stick.
+								int PreviousAmt = temp.BatchStick[0][0];
+								temp.BatchStick = new List<int[]>();
+
+								if (diff < 0) 
+								{
+									int FirstAmt = temp.NoOfPersonals - sticksLeft;
+									int SecAmt = temp.NoOfPersonals - FirstAmt;
+									Debug.Log ("First Second " + FirstAmt + " - " + SecAmt + " - " + PreviousAmt);
+									temp.BatchStick.Add (new int[] { PreviousAmt - 1, SecAmt });
+									temp.BatchStick.Add (new int[] { PreviousAmt, FirstAmt });
+								} 
+								else 
+								{
+									int FirstAmt = temp.NoOfPersonals - sticksLeft;
+									int SecAmt = temp.NoOfPersonals - FirstAmt;
+									Debug.Log ("First Second " + FirstAmt + " - " + SecAmt + " - " + PreviousAmt);
+									temp.BatchStick.Add (new int[] { PreviousAmt + 1, SecAmt });
+									temp.BatchStick.Add (new int[] { PreviousAmt, FirstAmt });
+								}
+								break;
+							}
+						}
+						else
+						{
+							// This is for not max xz
+
+						}
+					} 
+					breakpoint++;
+					int count = 0;
+					foreach (BatchClass countStick in StickCount) 
+					{
+						foreach (int[] val in countStick.BatchStick) 
+						{
+							count += val[0] * val[1];
+							Debug.Log ("(" + countStick.BatchName + ")" + val[1] + " People do " + val[0] * val[1]);
+						}
+					}
+					Debug.Log (breakpoint + " Times - Count: " + count);
+					if (count != NoOfSticks) 
+					{
+						diff = NoOfSticks - count;
+						continue;
+					}
+					else
+					{
+						loop = false;
+					}
+				}
 			}
 
+			int finalCount = 0;
 			foreach (BatchClass temp in StickCount) 
 			{
-				Debug.Log (temp.BatchName + " - " + temp.BatchStick [0] [0] + " - " + temp.BatchStick [0] [1]);
+				//Debug.Log (temp.BatchName);
+				foreach (int[] val in temp.BatchStick) 
+				{
+					finalCount += val[0] * val[1];
+					//Debug.Log (val[0] * val[1]);
+				}
 			}
+			Debug.Log ("Count: " + finalCount);
 		}
 	}
 

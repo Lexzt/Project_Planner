@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.Collections;
 
@@ -8,7 +9,7 @@ public class Stick : MonoBehaviour {
 	public DateTime TimeEnd;
 	public Person DutyPersonal;
 	public Emplacement Parent;
-	public bool Assigned;
+	public bool Assigned = false;
 	public GameObject GUI;
 	public StickState State = StickState.ENABLED;
 
@@ -26,6 +27,11 @@ public class Stick : MonoBehaviour {
 	{
 		DutyPersonal = Data;
 		Assigned = true;
+		Data.lastStickEndTiming = TimeEnd;
+		Data.NoOfSticks++;
+
+		// I need to update the ui here.
+		GUI.transform.GetChild(0).GetComponent<Text>().text = Data.name;
 	}
 
 	public void DefineTimeStart(DateTime Start, int NoOfSticks)

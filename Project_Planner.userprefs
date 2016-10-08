@@ -2,7 +2,14 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\ChangiAirBaseEast.cs">
     <Files>
-      <File FileName="Assets\ChangiAirBaseEast.cs" Line="378" Column="7" />
+      <File FileName="Assets\ChangiAirBaseEast.cs" Line="196" Column="23" />
+      <File FileName="Assets\Resources\data.json" Line="217" Column="7" />
+      <File FileName="Assets\Basic\Emplacement.cs" Line="24" Column="44" />
+      <File FileName="Assets\Basic\Stick.cs" Line="28" Column="1" />
+      <File FileName="Assets\Basic\StaticVars.cs" Line="27" Column="36" />
+      <File FileName="Assets\Basic\Base.cs" Line="7" Column="2" />
+      <File FileName="Assets\Basic\Batch.cs" Line="10" Column="30" />
+      <File FileName="Assets\Basic\Person.cs" Line="40" Column="32" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

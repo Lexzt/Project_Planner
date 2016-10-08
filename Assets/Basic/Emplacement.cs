@@ -22,6 +22,7 @@ public class Emplacement : MonoBehaviour {
 	public int Pirority;
 	public bool StickUnique = false;
     public Roles CurrentRole = Roles.eNONE;
+	private bool AllAssigned = false;
 
 	// Use this for initialization
 	void Start () 
@@ -35,8 +36,25 @@ public class Emplacement : MonoBehaviour {
 	
 	}
 
-	public void GenerateSticks (GameObject Parent,GameObject StickGameObject,Roles EmplacementType,int index) 
+	public bool GetAllAssigned ()
 	{
+		foreach (Stick val in ListOfSticks) 
+		{
+			if (val.Assigned == true) 
+			{
+				continue;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public void GenerateSticks (GameObject Parent,GameObject StickGameObject,Roles EmplacementType,int tPirority,int index) 
+	{
+		Pirority = tPirority;
 		TotalAmtOfStick = (int)(StaticVars.EndDate - StaticVars.StartDate).TotalHours / StaticVars.StickInHours;
         CurrentRole = EmplacementType; 
 		GameObject EmplacementObject = new GameObject (NameOfEmplacement);

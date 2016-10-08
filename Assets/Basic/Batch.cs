@@ -7,6 +7,7 @@ public class Batch : MonoBehaviour {
 	public List<Person> ListOfPeople = new List<Person> ();
 	public string BatchName;
 	public int BatchNo;
+	public BatchClass ClassData;
 
 	// Use this for initialization
 	void Start () {

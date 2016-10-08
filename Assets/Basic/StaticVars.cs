@@ -23,4 +23,29 @@ public static class StaticVars{
 	public static float StickPadding = 3f;
 	public static float xPixelPadding = 20f;
 	public static float yPixelPadding = 50f;
+
+	public static Roles RolesParseJson(string Json)
+	{
+		switch (Json)
+		{
+		case "Checker":
+			return Roles.eCHECKER;
+			break;
+		case "Sentry":
+			return Roles.eSENTRY;
+			break;
+		case "Pass Office":
+			return Roles.ePASS_OFFICE;
+			break;
+		case "Console":
+			return Roles.eCONSOLE;
+			break;
+		case "Driver":
+			return Roles.eDRIVER;
+			break;
+		default:
+			return Roles.eNONE;
+			break;
+		}
+	}
 }

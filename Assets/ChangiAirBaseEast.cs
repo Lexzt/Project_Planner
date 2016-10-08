@@ -23,7 +23,6 @@ public class BatchClass
 	// the second index, 1, will be the amount of personal with that stick. 
 	public List<int[]> BatchStick = new List<int[]>();
 	public int NoOfPersonals;
-	public bool UnEven = false;
 	public bool XZ = false;
 }
 
@@ -40,6 +39,8 @@ public class ChangiAirBaseEast : Base {
 	public GameObject SearchInputField;
 
 	private JSONNode root = null; 
+
+	public List<BatchClass> FinalizedList = new List<BatchClass>();
 
 	// Use this for initialization
 	void Start () 
@@ -63,11 +64,14 @@ public class ChangiAirBaseEast : Base {
 
             for (int i = 0; i < root["Batches"][j]["Personnels"].Count; i++)
             {
-                Debug.Log(root["Batches"][j]["Personnels"][i]);
+				Debug.Log("Array: " + root["Batches"][j]["Personnels"][i]["Roles"]);
                 GameObject Person = new GameObject();
                 Person.transform.parent = BatchObj.transform;
                 Person tempPerson = Person.AddComponent<Person>();
-                tempPerson.Set(root["Batches"][j]["Personnels"][i]["Name"], root["Batches"][j]["Personnels"][i]["IC"], new DateTime(root["Batches"][j]["Personnels"][i]["DOB"].AsInt));
+                tempPerson.Set(root["Batches"][j]["Personnels"][i]["Name"], 
+					root["Batches"][j]["Personnels"][i]["IC"], 
+					new DateTime(root["Batches"][j]["Personnels"][i]["DOB"].AsInt),
+					root["Batches"][j]["Personnels"][i]["Roles"]);
                 Person.name = tempPerson.Name;
                 tempBatch.AddPersonal(tempPerson);
             }
@@ -81,7 +85,8 @@ public class ChangiAirBaseEast : Base {
             Emplacement Emp1 = EmpObj.AddComponent<Emplacement>();
             Emp1.NameOfEmplacement = root["Emplacements"][i]["Name"];
             EmpObj.name = Emp1.NameOfEmplacement;
-            Emp1.GenerateSticks(ParentObject, StickGameObject,RolesParseJson(root["Emplacements"][i]["Role"]) ,i);
+			Emp1.GenerateSticks(ParentObject, StickGameObject,StaticVars.RolesParseJson(root["Emplacements"][i]["Role"]),root["Emplacements"][i]["Pirority"].AsInt,i);
+			base.Emplacements.Add (Emp1);
         }
 
         //GameObject EmpObj = new GameObject ();
@@ -117,38 +122,78 @@ public class ChangiAirBaseEast : Base {
 		return OutputDictionary.ToArray ();
 	}
 
-    Roles RolesParseJson(string Json)
-    {
-        switch (Json)
-        {
-            case "Checker":
-                return Roles.eCHECKER;
-                break;
-            case "Sentry":
-                return Roles.eSENTRY;
-                break;
-            case "Pass Office":
-                return Roles.ePASS_OFFICE;
-                break;
-            case "Console":
-                return Roles.eCONSOLE;
-                break;
-            case "Driver":
-                return Roles.eDRIVER;
-                break;
-            default:
-                return Roles.eNONE;
-                break;
-        }
-    }
+    
 
 	// Update is called once per frame
 	void Update () 
 	{
+		if (Input.GetKeyDown (KeyCode.A)) 
+		{
+			// The goal is to give the emplacement to the latest people.
+			// However, I will give from top down, cause the latest people can fill up the rest easily.
+			foreach (Emplacement tEmplacement in Emplacements) 
+			{
+				Debug.Log ("Doing " + tEmplacement.NameOfEmplacement);
+				if(tEmplacement.Pirority != 0)
+				{
+					// This is one here to ignore the first stick cause its odd number.
+					// We will cast it to the static var class in the future.
+					for(int j = 1; j < (tEmplacement.ListOfSticks.Count - 1); j ++)
+					{
+						if(tEmplacement.ListOfSticks[j].Assigned == false)
+						{
+							for(int k = 0; k < Batches.Count; k++)
+							{
+								Batch tBatch = Batches [k];
+								Debug.Log (tBatch.BatchName);
+								foreach(Person tPersonal in tBatch.ListOfPeople)
+								{
+									Debug.Log (tPersonal.NoOfSticks + " - " + tPersonal.Name);
+									if (tPersonal.NoOfSticks > 0)
+									{
+										TimeSpan TimePassed = tEmplacement.ListOfSticks[j].TimeStart - tPersonal.lastStickEndTiming;
+										if (TimePassed.TotalHours >= 6) 
+										{
+											Debug.Log ("Assigning " + tPersonal.Name + " " + tEmplacement.name);
+											tEmplacement.ListOfSticks[j].AssignPerson (tPersonal);
+											break;
+										}
+										else
+										{
+											Debug.Log ("Did not set cause " + tPersonal.lastStickEndTiming + " did stick recently! " + tEmplacement.ListOfSticks [j].TimeStart);
+											continue;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+//			Emplacements [0].ListOfSticks [1].AssignPerson (Batches [0].ListOfPeople [0]);
+//			Emplacements [0].ListOfSticks [2].AssignPerson (Batches [0].ListOfPeople [0]);
+//			TimeSpan TimePassed = Emplacements [0].ListOfSticks [2].TimeEnd - Batches [0].ListOfPeople [0].lastStickEndTiming;
+//			Debug.Log (TimePassed.TotalHours + " - " + Emplacements [0].ListOfSticks [2].TimeEnd + " - " + Batches [0].ListOfPeople [0].lastStickEndTiming);
+//			foreach (Emplacement val in ListOfEmplacements) 
+//			{
+//				// If pirority == 0, means they require a certain skillset to do the emplacement duty.
+//				// So, we cant assign them now like how we assign the rest cause we use people with the proper skillset only.
+//				if (val.Pirority != 0) 
+//				{
+//					Debug.Log (val.Pirority);
+//				}
+//				else
+//				{
+//					Debug.Log ("Ignoring cause " + val.NameOfEmplacement);
+//				}
+//			}
+		}
+
+		#region CalculateSticks
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
 			// Parameters for the function
-			int NoOfSticks = 48;
+			int NoOfSticks = 59;
 			bool MaxXZ = true;
 
 			// First, We need to pull out the personal who are not standing sticks.
@@ -202,7 +247,7 @@ public class ChangiAirBaseEast : Base {
 			int CurrentNoOfBatches = subNode ["Batches"].Count;
 
 			// Currently, I am going to hard code the variable of number of stick for xz.
-			int XZBaseStick = 7;
+			int XZBaseStick = 8;
 
 			// Define the stick count list, not the finalize number
 			List<BatchClass> StickCount = new List<BatchClass> ();
@@ -367,7 +412,7 @@ public class ChangiAirBaseEast : Base {
 						foreach (int[] val in countStick.BatchStick) 
 						{
 							count += val[0] * val[1];
-							Debug.Log ("(" + countStick.BatchName + ")" + val[1] + " People do " + val[0] * val[1]);
+							Debug.Log ("(" + countStick.BatchName + ")" + val[1] + " People do " + val[0] * val[1] + " - " + val[0] + " each");
 						}
 					}
 					Debug.Log (breakpoint + " Times - Count: " + count);
@@ -378,6 +423,7 @@ public class ChangiAirBaseEast : Base {
 					}
 					else
 					{
+						FinalizedList = StickCount;
 						loop = false;
 					}
 				}
@@ -392,9 +438,58 @@ public class ChangiAirBaseEast : Base {
 					finalCount += val[0] * val[1];
 					//Debug.Log (val[0] * val[1]);
 				}
+
+				foreach(Batch batchData in Batches)
+				{
+					if(batchData.BatchName == temp.BatchName)
+					{
+						batchData.ClassData = temp;
+						Debug.Log(temp.BatchStick.Count + " - " + temp.BatchName);
+						if(temp.BatchStick.Count > 1)
+						{
+							int RandomVal = Random.Range(0, temp.NoOfPersonals);
+							// This means uneven, So we need random.
+							for(int n = 0; n < temp.NoOfPersonals; n++)
+							{
+								bool RandomDone = true;
+								while(RandomDone)
+								{
+									int RandomIndex = Random.Range(0, temp.BatchStick.Count);
+									if(temp.BatchStick[RandomIndex][1] > 0)
+									{
+										batchData.ListOfPeople[n].NoOfSticks = temp.BatchStick[RandomIndex][0];
+										temp.BatchStick[RandomIndex][1]--;
+										RandomDone = false;
+									}
+								}
+							}
+						}
+						else
+						{
+							foreach(Person personal in batchData.ListOfPeople)
+							{
+								if(!personal.IsSpecialRole())
+								{
+									Debug.Log("Setting " + personal.Name + " to " + temp.BatchStick[0][0]);
+									personal.NoOfSticks = temp.BatchStick[0][0];
+								}
+							}
+						}
+					}
+				}
 			}
 			Debug.Log ("Count: " + finalCount);
+
+			// So now, I have calculated the amount of sticks per batch. 
+			// No matter if they are even or uneven. Yay!
+			// Now, I need to assign the sticks accordingly. 
+			// I will now check the emplacement data first.
+			for (int k = 0; k < subNode ["Emplacements"].Count; k++) 
+			{
+				Debug.Log(root["Emplacements"][k]["Name"].Value + " - " + root["Emplacements"][k]["Role"].Value);
+			}
 		}
+		#endregion
 	}
 
 	void CalculateStick (int[] BatchList, int TotalAmountOfSticks)

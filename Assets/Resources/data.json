@@ -202,31 +202,38 @@
   "Emplacements": {
     "Viper 1 Checker": {
       "Name": "Viper 1 Checker",
-      "Role": "Checker"
+      "Role": "Checker",
+      "Pirority": 1
     },
     "Viper 1 Sentry": {
       "Name": "Viper 1 Sentry",
-      "Role": "Sentry"
+      "Role": "Sentry",
+      "Pirority": 2
     },
     "Viper 2 Checker": {
       "Name": "Viper 2 Checker",
-      "Role": "Checker"
+      "Role": "Checker",
+      "Pirority": 3
     },
     "Viper 2 Sentry": {
       "Name": "Viper 2 Sentry",
-      "Role": "Sentry"
+      "Role": "Sentry",
+      "Pirority": 4
     },
     "Giro": {
       "Name": "Giro",
-      "Role": "Pass Office"
+      "Role": "Pass Office",
+      "Pirority": 0
     },
     "East Control": {
       "Name": "East Control",
-      "Role": "Console"
+      "Role": "Console",
+      "Pirority": 0
     },
     "Mystic": {
       "Name": "Mystic",
-      "Role": "Driver"
+      "Role": "Driver",
+      "Pirority": 0
     }
   },
   "StaticVars": {

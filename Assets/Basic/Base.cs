@@ -6,6 +6,7 @@ public class Base : MonoBehaviour {
 
 	public List<Emplacement> Emplacements;
 	public List<Batch> Batches;
+	public List<StepClass> Steps;
 
 	// Use this for initialization
 	void Start () {

@@ -17,6 +17,8 @@ public static class StaticVars{
 	public static int RestAfterSticks = 2;
 	public static DateTime StartDate = new DateTime(2016,8,15,14,00,00);
 	public static DateTime EndDate = new DateTime(2016,8,17,14,00,00);
+
+	public static bool StartEndStickOffset = true;
 	public static int StartHourOffset = 1;
 
 	// GUI Stuff

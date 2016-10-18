@@ -9,6 +9,14 @@ public class Batch : MonoBehaviour {
 	public int BatchNo;
 	public BatchClass ClassData;
 
+	public Batch(Batch tBatch)
+	{
+		ListOfPeople = new List<Person> ();
+		BatchName = tBatch.BatchName;
+		BatchNo = tBatch.BatchNo;
+		ClassData = tBatch.ClassData;
+	}
+
 	// Use this for initialization
 	void Start () {
 	
@@ -21,6 +29,10 @@ public class Batch : MonoBehaviour {
 
 	public void AddPersonal(Person Data)
 	{
+		if (ListOfPeople == null) 
+		{
+			ListOfPeople = new List<Person> ();
+		}
 		ListOfPeople.Add (Data);
 	}
 }

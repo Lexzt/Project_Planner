@@ -12,6 +12,8 @@ public class Stick : MonoBehaviour {
 	public bool Assigned = false;
 	public GameObject GUI;
 	public StickState State = StickState.ENABLED;
+	public int StepIndex = 0;
+	public bool Unique = false;
 
 	// Use this for initialization
 	void Start () {
@@ -28,7 +30,7 @@ public class Stick : MonoBehaviour {
 		DutyPersonal = Data;
 		Assigned = true;
 		Data.lastStickEndTiming = TimeEnd;
-		Data.NoOfSticks++;
+		Data.NoOfSticks--;
 
 		// I need to update the ui here.
 		GUI.transform.GetChild(0).GetComponent<Text>().text = Data.name;

@@ -11,6 +11,7 @@ public class Person : MonoBehaviour {
 	public DateTime DOB;
 	public Texture2D Photo;
 	public int NoOfSticks;
+	public Batch Parent;
 	public List<Roles> ListOfRoles = new List<Roles>();
 
 	public DateTime lastStickEndTiming;
@@ -53,6 +54,15 @@ public class Person : MonoBehaviour {
 			{
 				return false;
 			}
+		}
+		return false;
+	}
+
+	public bool IsRested (DateTime StickStartTiming)
+	{
+		if ((StickStartTiming - lastStickEndTiming).Hours >= (StaticVars.RestAfterSticks * StaticVars.StickInHours)) 
+		{
+			return true;
 		}
 		return false;
 	}

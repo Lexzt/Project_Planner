@@ -20,7 +20,7 @@ public class Emplacement : MonoBehaviour {
 	public List<Stick> ListOfSticks;
 	public int TotalAmtOfStick;
 	public int Pirority;
-	public bool StickUnique = false;
+	//public bool StickUnique = false;
     public Roles CurrentRole = Roles.eNONE;
 	private bool AllAssigned = false;
 
@@ -71,8 +71,27 @@ public class Emplacement : MonoBehaviour {
 			stickObject.GetComponent<RectTransform> ().position = new Vector3 (StaticVars.xPixelPadding + x + (i * width) + (i * StaticVars.StickPadding), Screen.height - y - StaticVars.yPixelPadding - (index * (height + StaticVars.StickPadding)));
 
 			Stick temp = stickObject.AddComponent<Stick> ();
-			temp.TimeStart = StaticVars.StartDate.Add (new TimeSpan ((i * StaticVars.StickInHours) + StaticVars.StartHourOffset, 0, 0));
-			temp.TimeEnd = temp.TimeStart.AddHours (StaticVars.StickInHours);
+			// First Stick
+			if (i == 0) 
+			{
+				temp.TimeStart = StaticVars.StartDate.Add (new TimeSpan ((i * StaticVars.StickInHours), 0, 0));
+				temp.TimeEnd = temp.TimeStart.AddHours (StaticVars.StickInHours + StaticVars.StartHourOffset);
+			}
+			else if(i == TotalAmtOfStick - 1)
+			{
+				temp.TimeStart = ListOfSticks[i - 1].TimeEnd;
+				temp.TimeEnd = temp.TimeStart.AddHours (StaticVars.StickInHours - StaticVars.StartHourOffset);
+			}
+			else
+			{
+				Debug.Log (ListOfSticks [i - 1].TimeEnd + " - " + StaticVars.StartDate.Add (new TimeSpan ((i * StaticVars.StickInHours), 0, 0)));
+				temp.TimeStart = ListOfSticks[i - 1].TimeEnd;
+				temp.TimeEnd = temp.TimeStart.AddHours (StaticVars.StickInHours);
+			}
+
+			//temp.TimeEnd = temp.TimeStart.AddHours (StaticVars.StickInHours);
+			temp.StepIndex = i;
+			temp.Parent = this;
 			stickObject.name = temp.TimeStart + " - " + temp.TimeEnd + "|" + NameOfEmplacement;
 			temp.GUI = stickObject;
 			ListOfSticks.Add (temp);
@@ -80,25 +99,30 @@ public class Emplacement : MonoBehaviour {
 			stickObject.GetComponent<Button> ().onClick.AddListener(temp.onClick);
 		}
 
-		if (StaticVars.EndDate < ListOfSticks [ListOfSticks.Count - 1].TimeEnd) 
-		{
-			Debug.Log ("We have a unique case for the last stick and first stick!");
-			StickUnique = true;
-			// We will handle this later.
-		}
+//		if (StaticVars.EndDate < ListOfSticks [ListOfSticks.Count - 1].TimeEnd) 
+//		{
+//			Debug.Log ("We have a unique case for the last stick and first stick!");
+//			StickUnique = true;
+//			// We will handle this later.
+//		}
 	}
 
-	public void RemoveStick (DateTime Time)
+	public void RemoveStick (DateTime TimeStart, DateTime TimeEnd)
 	{
+		List<Stick> RebuildList = new List<Stick> ();
 		foreach (Stick a in ListOfSticks) 
 		{
-			if (a.TimeStart > Time && Time < a.TimeEnd) 
+			if (a.TimeStart >= TimeStart && a.TimeEnd <= TimeEnd) 
 			{
-				Debug.Log ("Removing " + Time.ToString ());
+				Debug.Log ("Removing " + a.TimeStart.ToString () + " - "+ a.TimeEnd.ToString());
 				Destroy (a.GUI);
-				ListOfSticks.Remove (a);
-				break;
+				//ToRemoveSticks.Add (a);
+			}
+			else
+			{
+				RebuildList.Add (a);
 			}
 		}
+		ListOfSticks = RebuildList;
 	}
 }

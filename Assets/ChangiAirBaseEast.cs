@@ -24,6 +24,16 @@ public class BatchClass
 	public List<int[]> BatchStick = new List<int[]>();
 	public int NoOfPersonals;
 	public bool XZ = false;
+	public Batch BatchPersonalData;
+}
+
+[System.Serializable]
+public class StepClass
+{
+	public string StepName = "";
+	public List<Stick> ListOfSticks = new List<Stick> ();
+	public DateTime StartStepTime;
+	public DateTime EndStepTime;
 }
 
 public class StepClass
@@ -71,7 +81,7 @@ public class ChangiAirBaseEast : Base {
 
             for (int i = 0; i < root["Batches"][j]["Personnels"].Count; i++)
             {
-				Debug.Log("Array: " + root["Batches"][j]["Personnels"][i]["Roles"]);
+				Debug.Log("Array: " + root["Batches"][j]["Personnels"][i]["Name"]);
                 GameObject Person = new GameObject();
                 Person.transform.parent = BatchObj.transform;
                 Person tempPerson = Person.AddComponent<Person>();
@@ -79,6 +89,7 @@ public class ChangiAirBaseEast : Base {
 					root["Batches"][j]["Personnels"][i]["IC"], 
 					new DateTime(root["Batches"][j]["Personnels"][i]["DOB"].AsInt),
 					root["Batches"][j]["Personnels"][i]["Roles"]);
+				tempPerson.Parent = tempBatch;
                 Person.name = tempPerson.Name;
                 tempBatch.AddPersonal(tempPerson);
             }
@@ -96,6 +107,27 @@ public class ChangiAirBaseEast : Base {
 			base.Emplacements.Add (Emp1);
         }
 
+//		Debug.Log (base.Emplacements [0].NameOfEmplacement);
+		base.Emplacements [0].RemoveStick (new DateTime (2016, 8, 15, 18, 00, 00),new DateTime (2016, 8, 16, 6, 00, 00));
+		base.Emplacements [0].RemoveStick (new DateTime (2016, 8, 16, 9, 00, 00),new DateTime (2016, 8, 16, 15, 00, 00));
+		base.Emplacements [0].RemoveStick (new DateTime (2016, 8, 16, 18, 00, 00),new DateTime (2016, 8, 17, 6, 00, 00));
+		base.Emplacements [0].RemoveStick (new DateTime (2016, 8, 17, 9, 00, 00),new DateTime (2016, 8, 17, 15, 00, 00));
+
+		base.Emplacements [1].RemoveStick (new DateTime (2016, 8, 15, 18, 00, 00),new DateTime (2016, 8, 16, 6, 00, 00));
+		base.Emplacements [1].RemoveStick (new DateTime (2016, 8, 16, 9, 00, 00),new DateTime (2016, 8, 16, 15, 00, 00));
+		base.Emplacements [1].RemoveStick (new DateTime (2016, 8, 16, 18, 00, 00),new DateTime (2016, 8, 17, 6, 00, 00));
+		base.Emplacements [1].RemoveStick (new DateTime (2016, 8, 17, 9, 00, 00),new DateTime (2016, 8, 17, 15, 00, 00));
+
+		base.Emplacements [6].RemoveStick (new DateTime (2016, 8, 15, 18, 00, 00),new DateTime (2016, 8, 16, 6, 00, 00));
+		base.Emplacements [6].RemoveStick (new DateTime (2016, 8, 16, 9, 00, 00),new DateTime (2016, 8, 16, 15, 00, 00));
+		base.Emplacements [6].RemoveStick (new DateTime (2016, 8, 16, 18, 00, 00),new DateTime (2016, 8, 17, 6, 00, 00));
+		base.Emplacements [6].RemoveStick (new DateTime (2016, 8, 17, 9, 00, 00),new DateTime (2016, 8, 17, 15, 00, 00));
+
+		base.Emplacements [2].RemoveStick (new DateTime (2016, 8, 15, 18, 00, 00),new DateTime (2016, 8, 16, 6, 00, 00));
+		base.Emplacements [2].RemoveStick (new DateTime (2016, 8, 16, 18, 00, 00),new DateTime (2016, 8, 17, 6, 00, 00));
+
+		base.Emplacements [3].RemoveStick (new DateTime (2016, 8, 15, 18, 00, 00),new DateTime (2016, 8, 16, 6, 00, 00));
+		base.Emplacements [3].RemoveStick (new DateTime (2016, 8, 16, 18, 00, 00),new DateTime (2016, 8, 17, 6, 00, 00));
         //GameObject EmpObj = new GameObject ();
         //EmpObj.transform.parent = EmplacementParents.transform;
         //Emplacement Emp1 = EmpObj.AddComponent<Emplacement>();
@@ -201,11 +233,135 @@ public class ChangiAirBaseEast : Base {
 //			}
 		}
 
+		#region CalculateSteps
+		// This is the setup for step calculation. However, We did not take into consideration of xz yet.
+		// So we will now take it into considering with a bool as a test case first.
+		if(Input.GetKeyDown(KeyCode.M))
+		{
+			int TotalAmtOfStick = (int)(StaticVars.EndDate - StaticVars.StartDate).TotalHours / StaticVars.StickInHours;
+			for(int i = 0; i < TotalAmtOfStick; i++)
+			{
+				StepClass tempStep = new StepClass();
+				foreach(Emplacement emp in base.Emplacements)
+				{
+					if(emp.CurrentRole != Roles.eCONSOLE && emp.CurrentRole != Roles.ePASS_OFFICE && emp.CurrentRole != Roles.eDRIVER)
+					{
+						foreach(Stick stick in emp.ListOfSticks)
+						{
+							if(stick.Assigned == false && stick.StepIndex == i)
+							{
+								tempStep.ListOfSticks.Add(stick);
+								break;
+							}
+						}
+					}
+				}
+				tempStep.StartStepTime = tempStep.ListOfSticks[0].TimeStart;
+				tempStep.EndStepTime = tempStep.ListOfSticks[0].TimeEnd;
+				tempStep.StepName = tempStep.StartStepTime.ToString() + " - " + tempStep.EndStepTime.ToString();
+				base.Steps.Add(tempStep);
+			}
+
+			foreach(Emplacement emp in base.Emplacements)
+			{
+				foreach(Stick stick in emp.ListOfSticks)
+				{
+					if((stick.TimeEnd - stick.TimeStart).Hours % 3 != 0)
+					{
+						stick.Unique = true;
+					}
+				}
+			}
+
+			for(int i = 0; i < base.Steps.Count; i++)
+			{
+				// Yay Order works!
+				for(int k = 0; k < base.Steps[i].ListOfSticks.Count; k++)
+				{
+					if(base.Steps[i].ListOfSticks[k].Parent.Pirority != 0)
+					{
+						for(int l = 0; l < base.Steps[i].ListOfSticks.Count; l++)
+						{
+							if(base.Steps[i].ListOfSticks[k].Parent.Pirority < base.Steps[i].ListOfSticks[l].Parent.Pirority)
+							{
+								Stick tempHold = base.Steps[i].ListOfSticks[k];
+								base.Steps[i].ListOfSticks[k] = base.Steps[i].ListOfSticks[l];
+								base.Steps[i].ListOfSticks[l] = tempHold;
+							}
+						}
+					}
+				}
+
+				for(int j = 0; j < base.Steps[i].ListOfSticks.Count; j++)
+				{
+					Debug.Log(base.Steps[i].StartStepTime.ToString() + " - " + base.Steps[i].EndStepTime.ToString());
+					Stick tempData = base.Steps[i].ListOfSticks[j];
+					if(tempData.Unique == true && tempData.Assigned == false)
+					{
+						Debug.Log("Assign 1");
+						Assign(tempData,1);
+					}
+					else
+					{
+						Debug.Log("Assign 2");
+						Assign(tempData,2);
+					}
+				}
+			}
+				
+//			bool XZ = true;
+//			if(XZ)
+//			{
+//				BatchClass XZBatch = null;
+//				// This means we need to assign the xz stick first. 
+//				foreach(BatchClass batchData in FinalizedList)
+//				{
+//					// We assume one batch xz. 
+//					if(batchData.XZ == true)
+//					{
+//						XZBatch = batchData;
+//					}
+//				}
+//
+//				foreach (StepClass step in base.Steps) 
+//				{
+//					foreach (Stick stick in step.ListOfSticks) 
+//					{
+//						if (stick.Assigned == false) 
+//						{
+//							// Now we need to find a personal to put in first.
+//							foreach (Person personal in XZBatch.BatchPersonalData.ListOfPeople) 
+//							{
+//								if (personal.ListOfRoles.Contains (stick.Parent.CurrentRole) && 
+//									personal.IsRested (stick.TimeStart) &&
+//									personal.NoOfSticks > 0) 
+//								{
+//									// I can assign him that stick cause 
+//									// 1. He can do it.
+//									// 2. He is rested.
+//									// However, I have not checked if he has done that stick before. So I might want to consider that.
+//									Debug.Log(personal.Name + " - " + stick.Parent.NameOfEmplacement);
+//									stick.AssignPerson(personal);
+//									break;
+//								}
+//							}
+//						}
+//					}
+//				}
+//			}
+
+			foreach(Stick debugStep in base.Steps[0].ListOfSticks)
+			{
+				Debug.Log(debugStep.Parent.NameOfEmplacement + " - " + debugStep.TimeStart);
+			}
+		}
+		#endregion
+
 		#region CalculateSticks
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
 			// Parameters for the function
-			int NoOfSticks = 59;
+			int NoOfSticks = 56;
 			bool MaxXZ = true;
 
 			// First, We need to pull out the personal who are not standing sticks.
@@ -455,6 +611,7 @@ public class ChangiAirBaseEast : Base {
 				{
 					if(batchData.BatchName == temp.BatchName)
 					{
+						temp.BatchPersonalData = batchData;
 						batchData.ClassData = temp;
 						Debug.Log(temp.BatchStick.Count + " - " + temp.BatchName);
 						if(temp.BatchStick.Count > 1)
@@ -512,5 +669,48 @@ public class ChangiAirBaseEast : Base {
 	bool RecursionCalculate (int[] Current, int[] Previous, bool IncreaseOrDecrease)
 	{
 		return true;
+	}
+
+	void Assign(Stick stickData, int NoToAssign)
+	{
+		// So now I have created the list. I need to find the right guy for it.
+		List<Batch> FinalizedBatchList = new List<Batch> ();
+		foreach (Batch batch in base.Batches) 
+		{
+			Batch TempBatch = new Batch (batch);
+			foreach (Person personal in batch.ListOfPeople) 
+			{
+				if (personal.IsRested (stickData.TimeStart) &&
+				   personal.ListOfRoles.Contains (stickData.Parent.CurrentRole)) 
+				{
+					TempBatch.AddPersonal (personal);
+				}
+			}
+			if (TempBatch.ListOfPeople.Count > 0) 
+			{
+				FinalizedBatchList.Add (TempBatch);
+			}
+		}
+
+		// Now I need to assign the stick a person.
+		// For example, if UVSS is the best stick, we need to assign him first.
+		// I need to order the batch first.
+		for (int i = 0; i < FinalizedBatchList.Count; i++) 
+		{
+			for (int j = 0; j < FinalizedBatchList.Count; j++) 
+			{
+				if (FinalizedBatchList [i].BatchNo > FinalizedBatchList [j].BatchNo) 
+				{
+					Batch tBatch = FinalizedBatchList [i];
+					FinalizedBatchList [i] = FinalizedBatchList [j];
+					FinalizedBatchList [j] = tBatch;
+				}
+			}
+		}
+
+		foreach (Batch tempBatch in FinalizedBatchList) 
+		{
+			Debug.Log (tempBatch.BatchName);
+		}
 	}
 }

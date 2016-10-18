@@ -26,6 +26,13 @@ public class BatchClass
 	public bool XZ = false;
 }
 
+public class StepClass
+{
+	public List<Stick> ListOfSticks;
+	public DateTime StartTime;
+	public DateTime EndTime;
+}
+
 public class ChangiAirBaseEast : Base {
 
 	public DateTime StartDate;
@@ -127,6 +134,11 @@ public class ChangiAirBaseEast : Base {
 	// Update is called once per frame
 	void Update () 
 	{
+		if (Input.GetKeyDown (KeyCode.D)) 
+		{
+			// THe goal is to get th e list of steps first.
+		}
+
 		if (Input.GetKeyDown (KeyCode.A)) 
 		{
 			// The goal is to give the emplacement to the latest people.

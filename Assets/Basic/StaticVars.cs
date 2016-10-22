@@ -20,6 +20,7 @@ public static class StaticVars{
 
 	public static bool StartEndStickOffset = true;
 	public static int StartHourOffset = 1;
+	public static bool DoWithSameBatch = false;
 
 	// GUI Stuff
 	public static float StickPadding = 3f;

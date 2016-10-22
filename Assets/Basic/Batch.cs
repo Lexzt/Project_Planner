@@ -35,4 +35,12 @@ public class Batch : MonoBehaviour {
 		}
 		ListOfPeople.Add (Data);
 	}
+
+	public void Reset ()
+	{
+		foreach (Person personal in ListOfPeople) 
+		{
+			personal.Reset ();
+		}
+	}
 }

@@ -203,52 +203,62 @@
     "Viper 1 Sentry": {
       "Name": "Viper 1 Sentry",
       "Role": "Sentry",
-      "Pirority": 1
+      "Pirority": 2,
+      "Easy":false
     },
 	"Viper 1 Checker": {
       "Name": "Viper 1 Checker",
       "Role": "Checker",
-      "Pirority": 1
+      "Pirority": 2,
+      "Easy":false
     },
     "Python Sentry": {
       "Name": "Python Sentry",
       "Role": "Sentry",
-      "Pirority": 3
+      "Pirority": 3,
+      "Easy":true
     },
 	"Python Checker": {
       "Name": "Python Checker",
       "Role": "Checker",
-      "Pirority": 3
+      "Pirority": 3,
+      "Easy":true
     },
 	"Viper 2 Sentry": {
       "Name": "Viper 2 Sentry",
       "Role": "Sentry",
-      "Pirority": 2
+      "Pirority": 1,
+      "Easy":false
     },
 	"Viper 2 Checker": {
       "Name": "Viper 2 Checker",
       "Role": "Checker",
-      "Pirority": 2
+      "Pirority": 1,
+      "Easy":false
     },
 	"UVSS": {
       "Name": "UVSS",
-      "Role": "UVSS",
-      "Pirority": 4
+      "Role": "Checker",
+      "Pirority": 4,
+      "Easy":true
     },
     "Giro": {
       "Name": "Giro",
       "Role": "Pass Office",
-      "Pirority": 0
+      "Pirority": 0,
+      "Easy":true
     },
     "East Control": {
       "Name": "East Control",
       "Role": "Console",
-      "Pirority": 0
+      "Pirority": 0,
+      "Easy":true
     },
     "Mystic": {
       "Name": "Mystic",
       "Role": "Driver",
-      "Pirority": 0
+      "Pirority": 0,
+      "Easy":true
     }
   },
   "StaticVars": {

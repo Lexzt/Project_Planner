@@ -10,13 +10,12 @@ public class Person : MonoBehaviour {
 	public string IC;
 	public DateTime DOB;
 	public Texture2D Photo;
-	public int NoOfSticks;
+	public int NoOfSticks = 0;
+	public int OriginNoOfSticks = 0;
 	public Batch Parent;
 	public List<Roles> ListOfRoles = new List<Roles>();
-
+	public Emplacement lastDoneEmplacement = null;
 	public DateTime lastStickEndTiming;
-
-
 
 	public Person (string tName, string tIC, DateTime tDOB, JSONNode tRoles)
 	{
@@ -65,6 +64,13 @@ public class Person : MonoBehaviour {
 			return true;
 		}
 		return false;
+	}
+
+	public void Reset ()
+	{
+		NoOfSticks = OriginNoOfSticks;
+		lastDoneEmplacement = null;
+		lastStickEndTiming = new DateTime();
 	}
 
 	// Use this for initialization

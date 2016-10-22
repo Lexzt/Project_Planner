@@ -23,6 +23,7 @@ public class Emplacement : MonoBehaviour {
 	//public bool StickUnique = false;
     public Roles CurrentRole = Roles.eNONE;
 	private bool AllAssigned = false;
+	public bool Easy;
 
 	// Use this for initialization
 	void Start () 
@@ -124,5 +125,13 @@ public class Emplacement : MonoBehaviour {
 			}
 		}
 		ListOfSticks = RebuildList;
+	}
+
+	public void Reset ()
+	{
+		foreach (Stick stick in ListOfSticks) 
+		{
+			stick.Reset ();
+		}
 	}
 }

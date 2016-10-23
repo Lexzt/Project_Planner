@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
+using Weighted_Randomizer;
 
 [System.Serializable]
 public class BatchClass
@@ -486,16 +487,7 @@ public class ChangiAirBaseEast : Base {
 				}
 			}
 		}
-
-		foreach (Emplacement emp in base.Emplacements) 
-		{
-			emp.Reset ();
-		}
-
-		foreach (Batch batch in base.Batches) 
-		{
-			batch.Reset ();
-		}
+		Reset ();
 	}
 
 	string[] GenerateDictionary()
@@ -512,76 +504,112 @@ public class ChangiAirBaseEast : Base {
 		return OutputDictionary.ToArray ();
 	}
 
+	public void Reset ()
+	{
+		foreach (Emplacement emp in base.Emplacements) 
+		{
+			emp.Reset ();
+		}
+
+		foreach (Batch batch in base.Batches) 
+		{
+			batch.Reset ();
+		}
+	}
+
+	public void AssignSticks ()
+	{
+		for(int i = 0; i < 12; i++)
+		//for(int i = 0; i < base.Steps.Count; i++)
+		{
+			// Yay Order works!
+			for(int k = 0; k < base.Steps[i].ListOfSticks.Count; k++)
+			{
+				if(base.Steps[i].ListOfSticks[k].Parent.Pirority != 0)
+				{
+					for(int l = 0; l < base.Steps[i].ListOfSticks.Count; l++)
+					{
+						if(base.Steps[i].ListOfSticks[k].Parent.Pirority < base.Steps[i].ListOfSticks[l].Parent.Pirority)
+						{
+							Stick tempHold = base.Steps[i].ListOfSticks[k];
+							base.Steps[i].ListOfSticks[k] = base.Steps[i].ListOfSticks[l];
+							base.Steps[i].ListOfSticks[l] = tempHold;
+						}
+					}
+				}
+			}
+
+			for(int j = 0; j < base.Steps[i].ListOfSticks.Count; j++)
+			{
+				Debug.Log(base.Steps[i].ListOfSticks[j].Parent.NameOfEmplacement + " - " +base.Steps[i].StartStepTime.ToString() + " - " + base.Steps[i].EndStepTime.ToString());
+				Stick tempData = base.Steps[i].ListOfSticks[j];
+				if(tempData.Assigned == false)
+				{
+					if(tempData.Unique == true)
+					{
+						Debug.Log("Assign 1");
+						Assign(tempData,1);
+					}
+					else
+					{
+						Debug.Log("Assign 2");
+						Assign(tempData,2);
+					}
+				}
+			}
+		}
+
+		foreach (Emplacement emp in base.Emplacements) 
+		{
+			emp.SetAllAssigned ();
+			if (emp.GetAllAssigned () == false && !emp.IsSpecialRole()) 
+			{
+				Debug.Log (emp.NameOfEmplacement + " has " + emp.NumberOfSticksUnAssigned () + " sticks");
+			}
+		}
+
+		foreach (Batch batch in base.Batches) 
+		{
+			foreach (Person personal in batch.ListOfPeople) 
+			{
+				if (personal.NoOfSticks > 0) 
+				{
+					Debug.Log (personal.name + " has " + personal.NoOfSticks + " left");
+				}
+			}
+		}
+	}
+
 	// Update is called once per frame
 	void Update () 
 	{
-		#region CalculateSticks
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
-			//for(int i = 0; i < 12; i++)
-			for(int i = 0; i < base.Steps.Count; i++)
-			{
-				// Yay Order works!
-				for(int k = 0; k < base.Steps[i].ListOfSticks.Count; k++)
-				{
-					if(base.Steps[i].ListOfSticks[k].Parent.Pirority != 0)
-					{
-						for(int l = 0; l < base.Steps[i].ListOfSticks.Count; l++)
-						{
-							if(base.Steps[i].ListOfSticks[k].Parent.Pirority < base.Steps[i].ListOfSticks[l].Parent.Pirority)
-							{
-								Stick tempHold = base.Steps[i].ListOfSticks[k];
-								base.Steps[i].ListOfSticks[k] = base.Steps[i].ListOfSticks[l];
-								base.Steps[i].ListOfSticks[l] = tempHold;
-							}
-						}
-					}
-				}
-
-				for(int j = 0; j < base.Steps[i].ListOfSticks.Count; j++)
-				{
-					Debug.Log(base.Steps[i].ListOfSticks[j].Parent.NameOfEmplacement + " - " +base.Steps[i].StartStepTime.ToString() + " - " + base.Steps[i].EndStepTime.ToString());
-					Stick tempData = base.Steps[i].ListOfSticks[j];
-					if(tempData.Assigned == false)
-					{
-						if(tempData.Unique == true)
-						{
-							Debug.Log("Assign 1");
-							Assign(tempData,1);
-						}
-						else
-						{
-							Debug.Log("Assign 2");
-							Assign(tempData,2);
-						}
-					}
-				}
-			}
+			AssignSticks ();
 		}
-		#endregion
 
 		if (Input.GetKeyDown (KeyCode.R)) 
 		{
-			foreach (Emplacement emp in base.Emplacements) 
-			{
-				emp.Reset ();
-			}
+			Reset ();
+		}
 
-			foreach (Batch batch in base.Batches) 
+		if (Input.GetKeyDown (KeyCode.C)) 
+		{
+			IWeightedRandomizer<string> randomizer = new DynamicWeightedRandomizer<string>();
+			randomizer ["Joe"] = 1;
+			randomizer ["Ryan"] = 5;
+			randomizer ["Jason"] = 3;
+
+			//Debug.Log ("Before: " + randomizer.GetWeight("Joe") + " - " + randomizer.GetWeight("Ryan") + " - " + randomizer.GetWeight("Jason"));
+			string name1 = randomizer.NextWithReplacement ();
+			//Debug.Log ("After: " + randomizer.GetWeight("Joe") + " - " + randomizer.GetWeight("Ryan") + " - " + randomizer.GetWeight("Jason"));
+			//Debug.Log (name1);
+
+			foreach (string val in randomizer) 
 			{
-				batch.Reset ();
+				Debug.Log (val + " - " + randomizer.GetWeight(val));
 			}
 		}
-	}
-
-	void CalculateStick (int[] BatchList, int TotalAmountOfSticks)
-	{
-		
-	}
-
-	bool RecursionCalculate (int[] Current, int[] Previous, bool IncreaseOrDecrease)
-	{
-		return true;
 	}
 
 	void Assign(Stick stickData, int NoToAssign)
@@ -599,6 +627,7 @@ public class ChangiAirBaseEast : Base {
 			TempBatch.ListOfPeople = new List<Person> ();
 			foreach (Person personal in batch.ListOfPeople) 
 			{
+				Debug.Log (personal.Name + " - " + stickData.TimeStart + " - " + personal.lastStickEndTiming + " - " + (stickData.TimeStart - personal.lastStickEndTiming).Hours + " - " + personal.IsRested (stickData.TimeStart).ToString() + " - " + personal.ListOfRoles.Contains (stickData.Parent.CurrentRole).ToString() + " - " + (personal.NoOfSticks - NoToAssign >= 0).ToString());
 				if (personal.IsRested (stickData.TimeStart) &&
 				    personal.ListOfRoles.Contains (stickData.Parent.CurrentRole) && 
 					personal.NoOfSticks - NoToAssign >= 0) 
@@ -701,13 +730,31 @@ public class ChangiAirBaseEast : Base {
 		foreach (Batch temp in FinalizedBatchList) 
 		{
 			int EmplacementPirority = stickData.Parent.Pirority;
+			IWeightedRandomizer<string> randomizer = new DynamicWeightedRandomizer<string>();
+			foreach (Person personal in temp.ListOfPeople) 
+			{
+				Debug.Log (personal.Name + " Hours since last stick: " + personal.GetHoursSinceLastStick(stickData.TimeStart));
+				randomizer [personal.Name] = (personal.GetHoursSinceLastStick(stickData.TimeStart)) * personal.OriginNoOfSticks * 20;
+			}
+
+			foreach (string val in randomizer) 
+			{
+				Debug.Log (val + " - " + randomizer.GetWeight (val));;
+			}
+
 			if (NoToAssign == 1) 
 			{
-				stickData.AssignPerson (temp.ListOfPeople [Random.Range (0, temp.ListOfPeople.Count - 1)]);
+				//stickData.AssignPerson (temp.ListOfPeople [Random.Range (0, temp.ListOfPeople.Count - 1)]);
+				string Name = randomizer.NextWithReplacement();
+
+				Person personalToAssign = (temp.ListOfPeople.Find(x => x.Name == Name));
+				stickData.AssignPerson (personalToAssign);
 			}
 			else
 			{
-				Person personalToAssign = temp.ListOfPeople [Random.Range (0, temp.ListOfPeople.Count - 1)];
+				//Person personalToAssign = temp.ListOfPeople [Random.Range (0, temp.ListOfPeople.Count - 1)];
+				string Name = randomizer.NextWithReplacement();
+				Person personalToAssign = (temp.ListOfPeople.Find(x => x.Name == Name));
 				stickData.AssignPerson (personalToAssign);
 				// I need to get the next stick here. How do I get the next stick....
 				//Debug.Log("Hello world");

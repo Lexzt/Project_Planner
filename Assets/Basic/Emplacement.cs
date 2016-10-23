@@ -37,6 +37,45 @@ public class Emplacement : MonoBehaviour {
 	
 	}
 
+	public bool IsSpecialRole ()
+	{
+		if (CurrentRole == Roles.eCONSOLE || CurrentRole == Roles.eDRIVER || CurrentRole == Roles.ePASS_OFFICE) 
+		{
+			return true;
+		}
+		return false;
+	}
+
+	public int NumberOfSticksUnAssigned()
+	{
+		int Counter = 0;
+		foreach (Stick val in ListOfSticks) 
+		{
+			if (val.Assigned == false) 
+			{
+				Counter++;
+			}
+		}
+		return Counter;
+	}
+
+	public void SetAllAssigned ()
+	{
+		foreach (Stick val in ListOfSticks) 
+		{
+			if (val.Assigned == true) 
+			{
+				continue;
+			}
+			else
+			{
+				AllAssigned = false;
+				break;
+			}
+		}
+		AllAssigned = true;
+	}
+
 	public bool GetAllAssigned ()
 	{
 		foreach (Stick val in ListOfSticks) 

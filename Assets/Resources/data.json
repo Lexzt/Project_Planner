@@ -215,13 +215,13 @@
     "Python Sentry": {
       "Name": "Python Sentry",
       "Role": "Sentry",
-      "Pirority": 3,
+      "Pirority": 4,
       "Easy":true
     },
 	"Python Checker": {
       "Name": "Python Checker",
       "Role": "Checker",
-      "Pirority": 3,
+      "Pirority": 4,
       "Easy":true
     },
 	"Viper 2 Sentry": {
@@ -239,7 +239,7 @@
 	"UVSS": {
       "Name": "UVSS",
       "Role": "Checker",
-      "Pirority": 4,
+      "Pirority": 3,
       "Easy":true
     },
     "Giro": {

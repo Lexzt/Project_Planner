@@ -23,6 +23,7 @@ public class Emplacement : MonoBehaviour {
 	//public bool StickUnique = false;
     public Roles CurrentRole = Roles.eNONE;
 	private bool AllAssigned = false;
+	public bool Easy;
 
 	// Use this for initialization
 	void Start () 
@@ -34,6 +35,45 @@ public class Emplacement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	public bool IsSpecialRole ()
+	{
+		if (CurrentRole == Roles.eCONSOLE || CurrentRole == Roles.eDRIVER || CurrentRole == Roles.ePASS_OFFICE) 
+		{
+			return true;
+		}
+		return false;
+	}
+
+	public int NumberOfSticksUnAssigned()
+	{
+		int Counter = 0;
+		foreach (Stick val in ListOfSticks) 
+		{
+			if (val.Assigned == false) 
+			{
+				Counter++;
+			}
+		}
+		return Counter;
+	}
+
+	public void SetAllAssigned ()
+	{
+		foreach (Stick val in ListOfSticks) 
+		{
+			if (val.Assigned == true) 
+			{
+				continue;
+			}
+			else
+			{
+				AllAssigned = false;
+				break;
+			}
+		}
+		AllAssigned = true;
 	}
 
 	public bool GetAllAssigned ()
@@ -124,5 +164,13 @@ public class Emplacement : MonoBehaviour {
 			}
 		}
 		ListOfSticks = RebuildList;
+	}
+
+	public void Reset ()
+	{
+		foreach (Stick stick in ListOfSticks) 
+		{
+			stick.Reset ();
+		}
 	}
 }

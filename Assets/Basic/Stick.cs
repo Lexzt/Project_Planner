@@ -31,6 +31,7 @@ public class Stick : MonoBehaviour {
 		Assigned = true;
 		Data.lastStickEndTiming = TimeEnd;
 		Data.NoOfSticks--;
+		Data.lastDoneEmplacement = Parent;
 
 		// I need to update the ui here.
 		GUI.transform.GetChild(0).GetComponent<Text>().text = Data.name;
@@ -49,5 +50,12 @@ public class Stick : MonoBehaviour {
 		{
 			State = StickState.ENABLED;
 		}
+	}
+
+	public void Reset ()
+	{
+		DutyPersonal = null;
+		Assigned = false;
+		GUI.transform.GetChild(0).GetComponent<Text>().text = "Nil";
 	}
 }

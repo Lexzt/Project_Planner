@@ -1,0 +1,262 @@
+{
+  "Batches": [
+    {
+      "DoEasy": false,
+      "BatchName": "XZ",
+      "ORD Month And Year": "01/18",
+      "Personnels": [
+        {
+          "Name": "XZ 11",
+          "IC": "S1234567C",
+          "DOB": "779673600",
+          "ORD": "",
+          "Roles": [
+            "Sentry",
+            "Checker"
+          ]
+        },
+        {
+          "Name": "XZ 12",
+          "IC": "S1234567D",
+          "DOB": "779673600",
+          "ORD": "",
+          "Roles": [
+            "Sentry",
+            "Checker"
+          ]
+        }
+      ]
+    },
+    {
+      "DoEasy": true,
+      "BatchName": "XZ2",
+      "ORD Month And Year": "08/17",
+      "Personnels": [
+        {
+          "Name": "Cheong",
+          "IC": "S1234567C",
+          "DOB": "779673600",
+          "ORD": "",
+          "Roles": [
+            "Driver"
+          ]
+        },
+        {
+          "Name": "Teng Feng",
+          "IC": "S1234567D",
+          "DOB": "779673600",
+          "ORD": "",
+          "Roles": [
+            "Armorer"
+          ]
+        },
+        {
+          "Name": "CH",
+          "IC": "S1234567D",
+          "DOB": "779673600",
+          "ORD": "",
+          "Roles": [
+            "Giro"
+          ]
+        },
+        {
+          "Name": "XZ 24",
+          "IC": "S1234567D",
+          "DOB": "779673600",
+          "ORD": "",
+          "Roles": [
+            "Sentry",
+            "Checker"
+          ]
+        },
+        {
+          "Name": "XZ 25",
+          "IC": "S1234567D",
+          "DOB": "779673600",
+          "ORD": "",
+          "Roles": [
+            "Sentry",
+            "Checker"
+          ]
+        },
+        {
+          "Name": "XZ 26",
+          "IC": "S1234567D",
+          "DOB": "779673600",
+          "ORD": "",
+          "Roles": [
+            "Sentry",
+            "Checker"
+          ]
+        },
+        {
+          "Name": "XZ 27",
+          "IC": "S1234567D",
+          "DOB": "779673600",
+          "ORD": "",
+          "Roles": [
+            "Sentry",
+            "Checker"
+          ]
+        }
+      ]
+    },
+    {
+      "DoEasy": true,
+      "BatchName": "Team Brian",
+      "ORD Month And Year": "05/17",
+      "Personnels": [
+        {
+          "Name": "Keith Fong",
+          "IC": "S9434749A",
+          "DOB": "779673600",
+          "ORD": "",
+          "Roles": [
+            "Console"
+          ]
+        },
+        {
+          "Name": "Andrew",
+          "IC": "S9434749A",
+          "DOB": "779673600",
+          "ORD": "",
+          "Roles": [
+            "Driver"
+          ]
+        },
+        {
+          "Name": "Mervyn",
+          "IC": "S9434749A",
+          "DOB": "779673600",
+          "ORD": "",
+          "Roles": [
+            "Sentry",
+            "Checker"
+          ]
+        },
+        {
+          "Name": "Brian",
+          "IC": "S9434749A",
+          "DOB": "779673600",
+          "ORD": "",
+          "Roles": [
+            "Console"
+          ]
+        },
+        {
+          "Name": "Jun Xiang",
+          "IC": "S1234567B",
+          "DOB": "779673600",
+          "ORD": "",
+          "Roles": [
+            "Sentry",
+            "Checker"
+          ]
+        }
+      ]
+    },
+    {
+      "DoEasy": true,
+      "BatchName": "MinghanLouis",
+      "ORD Month And Year": "03/17",
+      "Personnels": [
+        {
+          "Name": "Ming Han",
+          "IC": "S1234567C",
+          "DOB": "779673600",
+          "ORD": "",
+          "Roles": [
+            "Driver"
+          ]
+        },
+        {
+          "Name": "Louis Ace",
+          "IC": "S1234567D",
+          "DOB": "779673600",
+          "ORD": "",
+          "Roles": [
+            "Console"
+          ]
+        }
+      ]
+    }
+  ],
+  "Emplacements": {
+    "Viper 1 Sentry": {
+      "Name": "Viper 1 Sentry",
+      "Role": "Sentry",
+      "Pirority": 2,
+      "Easy": false
+    },
+    "Viper 1 Checker": {
+      "Name": "Viper 1 Checker",
+      "Role": "Checker",
+      "Pirority": 2,
+      "Easy": false
+    },
+    "Python Sentry": {
+      "Name": "Python Sentry",
+      "Role": "Sentry",
+      "Pirority": 4,
+      "Easy": true
+    },
+    "Python Checker": {
+      "Name": "Python Checker",
+      "Role": "Checker",
+      "Pirority": 4,
+      "Easy": true
+    },
+    "Viper 2 Sentry": {
+      "Name": "Viper 2 Sentry",
+      "Role": "Sentry",
+      "Pirority": 1,
+      "Easy": false
+    },
+    "Viper 2 Checker": {
+      "Name": "Viper 2 Checker",
+      "Role": "Checker",
+      "Pirority": 1,
+      "Easy": false
+    },
+    "UVSS": {
+      "Name": "UVSS",
+      "Role": "Checker",
+      "Pirority": 3,
+      "Easy": true
+    },
+    "Giro": {
+      "Name": "Pass Office",
+      "Role": "Giro",
+      "Pirority": 0,
+      "Easy": true
+    },
+    "East Control": {
+      "Name": "East Control",
+      "Role": "Console",
+      "Pirority": 0,
+      "Easy": true
+    },
+    "Mystic": {
+      "Name": "Mystic",
+      "Role": "Driver",
+      "Pirority": 0,
+      "Easy": true
+    }
+  },
+  "ICT": {
+    "NumberOfICT": 4,
+    "NumberOfStickforICTWeekDay": 4,
+    "NumberOfStickforICTWeekEnd": 6,
+    "FirstStick": false,
+    "Roles": [
+      "Sentry"
+    ]
+  },
+  "StaticVars": {
+    "MaxNoPerMountWeekDay": 6,
+    "MaxNoPerMountWeekEnd": 8,
+    "MaxNoOfDutyInARow": 2,
+    "StickInHours": 3,
+    "RestAfterSticks": 2
+  }
+}

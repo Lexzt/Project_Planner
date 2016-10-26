@@ -53,15 +53,16 @@ public class ChangiAirBaseEast : Base {
 
 	public List<BatchClass> FinalizedList = new List<BatchClass>();
 
+	public string dataFile = "";
+
 	// Use this for initialization
 	void Start () 
     {
         Debug.Log("No Of Hours: " + (StaticVars.EndDate - StaticVars.StartDate).TotalHours);
-        
         GameObject BatchParents = new GameObject("Batches");
         GameObject EmplacementParents = new GameObject("Emplacements");
         
-        TextAsset Json = Resources.Load("data") as TextAsset;
+		TextAsset Json = Resources.Load(dataFile) as TextAsset;
         root = JSON.Parse(Json.text);
         
         for (int j = 0; j < root["Batches"].Count; j++)
@@ -71,12 +72,13 @@ public class ChangiAirBaseEast : Base {
             Batch tempBatch = BatchObj.AddComponent<Batch>();
             tempBatch.BatchName = root["Batches"][j]["BatchName"];
 			tempBatch.BatchNo = j + 1;
+			tempBatch.DoEasy = root["Batches"][j]["DoEasy"].AsBool;
             BatchObj.name = root["Batches"][j]["BatchName"];
             base.Batches.Add(tempBatch);
 
             for (int i = 0; i < root["Batches"][j]["Personnels"].Count; i++)
             {
-				Debug.Log("Array: " + root["Batches"][j]["Personnels"][i]["Name"]);
+				//Debug.Log("Array: " + root["Batches"][j]["Personnels"][i]["Name"]);
                 GameObject Person = new GameObject();
                 Person.transform.parent = BatchObj.transform;
                 Person tempPerson = Person.AddComponent<Person>();
@@ -90,63 +92,93 @@ public class ChangiAirBaseEast : Base {
             }
         }
 
+//		#region ICT Creation
+//		if(StaticVars.NumberOfICT > 0)
+//		{
+//			GameObject ICTObject = new GameObject("ICT");
+//			ICTObject.transform.parent = BatchParents.transform;
+//			Batch ICTBatch = ICTObject.AddComponent<Batch>();
+//			ICTBatch.ICT = true;
+//			base.Batches.Add(ICTBatch);
+//			for(int i = 0; i < StaticVars.NumberOfICT; i++)
+//			{
+//				GameObject Person = new GameObject();
+//				Person.transform.parent = ICTObject.transform;
+//				Person tempPerson = Person.AddComponent<Person>();
+//				tempPerson.Set("ICT " + (i + 1), 
+//					"", 
+//					new DateTime(),
+//					root["ICT"]["Roles"]);
+//				tempPerson.NoOfSticks = StaticVars.NumberOfStickforICTWeekDay;
+//				tempPerson.OriginNoOfSticks = StaticVars.NumberOfStickforICTWeekDay;
+//				tempPerson.Parent = ICTBatch;
+//				Person.name = tempPerson.Name;
+//				ICTBatch.AddPersonal(tempPerson);
+//			}
+//		}
+//		#endregion
+
         for (int i = 0; i < root["Emplacements"].Count; i++)
         {
-            Debug.Log(root["Emplacements"][i]["Name"].Value + " - " + root["Emplacements"][i]["Role"].Value);
+            //Debug.Log(root["Emplacements"][i]["Name"].Value + " - " + root["Emplacements"][i]["Role"].Value);
             GameObject EmpObj = new GameObject();
             EmpObj.transform.parent = EmplacementParents.transform;
             Emplacement Emp1 = EmpObj.AddComponent<Emplacement>();
             Emp1.NameOfEmplacement = root["Emplacements"][i]["Name"];
 			Emp1.Easy = root ["Emplacements"] [i] ["Easy"].AsBool;
             EmpObj.name = Emp1.NameOfEmplacement;
-			Emp1.GenerateSticks(ParentObject, StickGameObject,StaticVars.RolesParseJson(root["Emplacements"][i]["Role"]),root["Emplacements"][i]["Pirority"].AsInt,i);
+			Emp1.GenerateSticks(ParentObject, StickGameObject, StaticVars.RolesParseJson(root["Emplacements"][i]["Role"]),root["Emplacements"][i]["Pirority"].AsInt,i);
 			base.Emplacements.Add (Emp1);
         }
 
 		ParentObject.transform.localScale = new Vector3 (0.7f, 0.7f, 0f);
 		ParentObject.transform.localPosition = new Vector3 (-115f,0f,0f);
 
-//		Debug.Log (base.Emplacements [0].NameOfEmplacement);
-		base.Emplacements [0].RemoveStick (new DateTime (2016, 8, 15, 18, 00, 00),new DateTime (2016, 8, 16, 6, 00, 00));
-		base.Emplacements [0].RemoveStick (new DateTime (2016, 8, 16, 9, 00, 00),new DateTime (2016, 8, 16, 15, 00, 00));
-		base.Emplacements [0].RemoveStick (new DateTime (2016, 8, 16, 18, 00, 00),new DateTime (2016, 8, 17, 6, 00, 00));
-		base.Emplacements [0].RemoveStick (new DateTime (2016, 8, 17, 9, 00, 00),new DateTime (2016, 8, 17, 15, 00, 00));
+		// Viper 1 Sentry
+//		base.Emplacements [0].RemoveStick (new DateTime (2016, 8, 15, 18, 00, 00),new DateTime (2016, 8, 16, 6, 00, 00));
+//		base.Emplacements [0].RemoveStick (new DateTime (2016, 8, 16, 9, 00, 00),new DateTime (2016, 8, 16, 15, 00, 00));
+//		base.Emplacements [0].RemoveStick (new DateTime (2016, 8, 16, 18, 00, 00),new DateTime (2016, 8, 17, 6, 00, 00));
+//		base.Emplacements [0].RemoveStick (new DateTime (2016, 8, 17, 9, 00, 00),new DateTime (2016, 8, 17, 15, 00, 00));
+		base.Emplacements [0].RemoveStick (new DateTime (2016, 8, 15, 14, 00, 00),new DateTime (2016, 8, 17, 14, 00, 00));
 
-		base.Emplacements [1].RemoveStick (new DateTime (2016, 8, 15, 18, 00, 00),new DateTime (2016, 8, 16, 6, 00, 00));
+		// Viper 1 Checker
+//		base.Emplacements [1].RemoveStick (new DateTime (2016, 8, 15, 18, 00, 00),new DateTime (2016, 8, 16, 6, 00, 00));
+//		base.Emplacements [1].RemoveStick (new DateTime (2016, 8, 16, 9, 00, 00),new DateTime (2016, 8, 16, 15, 00, 00));
+//		base.Emplacements [1].RemoveStick (new DateTime (2016, 8, 16, 18, 00, 00),new DateTime (2016, 8, 17, 6, 00, 00));
+//		base.Emplacements [1].RemoveStick (new DateTime (2016, 8, 17, 9, 00, 00),new DateTime (2016, 8, 17, 15, 00, 00));
+		base.Emplacements [1].RemoveStick (new DateTime (2016, 8, 15, 14, 00, 00),new DateTime (2016, 8, 16, 6, 00, 00));
 		base.Emplacements [1].RemoveStick (new DateTime (2016, 8, 16, 9, 00, 00),new DateTime (2016, 8, 16, 15, 00, 00));
-		base.Emplacements [1].RemoveStick (new DateTime (2016, 8, 16, 18, 00, 00),new DateTime (2016, 8, 17, 6, 00, 00));
-		base.Emplacements [1].RemoveStick (new DateTime (2016, 8, 17, 9, 00, 00),new DateTime (2016, 8, 17, 15, 00, 00));
+		base.Emplacements [1].RemoveStick (new DateTime (2016, 8, 16, 18, 00, 00),new DateTime (2016, 8, 17, 14, 00, 00));
 
-		base.Emplacements [6].RemoveStick (new DateTime (2016, 8, 15, 18, 00, 00),new DateTime (2016, 8, 16, 6, 00, 00));
+		// UVSS
+//		base.Emplacements [6].RemoveStick (new DateTime (2016, 8, 15, 18, 00, 00),new DateTime (2016, 8, 16, 6, 00, 00));
+//		base.Emplacements [6].RemoveStick (new DateTime (2016, 8, 16, 9, 00, 00),new DateTime (2016, 8, 16, 15, 00, 00));
+//		base.Emplacements [6].RemoveStick (new DateTime (2016, 8, 16, 18, 00, 00),new DateTime (2016, 8, 17, 6, 00, 00));
+//		base.Emplacements [6].RemoveStick (new DateTime (2016, 8, 17, 9, 00, 00),new DateTime (2016, 8, 17, 15, 00, 00));
+		base.Emplacements [6].RemoveStick (new DateTime (2016, 8, 15, 14, 00, 00),new DateTime (2016, 8, 16, 6, 00, 00));
 		base.Emplacements [6].RemoveStick (new DateTime (2016, 8, 16, 9, 00, 00),new DateTime (2016, 8, 16, 15, 00, 00));
-		base.Emplacements [6].RemoveStick (new DateTime (2016, 8, 16, 18, 00, 00),new DateTime (2016, 8, 17, 6, 00, 00));
-		base.Emplacements [6].RemoveStick (new DateTime (2016, 8, 17, 9, 00, 00),new DateTime (2016, 8, 17, 15, 00, 00));
+		base.Emplacements [6].RemoveStick (new DateTime (2016, 8, 16, 18, 00, 00),new DateTime (2016, 8, 17, 14, 00, 00));
 
+		// Python Sentry
 		base.Emplacements [2].RemoveStick (new DateTime (2016, 8, 15, 18, 00, 00),new DateTime (2016, 8, 16, 6, 00, 00));
 		base.Emplacements [2].RemoveStick (new DateTime (2016, 8, 16, 18, 00, 00),new DateTime (2016, 8, 17, 6, 00, 00));
+		base.Emplacements [2].RemoveStick (new DateTime (2016, 8, 16, 9, 00, 00),new DateTime (2016, 8, 16, 15, 00, 00));
+		base.Emplacements [2].RemoveStick (new DateTime (2016, 8, 17, 9, 00, 00),new DateTime (2016, 8, 17, 14, 00, 00));
 
 		base.Emplacements [3].RemoveStick (new DateTime (2016, 8, 15, 18, 00, 00),new DateTime (2016, 8, 16, 6, 00, 00));
 		base.Emplacements [3].RemoveStick (new DateTime (2016, 8, 16, 18, 00, 00),new DateTime (2016, 8, 17, 6, 00, 00));
-        //GameObject EmpObj = new GameObject ();
-        //EmpObj.transform.parent = EmplacementParents.transform;
-        //Emplacement Emp1 = EmpObj.AddComponent<Emplacement>();
-        //Emp1.NameOfEmplacement = "Viper 1 Checker";
-        //EmpObj.name = Emp1.NameOfEmplacement;
-        //Emp1.GenerateSticks (ParentObject,StickGameObject,0);
-        //Emp1.RemoveStick (new DateTime (2016, 8, 15, 18, 00, 00));
-        //Emp1.RemoveStick (new DateTime (2016, 8, 16, 22, 00, 00));
 
-        //EmpObj = new GameObject ();
-        //EmpObj.transform.parent = EmplacementParents.transform;
-        //Emplacement Emp2 = EmpObj.AddComponent<Emplacement>();
-        //Emp2.NameOfEmplacement = "Viper 1 Sentry";
-        //EmpObj.name = Emp2.NameOfEmplacement;
-        //Emp2.GenerateSticks (ParentObject,StickGameObject,1);
+		base.Emplacements [4].RemoveStick (new DateTime (2016, 8, 15, 18, 00, 00),new DateTime (2016, 8, 17, 12, 00, 00));
 
 		GenerateDictionary ();
 
+		#region ICT Handling
+		//int TotalNumberOfSticksCoveredByICT = root["ICT"]["NumberOfICT"].AsInt * root["ICT"]["NumberOfStickforICTWeekDay"].AsInt;
+		#endregion
+
 		// Parameters for the function
-		int NoOfSticks = 60;
+		//int NoOfSticks = 60 - TotalNumberOfSticksCoveredByICT;
+		int NoOfSticks = 34;
 		bool MaxXZ = true;
 
 		// First, We need to pull out the personal who are not standing sticks.
@@ -162,7 +194,7 @@ public class ChangiAirBaseEast : Base {
 			List<JSONNode> indexToRemove = new List<JSONNode> ();
 			for (int i = 0; i < subNode ["Batches"] [j] ["Personnels"].Count; i++) 
 			{
-				Debug.Log(subNode ["Batches"] [j] ["Personnels"] [i] ["Name"]+ " - " + subNode["Batches"][j]["Personnels"][i]["Roles"][0].Value);
+				//Debug.Log(subNode ["Batches"] [j] ["Personnels"] [i] ["Name"]+ " - " + subNode["Batches"][j]["Personnels"][i]["Roles"][0].Value);
 				if (subNode ["Batches"] [j] ["Personnels"] [i] ["Roles"][0].Value == "Driver") 
 				{
 					Debug.Log ("Driver detected! " + subNode ["Batches"] [j] ["Personnels"] [i]["Name"]);
@@ -173,7 +205,16 @@ public class ChangiAirBaseEast : Base {
 					Debug.Log ("Console detected! " + subNode ["Batches"] [j] ["Personnels"] [i]["Name"]);
 					indexToRemove.Add (subNode ["Batches"] [j] ["Personnels"] [i]);
 				}
-
+				else if (subNode ["Batches"] [j] ["Personnels"] [i] ["Roles"][0].Value == "Giro") 
+				{
+					Debug.Log ("Giro detected! " + subNode ["Batches"] [j] ["Personnels"] [i]["Name"]);
+					indexToRemove.Add (subNode ["Batches"] [j] ["Personnels"] [i]);
+				}
+				else if (subNode ["Batches"] [j] ["Personnels"] [i] ["Roles"][0].Value == "Armorer") 
+				{
+					Debug.Log ("Armorer detected! " + subNode ["Batches"] [j] ["Personnels"] [i]["Name"]);
+					indexToRemove.Add (subNode ["Batches"] [j] ["Personnels"] [i]);
+				}
 			}
 
 			for (int k = 0; k < indexToRemove.Count; k++) 
@@ -200,7 +241,7 @@ public class ChangiAirBaseEast : Base {
 		int CurrentNoOfBatches = subNode ["Batches"].Count;
 
 		// Currently, I am going to hard code the variable of number of stick for xz.
-		int XZBaseStick = 8;
+		int XZBaseStick = StaticVars.MaxNoPerMountWeekDay;
 
 		// Define the stick count list, not the finalize number
 		List<BatchClass> StickCount = new List<BatchClass> ();
@@ -238,10 +279,10 @@ public class ChangiAirBaseEast : Base {
 		foreach(BatchClass temp in StickCount)
 		{
 			int val = temp.BatchStick[0][0] * temp.BatchStick [0][1];
-			//Debug.Log (temp.BatchName + " - " + val);
+			Debug.Log (temp.BatchName + " - " + val + " - " + temp.NoOfPersonals);
 			TotalSticks += val;
 		}
-		//Debug.Log (TotalSticks);
+		Debug.Log ("Here:" + TotalSticks);
 
 		// Now, I need to calculate the diff in sticks. Which is the most important value.
 		// This value determines if we increase or decrease the value. 
@@ -366,6 +407,11 @@ public class ChangiAirBaseEast : Base {
 					{
 						count += val[0] * val[1];
 						Debug.Log ("(" + countStick.BatchName + ")" + val[1] + " People do " + val[0] * val[1] + " - " + val[0] + " each");
+						if (val[1] == 0 && val[0] == 0) 
+						{
+							StickCount.Remove (countStick);
+							break;
+						}
 					}
 				}
 				Debug.Log (breakpoint + " Times - Count: " + count);
@@ -398,23 +444,25 @@ public class ChangiAirBaseEast : Base {
 				{
 					temp.BatchPersonalData = batchData;
 					batchData.ClassData = temp;
-					Debug.Log(temp.BatchStick.Count + " - " + temp.BatchName);
+					//Debug.Log(temp.BatchStick.Count + " - " + temp.BatchName);
 					if(temp.BatchStick.Count > 1)
 					{
-						int RandomVal = Random.Range(0, temp.NoOfPersonals);
-						// This means uneven, So we need random.
-						for(int n = 0; n < temp.NoOfPersonals; n++)
+						for (int NoOfIndex = 0; NoOfIndex < temp.BatchStick.Count; NoOfIndex++) 
 						{
-							bool RandomDone = true;
-							while(RandomDone)
+							int NoOfLoops = 0;
+							int LoopNo = temp.BatchStick [NoOfIndex] [1];
+							while (NoOfLoops != LoopNo) 
 							{
-								int RandomIndex = Random.Range(0, temp.BatchStick.Count);
-								if(temp.BatchStick[RandomIndex][1] > 0)
+								int RandomIndex = Random.Range(0, batchData.ListOfPeople.Count);
+								if (!batchData.ListOfPeople [RandomIndex].IsSpecialRole () && batchData.ListOfPeople [RandomIndex].NoOfSticks == 0) 
 								{
-									batchData.ListOfPeople[n].NoOfSticks = temp.BatchStick[RandomIndex][0];
-									batchData.ListOfPeople[n].OriginNoOfSticks = temp.BatchStick[RandomIndex][0];
-									temp.BatchStick[RandomIndex][1]--;
-									RandomDone = false;
+									if(temp.BatchStick[NoOfIndex][1] > 0)
+									{
+										batchData.ListOfPeople[RandomIndex].NoOfSticks = temp.BatchStick[NoOfIndex][0];
+										batchData.ListOfPeople[RandomIndex].OriginNoOfSticks = temp.BatchStick[NoOfIndex][0];
+										temp.BatchStick[NoOfIndex][1]--;
+										NoOfLoops++;
+									}
 								}
 							}
 						}
@@ -425,7 +473,7 @@ public class ChangiAirBaseEast : Base {
 						{
 							if(!personal.IsSpecialRole())
 							{
-								Debug.Log("Setting " + personal.Name + " to " + temp.BatchStick[0][0]);
+								//Debug.Log("Setting " + personal.Name + " to " + temp.BatchStick[0][0]);
 								personal.NoOfSticks = temp.BatchStick[0][0];
 								personal.OriginNoOfSticks = personal.NoOfSticks;
 							}
@@ -440,10 +488,10 @@ public class ChangiAirBaseEast : Base {
 		// No matter if they are even or uneven. Yay!
 		// Now, I need to assign the sticks accordingly. 
 		// I will now check the emplacement data first.
-		for (int k = 0; k < subNode ["Emplacements"].Count; k++) 
-		{
-			Debug.Log(root["Emplacements"][k]["Name"].Value + " - " + root["Emplacements"][k]["Role"].Value);
-		}
+//		for (int k = 0; k < subNode ["Emplacements"].Count; k++) 
+//		{
+//			Debug.Log(root["Emplacements"][k]["Name"].Value + " - " + root["Emplacements"][k]["Role"].Value);
+//		}
 
 		base.Steps = new List<StepClass>();
 		int TotalAmtOfStick = (int)(StaticVars.EndDate - StaticVars.StartDate).TotalHours / StaticVars.StickInHours;
@@ -452,7 +500,7 @@ public class ChangiAirBaseEast : Base {
 			StepClass tempStep = new StepClass();
 			foreach(Emplacement emp in base.Emplacements)
 			{
-				if(emp.CurrentRole != Roles.eCONSOLE && emp.CurrentRole != Roles.ePASS_OFFICE && emp.CurrentRole != Roles.eDRIVER)
+				if(!emp.IsSpecialRole())
 				{
 					foreach(Stick stick in emp.ListOfSticks)
 					{
@@ -485,6 +533,28 @@ public class ChangiAirBaseEast : Base {
 				{
 					stick.Unique = true;
 				}
+
+				if (i + 1 != emp.ListOfSticks.Count && (i - 1 >= 0)) 
+				{
+					Stick NextStick = emp.ListOfSticks [i + 1];
+					Stick PrevStick = emp.ListOfSticks [i - 1];
+					if (NextStick.TimeStart != stick.TimeEnd && PrevStick.TimeEnd != stick.TimeStart) 
+					{
+						stick.Unique = true;
+					}
+				}
+
+				if (i == 0) 
+				{
+					if (i + 1 != emp.ListOfSticks.Count) 
+					{
+						Stick NextStick = emp.ListOfSticks [i + 1];
+						if (NextStick.TimeStart != stick.TimeEnd) 
+						{
+							stick.Unique = true;
+						}
+					}
+				}
 			}
 		}
 		Reset ();
@@ -497,7 +567,7 @@ public class ChangiAirBaseEast : Base {
 		{
 			for (int j = 0; j < Batches [i].ListOfPeople.Count; j++) 
 			{
-				Debug.Log ("Batch: " + Batches [i].BatchName + " - " + Batches [i].ListOfPeople [j].Name);
+				//Debug.Log ("Batch: " + Batches [i].BatchName + " - " + Batches [i].ListOfPeople [j].Name);
 				OutputDictionary.Add (Batches [i].ListOfPeople [j].Name);
 			}
 		}
@@ -519,8 +589,8 @@ public class ChangiAirBaseEast : Base {
 
 	public void AssignSticks ()
 	{
-		for(int i = 0; i < 12; i++)
-		//for(int i = 0; i < base.Steps.Count; i++)
+		for(int i = 0; i < base.Steps.Count; i++)
+		//for(int i = 0; i < 5; i++)
 		{
 			// Yay Order works!
 			for(int k = 0; k < base.Steps[i].ListOfSticks.Count; k++)
@@ -620,26 +690,56 @@ public class ChangiAirBaseEast : Base {
 		List<Batch> FinalizedBatchList = new List<Batch> ();
 		foreach (Batch batch in base.Batches) 
 		{
-			Batch TempBatch = gameObject.AddComponent<Batch>();
-			TempBatch.BatchName = batch.BatchName;
-			TempBatch.BatchNo = batch.BatchNo;
-			TempBatch.ClassData = batch.ClassData;
-			TempBatch.ListOfPeople = new List<Person> ();
-			foreach (Person personal in batch.ListOfPeople) 
+			if (stickData.Parent.Easy == true) 
 			{
-				Debug.Log (personal.Name + " - " + stickData.TimeStart + " - " + personal.lastStickEndTiming + " - " + (stickData.TimeStart - personal.lastStickEndTiming).Hours + " - " + personal.IsRested (stickData.TimeStart).ToString() + " - " + personal.ListOfRoles.Contains (stickData.Parent.CurrentRole).ToString() + " - " + (personal.NoOfSticks - NoToAssign >= 0).ToString());
-				if (personal.IsRested (stickData.TimeStart) &&
-				    personal.ListOfRoles.Contains (stickData.Parent.CurrentRole) && 
-					personal.NoOfSticks - NoToAssign >= 0) 
+				if (batch.DoEasy == true) 
 				{
-					TempBatch.AddPersonal (personal);
+					Batch TempBatch = gameObject.AddComponent<Batch>();
+					TempBatch.BatchName = batch.BatchName;
+					TempBatch.BatchNo = batch.BatchNo;
+					TempBatch.ClassData = batch.ClassData;
+					TempBatch.ListOfPeople = new List<Person> ();
+					foreach (Person personal in batch.ListOfPeople) 
+					{
+						//Debug.Log (personal.Name + " - " + stickData.TimeStart + " - " + personal.lastStickEndTiming + " - " + (stickData.TimeStart - personal.lastStickEndTiming).Hours + " - " + personal.IsRested (stickData.TimeStart).ToString() + " - " + personal.ListOfRoles.Contains (stickData.Parent.CurrentRole).ToString() + " - " + (personal.NoOfSticks - NoToAssign >= 0).ToString());
+						if (personal.IsRested (stickData.TimeStart) &&
+							personal.ListOfRoles.Contains (stickData.Parent.CurrentRole) && 
+							personal.NoOfSticks - NoToAssign >= 0) 
+						{
+							TempBatch.AddPersonal (personal);
+						}
+					}
+					if (TempBatch.ListOfPeople.Count > 0) 
+					{
+						FinalizedBatchList.Add (TempBatch);
+					}
+					Destroy (TempBatch);
 				}
 			}
-			if (TempBatch.ListOfPeople.Count > 0) 
+			else
 			{
-				FinalizedBatchList.Add (TempBatch);
+				Batch TempBatch = gameObject.AddComponent<Batch>();
+				TempBatch.BatchName = batch.BatchName;
+				TempBatch.BatchNo = batch.BatchNo;
+				TempBatch.ClassData = batch.ClassData;
+				TempBatch.ListOfPeople = new List<Person> ();
+				foreach (Person personal in batch.ListOfPeople) 
+				{
+					//Debug.Log (personal.Name + " - " + stickData.TimeStart + " - " + personal.lastStickEndTiming + " - " + (stickData.TimeStart - personal.lastStickEndTiming).Hours + " - " + personal.IsRested (stickData.TimeStart).ToString() + " - " + personal.ListOfRoles.Contains (stickData.Parent.CurrentRole).ToString() + " - " + (personal.NoOfSticks - NoToAssign >= 0).ToString());
+					if (personal.IsRested (stickData.TimeStart) &&
+						personal.ListOfRoles.Contains (stickData.Parent.CurrentRole) && 
+						personal.NoOfSticks - NoToAssign >= 0
+						) 
+					{
+						TempBatch.AddPersonal (personal);
+					}
+				}
+				if (TempBatch.ListOfPeople.Count > 0) 
+				{
+					FinalizedBatchList.Add (TempBatch);
+				}
+				Destroy (TempBatch);
 			}
-			Destroy (TempBatch);
 		}		
 
 		// This simple sort handles the ordering of people based off the number of sticks. 
@@ -658,8 +758,6 @@ public class ChangiAirBaseEast : Base {
 				}		
 			}
 		}
-
-
 
 		// Debug here to check if the sort works
 		foreach (Batch TempBatch in FinalizedBatchList) 
@@ -686,10 +784,10 @@ public class ChangiAirBaseEast : Base {
 			}
 		}
 
-		if (stickData.Parent.Easy == true) 
-		{
-			FinalizedBatchList.Reverse ();
-		}
+//		if (stickData.Parent.Easy == true) 
+//		{
+//			FinalizedBatchList.Reverse ();
+//		}
 
 		// Now we need to select the guy who the largest pirority.
 		List<Person> FinalizedListOfPersonal = new List<Person>();
@@ -697,73 +795,85 @@ public class ChangiAirBaseEast : Base {
 		{
 			if (temp.ListOfPeople.Count > 0) 
 			{
-				Person HighestAmtOfStickInBatch = null;
-				// Find the largest guy in each batch
-				List<Person> BatchListOfPersonal = new List<Person> ();
+//				Person HighestAmtOfStickInBatch = null;
+//				// Find the largest guy in each batch
+//				List<Person> BatchListOfPersonal = new List<Person> ();
+//				foreach (Person personal in temp.ListOfPeople) 
+//				{
+//					if (HighestAmtOfStickInBatch == null) 
+//					{
+//						HighestAmtOfStickInBatch = personal;
+//						BatchListOfPersonal.Add (HighestAmtOfStickInBatch);
+//					}
+//					else if (HighestAmtOfStickInBatch.NoOfSticks == personal.NoOfSticks)
+//					{
+//						BatchListOfPersonal.Add (personal);
+//					}
+//					else if (personal.NoOfSticks > HighestAmtOfStickInBatch.NoOfSticks) 
+//					{
+//						HighestAmtOfStickInBatch = personal;
+//						if (BatchListOfPersonal.Count > 0) 
+//						{
+//							BatchListOfPersonal = new List<Person> ();
+//							BatchListOfPersonal.Add (HighestAmtOfStickInBatch);
+//						}
+//					}
+//				}
+//				Person tPerson = BatchListOfPersonal [Random.Range (0, BatchListOfPersonal.Count)];
+//				Debug.Log ("Highest In Batch: " + tPerson.Name + " - " + tPerson.Parent.BatchName + " - " + tPerson.NoOfSticks);
+//				FinalizedListOfPersonal.Add (tPerson);
+
 				foreach (Person personal in temp.ListOfPeople) 
 				{
-					if (HighestAmtOfStickInBatch == null) 
-					{
-						HighestAmtOfStickInBatch = personal;
-						BatchListOfPersonal.Add (HighestAmtOfStickInBatch);
-					}
-					else if (HighestAmtOfStickInBatch.NoOfSticks == personal.NoOfSticks)
-					{
-						BatchListOfPersonal.Add (personal);
-					}
-					else if (personal.NoOfSticks > HighestAmtOfStickInBatch.NoOfSticks) 
-					{
-						HighestAmtOfStickInBatch = personal;
-						if (BatchListOfPersonal.Count > 0) 
-						{
-							BatchListOfPersonal = new List<Person> ();
-							BatchListOfPersonal.Add (HighestAmtOfStickInBatch);
-						}
-					}
+					FinalizedListOfPersonal.Add (personal);
 				}
-				Person tPerson = BatchListOfPersonal [Random.Range (0, BatchListOfPersonal.Count)];
-				Debug.Log ("Highest In Batch: " + tPerson.Name + " - " + tPerson.Parent.BatchName + " - " + tPerson.NoOfSticks);
-				FinalizedListOfPersonal.Add (tPerson);
 			}
 		}
 
+		IWeightedRandomizer<string> randomizer = new DynamicWeightedRandomizer<string>();
 		foreach (Batch temp in FinalizedBatchList) 
 		{
 			int EmplacementPirority = stickData.Parent.Pirority;
-			IWeightedRandomizer<string> randomizer = new DynamicWeightedRandomizer<string>();
 			foreach (Person personal in temp.ListOfPeople) 
 			{
 				Debug.Log (personal.Name + " Hours since last stick: " + personal.GetHoursSinceLastStick(stickData.TimeStart));
-				randomizer [personal.Name] = (personal.GetHoursSinceLastStick(stickData.TimeStart)) * personal.OriginNoOfSticks * 20;
+//				if (stickData.Parent.Easy == false && temp.DoEasy == false) 
+//				{
+//					randomizer [personal.Name] = (personal.GetHoursSinceLastStick (stickData.TimeStart) *
+//					personal.GetHoursSinceLastStick (stickData.TimeStart)) * (personal.NoOfSticks + 1) * (personal.OriginNoOfSticks) * 20;
+//				}
+//				else
+//				{
+				randomizer [personal.Name] = (personal.GetHoursSinceLastStick(stickData.TimeStart) * (personal.NoOfSticks + 1) * (personal.OriginNoOfSticks));
+//				}
 			}
+		}
 
-			foreach (string val in randomizer) 
-			{
-				Debug.Log (val + " - " + randomizer.GetWeight (val));;
-			}
+		foreach (string val in randomizer) 
+		{
+			Debug.Log ("Weight: " + val + " - " + randomizer.GetWeight (val));;
+		}
 
-			if (NoToAssign == 1) 
-			{
-				//stickData.AssignPerson (temp.ListOfPeople [Random.Range (0, temp.ListOfPeople.Count - 1)]);
-				string Name = randomizer.NextWithReplacement();
+		if (NoToAssign == 1) 
+		{
+			//stickData.AssignPerson (temp.ListOfPeople [Random.Range (0, temp.ListOfPeople.Count - 1)]);
+			string Name = randomizer.NextWithReplacement();
 
-				Person personalToAssign = (temp.ListOfPeople.Find(x => x.Name == Name));
-				stickData.AssignPerson (personalToAssign);
-			}
-			else
-			{
-				//Person personalToAssign = temp.ListOfPeople [Random.Range (0, temp.ListOfPeople.Count - 1)];
-				string Name = randomizer.NextWithReplacement();
-				Person personalToAssign = (temp.ListOfPeople.Find(x => x.Name == Name));
-				stickData.AssignPerson (personalToAssign);
-				// I need to get the next stick here. How do I get the next stick....
-				//Debug.Log("Hello world");
-				Debug.Log("Data: " + stickData.Parent.ListOfSticks.FindIndex(x => x.TimeStart == stickData.TimeStart) + " - " + stickData.Parent.ListOfSticks.Count);
-				Debug.Log (stickData.Parent.ListOfSticks [stickData.Parent.ListOfSticks.FindIndex (x => x.TimeStart == stickData.TimeStart)].Parent.NameOfEmplacement);
-				Debug.Log (stickData.Parent.ListOfSticks [stickData.Parent.ListOfSticks.FindIndex (x => x.TimeStart == stickData.TimeStart) + 1].Parent.NameOfEmplacement);
-				stickData.Parent.ListOfSticks[stickData.Parent.ListOfSticks.FindIndex(x => x.TimeStart == stickData.TimeStart) + 1].AssignPerson(personalToAssign);
-			}
-			break;
+			Person personalToAssign = (FinalizedListOfPersonal.Find(x => x.Name == Name));
+			stickData.AssignPerson (personalToAssign);
+		}
+		else
+		{
+			//Person personalToAssign = temp.ListOfPeople [Random.Range (0, temp.ListOfPeople.Count - 1)];
+			string Name = randomizer.NextWithReplacement();
+			Person personalToAssign = (FinalizedListOfPersonal.Find(x => x.Name == Name));
+			stickData.AssignPerson (personalToAssign);
+			// I need to get the next stick here. How do I get the next stick....
+			//Debug.Log("Hello world");
+			//Debug.Log("Data: " + stickData.Parent.ListOfSticks.FindIndex(x => x.TimeStart == stickData.TimeStart) + " - " + stickData.Parent.ListOfSticks.Count);
+			//Debug.Log (stickData.Parent.ListOfSticks [stickData.Parent.ListOfSticks.FindIndex (x => x.TimeStart == stickData.TimeStart)].Parent.NameOfEmplacement);
+			//Debug.Log (stickData.Parent.ListOfSticks [stickData.Parent.ListOfSticks.FindIndex (x => x.TimeStart == stickData.TimeStart) + 1].Parent.NameOfEmplacement);
+			stickData.Parent.ListOfSticks[stickData.Parent.ListOfSticks.FindIndex(x => x.TimeStart == stickData.TimeStart) + 1].AssignPerson(personalToAssign);
 		}
 	}
 }

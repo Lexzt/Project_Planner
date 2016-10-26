@@ -47,7 +47,10 @@ public class Person : MonoBehaviour {
 	{
 		foreach (Roles tRole in ListOfRoles) 
 		{
-			if (tRole == Roles.eCONSOLE || tRole == Roles.eDRIVER || tRole == Roles.ePASS_OFFICE) 
+			if (tRole == Roles.eCONSOLE || 
+				tRole == Roles.eDRIVER || 
+				tRole == Roles.ePASS_OFFICE || 
+				tRole == Roles.eARMOURER) 
 			{
 				return true;
 			}

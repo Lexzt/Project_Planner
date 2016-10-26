@@ -10,7 +10,7 @@ public enum StickState
 }
 
 public static class StaticVars{
-	public static int MaxNoPerMountWeekDay = 8;
+	public static int MaxNoPerMountWeekDay = 6;
 	public static int MaxNoPerMountWeekEnd = 10;
 	public static int MaxNoOfDutyInARow = 2;
 	public static int StickInHours = 3;
@@ -21,6 +21,11 @@ public static class StaticVars{
 	public static bool StartEndStickOffset = true;
 	public static int StartHourOffset = 1;
 	public static bool DoWithSameBatch = false;
+
+	// ICT Variables
+	public static int NumberOfICT = 4;
+	public static int NumberOfStickforICTWeekDay = 4;
+	public static int NumberOfStickforICTWeekEnd = 6;
 
 	// GUI Stuff
 	public static float StickPadding = 3f;
@@ -37,7 +42,7 @@ public static class StaticVars{
 		case "Sentry":
 			return Roles.eSENTRY;
 			break;
-		case "Pass Office":
+		case "Giro":
 			return Roles.ePASS_OFFICE;
 			break;
 		case "Console":
@@ -46,6 +51,8 @@ public static class StaticVars{
 		case "Driver":
 			return Roles.eDRIVER;
 			break;
+		case "Armorer":
+			return Roles.eARMOURER;
 		default:
 			return Roles.eNONE;
 			break;

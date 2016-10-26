@@ -8,6 +8,8 @@ public class Batch : MonoBehaviour {
 	public string BatchName;
 	public int BatchNo;
 	public BatchClass ClassData;
+	public bool DoEasy = false;
+	public bool ICT = false;
 
 	public Batch(Batch tBatch)
 	{

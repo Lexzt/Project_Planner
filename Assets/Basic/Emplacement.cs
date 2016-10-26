@@ -12,6 +12,7 @@ public enum Roles
     ePASS_OFFICE,
     eCONSOLE,
     eDRIVER,
+	eARMOURER,
 };
 
 public class Emplacement : MonoBehaviour {
@@ -124,7 +125,7 @@ public class Emplacement : MonoBehaviour {
 			}
 			else
 			{
-				Debug.Log (ListOfSticks [i - 1].TimeEnd + " - " + StaticVars.StartDate.Add (new TimeSpan ((i * StaticVars.StickInHours), 0, 0)));
+				//Debug.Log (ListOfSticks [i - 1].TimeEnd + " - " + StaticVars.StartDate.Add (new TimeSpan ((i * StaticVars.StickInHours), 0, 0)));
 				temp.TimeStart = ListOfSticks[i - 1].TimeEnd;
 				temp.TimeEnd = temp.TimeStart.AddHours (StaticVars.StickInHours);
 			}
@@ -154,7 +155,7 @@ public class Emplacement : MonoBehaviour {
 		{
 			if (a.TimeStart >= TimeStart && a.TimeEnd <= TimeEnd) 
 			{
-				Debug.Log ("Removing " + a.TimeStart.ToString () + " - "+ a.TimeEnd.ToString());
+				//Debug.Log ("Removing " + a.TimeStart.ToString () + " - "+ a.TimeEnd.ToString());
 				Destroy (a.GUI);
 				//ToRemoveSticks.Add (a);
 			}
@@ -172,5 +173,21 @@ public class Emplacement : MonoBehaviour {
 		{
 			stick.Reset ();
 		}
+	}
+
+	public bool IsSpecialEmplacement ()
+	{
+		if (CurrentRole == Roles.eCONSOLE || 
+			CurrentRole == Roles.eDRIVER || 
+			CurrentRole == Roles.ePASS_OFFICE || 
+			CurrentRole == Roles.eARMOURER) 
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+		return false;
 	}
 }

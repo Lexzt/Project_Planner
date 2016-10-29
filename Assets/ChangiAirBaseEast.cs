@@ -701,7 +701,7 @@ public class ChangiAirBaseEast : Base {
 					TempBatch.ListOfPeople = new List<Person> ();
 					foreach (Person personal in batch.ListOfPeople) 
 					{
-						//Debug.Log (personal.Name + " - " + stickData.TimeStart + " - " + personal.lastStickEndTiming + " - " + (stickData.TimeStart - personal.lastStickEndTiming).Hours + " - " + personal.IsRested (stickData.TimeStart).ToString() + " - " + personal.ListOfRoles.Contains (stickData.Parent.CurrentRole).ToString() + " - " + (personal.NoOfSticks - NoToAssign >= 0).ToString());
+						Debug.Log (personal.Name + " - " + stickData.TimeStart + " - " + personal.lastStickEndTiming + " - " + (stickData.TimeStart - personal.lastStickEndTiming).Hours + " - " + personal.IsRested (stickData.TimeStart).ToString() + " - " + personal.ListOfRoles.Contains (stickData.Parent.CurrentRole).ToString() + " - " + (personal.NoOfSticks - NoToAssign >= 0).ToString());
 						if (personal.IsRested (stickData.TimeStart) &&
 							personal.ListOfRoles.Contains (stickData.Parent.CurrentRole) && 
 							personal.NoOfSticks - NoToAssign >= 0) 
@@ -725,7 +725,7 @@ public class ChangiAirBaseEast : Base {
 				TempBatch.ListOfPeople = new List<Person> ();
 				foreach (Person personal in batch.ListOfPeople) 
 				{
-					//Debug.Log (personal.Name + " - " + stickData.TimeStart + " - " + personal.lastStickEndTiming + " - " + (stickData.TimeStart - personal.lastStickEndTiming).Hours + " - " + personal.IsRested (stickData.TimeStart).ToString() + " - " + personal.ListOfRoles.Contains (stickData.Parent.CurrentRole).ToString() + " - " + (personal.NoOfSticks - NoToAssign >= 0).ToString());
+					Debug.Log (personal.Name + " - " + stickData.TimeStart + " - " + personal.lastStickEndTiming + " - " + (stickData.TimeStart - personal.lastStickEndTiming).Hours + " - " + personal.IsRested (stickData.TimeStart).ToString() + " - " + personal.ListOfRoles.Contains (stickData.Parent.CurrentRole).ToString() + " - " + (personal.NoOfSticks - NoToAssign >= 0).ToString());
 					if (personal.IsRested (stickData.TimeStart) &&
 						personal.ListOfRoles.Contains (stickData.Parent.CurrentRole) && 
 						personal.NoOfSticks - NoToAssign >= 0
@@ -831,10 +831,10 @@ public class ChangiAirBaseEast : Base {
 		}
 
 		IWeightedRandomizer<string> randomizer = new DynamicWeightedRandomizer<string>();
-		foreach (Batch temp in FinalizedBatchList) 
-		{
-			int EmplacementPirority = stickData.Parent.Pirority;
-			foreach (Person personal in temp.ListOfPeople) 
+//		foreach (Batch temp in FinalizedBatchList) 
+//		{
+//			int EmplacementPirority = stickData.Parent.Pirority;
+			foreach (Person personal in FinalizedListOfPersonal) 
 			{
 				Debug.Log (personal.Name + " Hours since last stick: " + personal.GetHoursSinceLastStick(stickData.TimeStart));
 //				if (stickData.Parent.Easy == false && temp.DoEasy == false) 
@@ -847,33 +847,39 @@ public class ChangiAirBaseEast : Base {
 				randomizer [personal.Name] = (personal.GetHoursSinceLastStick(stickData.TimeStart) * (personal.NoOfSticks + 1) * (personal.OriginNoOfSticks));
 //				}
 			}
-		}
+//		}
 
 		foreach (string val in randomizer) 
 		{
 			Debug.Log ("Weight: " + val + " - " + randomizer.GetWeight (val));;
 		}
 
-		if (NoToAssign == 1) 
-		{
-			//stickData.AssignPerson (temp.ListOfPeople [Random.Range (0, temp.ListOfPeople.Count - 1)]);
-			string Name = randomizer.NextWithReplacement();
 
-			Person personalToAssign = (FinalizedListOfPersonal.Find(x => x.Name == Name));
-			stickData.AssignPerson (personalToAssign);
-		}
-		else
+		if(randomizer.Count > 0)
 		{
-			//Person personalToAssign = temp.ListOfPeople [Random.Range (0, temp.ListOfPeople.Count - 1)];
-			string Name = randomizer.NextWithReplacement();
-			Person personalToAssign = (FinalizedListOfPersonal.Find(x => x.Name == Name));
-			stickData.AssignPerson (personalToAssign);
-			// I need to get the next stick here. How do I get the next stick....
-			//Debug.Log("Hello world");
-			//Debug.Log("Data: " + stickData.Parent.ListOfSticks.FindIndex(x => x.TimeStart == stickData.TimeStart) + " - " + stickData.Parent.ListOfSticks.Count);
-			//Debug.Log (stickData.Parent.ListOfSticks [stickData.Parent.ListOfSticks.FindIndex (x => x.TimeStart == stickData.TimeStart)].Parent.NameOfEmplacement);
-			//Debug.Log (stickData.Parent.ListOfSticks [stickData.Parent.ListOfSticks.FindIndex (x => x.TimeStart == stickData.TimeStart) + 1].Parent.NameOfEmplacement);
-			stickData.Parent.ListOfSticks[stickData.Parent.ListOfSticks.FindIndex(x => x.TimeStart == stickData.TimeStart) + 1].AssignPerson(personalToAssign);
+			if (NoToAssign == 1) 
+			{
+				//stickData.AssignPerson (temp.ListOfPeople [Random.Range (0, temp.ListOfPeople.Count - 1)]);
+				string Name = randomizer.NextWithReplacement();
+
+				Person personalToAssign = (FinalizedListOfPersonal.Find(x => x.Name == Name));
+				Debug.Log("Assigning " + Name + " with weight " + randomizer.GetWeight (Name));
+				stickData.AssignPerson (personalToAssign);
+			}
+			else
+			{
+				//Person personalToAssign = temp.ListOfPeople [Random.Range (0, temp.ListOfPeople.Count - 1)];
+				string Name = randomizer.NextWithReplacement();
+				Debug.Log("Assigning " + Name + " with weight " + randomizer.GetWeight (Name));
+				Person personalToAssign = (FinalizedListOfPersonal.Find(x => x.Name == Name));
+				stickData.AssignPerson (personalToAssign);
+				// I need to get the next stick here. How do I get the next stick....
+				//Debug.Log("Hello world");
+				//Debug.Log("Data: " + stickData.Parent.ListOfSticks.FindIndex(x => x.TimeStart == stickData.TimeStart) + " - " + stickData.Parent.ListOfSticks.Count);
+				//Debug.Log (stickData.Parent.ListOfSticks [stickData.Parent.ListOfSticks.FindIndex (x => x.TimeStart == stickData.TimeStart)].Parent.NameOfEmplacement);
+				//Debug.Log (stickData.Parent.ListOfSticks [stickData.Parent.ListOfSticks.FindIndex (x => x.TimeStart == stickData.TimeStart) + 1].Parent.NameOfEmplacement);
+				stickData.Parent.ListOfSticks[stickData.Parent.ListOfSticks.FindIndex(x => x.TimeStart == stickData.TimeStart) + 1].AssignPerson(personalToAssign);
+			}
 		}
 	}
 }

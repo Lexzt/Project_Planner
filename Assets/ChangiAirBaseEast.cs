@@ -609,25 +609,78 @@ public class ChangiAirBaseEast : Base {
 				}
 			}
 
+//			for(int j = 0; j < base.Steps[i].ListOfSticks.Count; j++)
+//			{
+//				Debug.Log(base.Steps[i].ListOfSticks[j].Parent.NameOfEmplacement + " - " +base.Steps[i].StartStepTime.ToString() + " - " + base.Steps[i].EndStepTime.ToString());
+//				Stick tempData = base.Steps[i].ListOfSticks[j];
+//				if(tempData.Assigned == false)
+//				{
+//					if(tempData.Unique == true)
+//					{
+//						Debug.Log("Assign 1");
+//						Assign(tempData,1);
+//					}
+//					else
+//					{
+//						Debug.Log("Assign 2");
+//						Assign(tempData,2);
+//					}
+//				}
+//			}
+
 			for(int j = 0; j < base.Steps[i].ListOfSticks.Count; j++)
 			{
 				Debug.Log(base.Steps[i].ListOfSticks[j].Parent.NameOfEmplacement + " - " +base.Steps[i].StartStepTime.ToString() + " - " + base.Steps[i].EndStepTime.ToString());
 				Stick tempData = base.Steps[i].ListOfSticks[j];
-				if(tempData.Assigned == false)
+				if(tempData.Assigned == false && tempData.Unique != true && tempData.Parent.Easy == true)
 				{
-					if(tempData.Unique == true)
-					{
-						Debug.Log("Assign 1");
-						Assign(tempData,1);
-					}
-					else
-					{
-						Debug.Log("Assign 2");
-						Assign(tempData,2);
-					}
+					Debug.Log("Assign 2");
+					Assign(tempData,2);
 				}
 			}
 		}
+
+		for (int i = 0; i < base.Steps.Count; i++)
+		{
+			for(int j = 0; j < base.Steps[i].ListOfSticks.Count; j++)
+			{
+				Debug.Log(base.Steps[i].ListOfSticks[j].Parent.NameOfEmplacement + " - " +base.Steps[i].StartStepTime.ToString() + " - " + base.Steps[i].EndStepTime.ToString());
+				Stick tempData = base.Steps[i].ListOfSticks[j];
+				if(tempData.Assigned == false && tempData.Unique == true && tempData.Parent.Easy == true)
+				{
+					Debug.Log("Assign 1");
+					Assign(tempData,1);
+				}
+			}
+		}
+
+		for (int i = 0; i < base.Steps.Count; i++)
+		{
+			for(int j = 0; j < base.Steps[i].ListOfSticks.Count; j++)
+			{
+				Debug.Log(base.Steps[i].ListOfSticks[j].Parent.NameOfEmplacement + " - " +base.Steps[i].StartStepTime.ToString() + " - " + base.Steps[i].EndStepTime.ToString());
+				Stick tempData = base.Steps[i].ListOfSticks[j];
+				if(tempData.Assigned == false && tempData.Unique != true)
+				{
+					Debug.Log("Assign 2");
+					Assign(tempData,2);
+				}
+			}
+		}
+
+//		for (int i = 0; i < base.Steps.Count; i++)
+//		{
+//			for(int j = 0; j < base.Steps[i].ListOfSticks.Count; j++)
+//			{
+//				Debug.Log(base.Steps[i].ListOfSticks[j].Parent.NameOfEmplacement + " - " +base.Steps[i].StartStepTime.ToString() + " - " + base.Steps[i].EndStepTime.ToString());
+//				Stick tempData = base.Steps[i].ListOfSticks[j];
+//				if(tempData.Assigned == false && tempData.Unique == true)
+//				{
+//					Debug.Log("Assign 1");
+//					Assign(tempData,1);
+//				}
+//			}
+//		}
 
 		foreach (Emplacement emp in base.Emplacements) 
 		{
@@ -701,8 +754,8 @@ public class ChangiAirBaseEast : Base {
 					TempBatch.ListOfPeople = new List<Person> ();
 					foreach (Person personal in batch.ListOfPeople) 
 					{
-						Debug.Log (personal.Name + " - " + stickData.TimeStart + " - " + personal.lastStickEndTiming + " - " + (stickData.TimeStart - personal.lastStickEndTiming).Hours + " - " + personal.IsRested (stickData.TimeStart).ToString() + " - " + personal.ListOfRoles.Contains (stickData.Parent.CurrentRole).ToString() + " - " + (personal.NoOfSticks - NoToAssign >= 0).ToString());
-						if (personal.IsRested (stickData.TimeStart) &&
+						Debug.Log (personal.Name + " - " + stickData.TimeStart + " - " + personal.lastStickEndTiming + " - " + (stickData.TimeStart - personal.lastStickEndTiming).Hours + " - " + personal.IsRested (stickData.TimeStart,stickData.TimeEnd).ToString() + " - " + personal.ListOfRoles.Contains (stickData.Parent.CurrentRole).ToString() + " - " + (personal.NoOfSticks - NoToAssign >= 0).ToString());
+						if (personal.IsRested (stickData.TimeStart,stickData.TimeEnd) &&
 							personal.ListOfRoles.Contains (stickData.Parent.CurrentRole) && 
 							personal.NoOfSticks - NoToAssign >= 0) 
 						{
@@ -725,8 +778,8 @@ public class ChangiAirBaseEast : Base {
 				TempBatch.ListOfPeople = new List<Person> ();
 				foreach (Person personal in batch.ListOfPeople) 
 				{
-					Debug.Log (personal.Name + " - " + stickData.TimeStart + " - " + personal.lastStickEndTiming + " - " + (stickData.TimeStart - personal.lastStickEndTiming).Hours + " - " + personal.IsRested (stickData.TimeStart).ToString() + " - " + personal.ListOfRoles.Contains (stickData.Parent.CurrentRole).ToString() + " - " + (personal.NoOfSticks - NoToAssign >= 0).ToString());
-					if (personal.IsRested (stickData.TimeStart) &&
+					Debug.Log (personal.Name + " - " + stickData.TimeStart + " - " + personal.lastStickEndTiming + " - " + (stickData.TimeStart - personal.lastStickEndTiming).Hours + " - " + personal.IsRested (stickData.TimeStart,stickData.TimeEnd).ToString() + " - " + personal.ListOfRoles.Contains (stickData.Parent.CurrentRole).ToString() + " - " + (personal.NoOfSticks - NoToAssign >= 0).ToString());
+					if (personal.IsRested (stickData.TimeStart,stickData.TimeEnd) &&
 						personal.ListOfRoles.Contains (stickData.Parent.CurrentRole) && 
 						personal.NoOfSticks - NoToAssign >= 0
 						) 
@@ -775,7 +828,7 @@ public class ChangiAirBaseEast : Base {
 		{
 			for (int j = 0; j < FinalizedBatchList.Count; j++) 
 			{
-				if (FinalizedBatchList [i].BatchNo < FinalizedBatchList [j].BatchNo) 
+				if (FinalizedBatchList [i].BatchNo > FinalizedBatchList [j].BatchNo) 
 				{
 					Batch tBatch = FinalizedBatchList [i];
 					FinalizedBatchList [i] = FinalizedBatchList [j];
@@ -831,23 +884,18 @@ public class ChangiAirBaseEast : Base {
 		}
 
 		IWeightedRandomizer<string> randomizer = new DynamicWeightedRandomizer<string>();
-//		foreach (Batch temp in FinalizedBatchList) 
-//		{
-//			int EmplacementPirority = stickData.Parent.Pirority;
-			foreach (Person personal in FinalizedListOfPersonal) 
+		foreach (Batch temp in FinalizedBatchList) 
+		{
+			if(temp.ListOfPeople.Count > 0)
 			{
-				Debug.Log (personal.Name + " Hours since last stick: " + personal.GetHoursSinceLastStick(stickData.TimeStart));
-//				if (stickData.Parent.Easy == false && temp.DoEasy == false) 
-//				{
-//					randomizer [personal.Name] = (personal.GetHoursSinceLastStick (stickData.TimeStart) *
-//					personal.GetHoursSinceLastStick (stickData.TimeStart)) * (personal.NoOfSticks + 1) * (personal.OriginNoOfSticks) * 20;
-//				}
-//				else
-//				{
-				randomizer [personal.Name] = (personal.GetHoursSinceLastStick(stickData.TimeStart) * (personal.NoOfSticks + 1) * (personal.OriginNoOfSticks));
-//				}
+				foreach (Person personal in temp.ListOfPeople) 
+				{
+					Debug.Log (personal.Name + " Hours since last stick: " + personal.GetHoursSinceLastStick(stickData.TimeStart));
+					randomizer [personal.Name] = (personal.GetHoursSinceLastStick(stickData.TimeStart) * (personal.NoOfSticks + 1) * (personal.OriginNoOfSticks));
+				}
+				break;
 			}
-//		}
+		}
 
 		foreach (string val in randomizer) 
 		{

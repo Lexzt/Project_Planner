@@ -32,7 +32,7 @@ public class Stick : MonoBehaviour {
 		Data.lastStickEndTiming = TimeEnd;
 		Data.NoOfSticks--;
 		Data.lastDoneEmplacement = Parent;
-
+		Data.ListOfSticks.Add (this);
 		// I need to update the ui here.
 		GUI.transform.GetChild(0).GetComponent<Text>().text = Data.name;
 	}

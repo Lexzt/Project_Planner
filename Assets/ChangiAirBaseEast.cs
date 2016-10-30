@@ -668,19 +668,138 @@ public class ChangiAirBaseEast : Base {
 			}
 		}
 
-//		for (int i = 0; i < base.Steps.Count; i++)
-//		{
-//			for(int j = 0; j < base.Steps[i].ListOfSticks.Count; j++)
-//			{
-//				Debug.Log(base.Steps[i].ListOfSticks[j].Parent.NameOfEmplacement + " - " +base.Steps[i].StartStepTime.ToString() + " - " + base.Steps[i].EndStepTime.ToString());
-//				Stick tempData = base.Steps[i].ListOfSticks[j];
-//				if(tempData.Assigned == false && tempData.Unique == true)
-//				{
-//					Debug.Log("Assign 1");
-//					Assign(tempData,1);
-//				}
-//			}
-//		}
+		foreach (Emplacement emp in base.Emplacements) 
+		{
+			emp.SetAllAssigned ();
+			if (emp.GetAllAssigned () == false && !emp.IsSpecialRole()) 
+			{
+				Debug.Log (emp.NameOfEmplacement + " has " + emp.NumberOfSticksUnAssigned () + " sticks");
+			}
+		}
+
+		foreach (Batch batch in base.Batches) 
+		{
+			foreach (Person personal in batch.ListOfPeople) 
+			{
+				if (personal.NoOfSticks > 0) 
+				{
+					Debug.Log (personal.name + " has " + personal.NoOfSticks + " left");
+				}
+			}
+		}
+
+		// This is the last pass, where we will Assign specially with the new style.
+		List<StepClass> ListOfStepsWithUnassignedSticks = new List<StepClass> ();
+		List<int> NumberOfSticksUnassigned = new List<int> ();
+		for (int i = 0; i < base.Steps.Count; i++)
+		{
+			int counter = 0;
+			for(int j = 0; j < base.Steps[i].ListOfSticks.Count; j++)
+			{
+				Stick tempData = base.Steps[i].ListOfSticks[j];
+				if(tempData.Assigned == false && tempData.Unique == true)
+				{
+					counter++;
+				}
+			}
+			if (counter > 0) 
+			{
+				ListOfStepsWithUnassignedSticks.Add (base.Steps [i]);
+				NumberOfSticksUnassigned.Add (counter);
+			}
+		}
+
+		for (int i = 0; i < 4; i++) 
+		{
+			Debug.Log (ListOfStepsWithUnassignedSticks [i].StartStepTime + " - " + NumberOfSticksUnassigned [i]);
+		}
+
+		// Now, I will find out which personal has not been assigned.
+		List<Person> UnassignedPeople = new List<Person>();
+		foreach (Batch batch in base.Batches) 
+		{
+			foreach (Person personal in batch.ListOfPeople) 
+			{
+				if (personal.NoOfSticks > 0) 
+				{
+					UnassignedPeople.Add (personal);
+				}
+			}
+		}
+		Debug.Log (UnassignedPeople.Count);
+
+		int WhileHold = 0;
+		while(WhileHold != 3)
+		{
+			// Now, for the last part, I need to check how many people can do that specific step.
+			for (int i = 0; i < ListOfStepsWithUnassignedSticks.Count; i++) 
+			{
+				List<Person> NumberOfPeopleWhoCanDoThatStick = new List<Person> ();
+				for (int j = 0; j < ListOfStepsWithUnassignedSticks [i].ListOfSticks.Count; j++) 
+				{
+					Stick tempData = ListOfStepsWithUnassignedSticks[i].ListOfSticks[j];
+					if (tempData.Assigned == false && tempData.Unique == true) 
+					{
+						foreach (Person personal in UnassignedPeople) 
+						{
+							if (personal.IsRested (tempData.TimeStart,tempData.TimeEnd) &&
+								personal.ListOfRoles.Contains (tempData.Parent.CurrentRole) && 
+								personal.NoOfSticks - 1 >= 0) 
+							{
+								NumberOfPeopleWhoCanDoThatStick.Add (personal);
+							}
+						}
+						break;
+					}
+				}
+
+				Debug.Log (ListOfStepsWithUnassignedSticks[i].StartStepTime + " - " + NumberOfPeopleWhoCanDoThatStick.Count + " - " + NumberOfSticksUnassigned [i]);
+				if (NumberOfPeopleWhoCanDoThatStick.Count == NumberOfSticksUnassigned [i]) 
+				{
+					Debug.Log (ListOfStepsWithUnassignedSticks [i].StartStepTime + " has " + NumberOfSticksUnassigned [i] + " unassigned sticks, and " + NumberOfPeopleWhoCanDoThatStick.Count + " people can do it");
+					foreach (Person people in NumberOfPeopleWhoCanDoThatStick) 
+					{
+						Debug.Log ("Person are " + people.Name);
+					}
+
+					for(int j = 0; j < ListOfStepsWithUnassignedSticks [i].ListOfSticks.Count; j++) 
+					{
+						Stick tempData = ListOfStepsWithUnassignedSticks[i].ListOfSticks[j];
+						if (tempData.Assigned == false && tempData.Unique == true) 
+						{
+							int index = Random.Range (0, NumberOfPeopleWhoCanDoThatStick.Count);
+							tempData.AssignPerson(NumberOfPeopleWhoCanDoThatStick[index]);
+							NumberOfPeopleWhoCanDoThatStick.RemoveAt (index);
+							NumberOfSticksUnassigned [i]--;
+						}
+					}
+				}
+
+				if (NumberOfSticksUnassigned [i] == 0) 
+				{
+					ListOfStepsWithUnassignedSticks.RemoveAt (i);
+					NumberOfSticksUnassigned.RemoveAt (i);
+				}
+			}
+
+			// The idea is that, if all the emplacement is a ssigned, break the loop.
+			bool AllAssigned = true;
+			foreach (Emplacement emp in base.Emplacements) 
+			{
+				if (emp.GetAllAssigned() == false) 
+				{
+					AllAssigned = false;
+					break;
+				}
+			}
+			if (AllAssigned == true) 
+			{
+				Debug.Log ("Breaking loop cause all assigned!");
+				break;
+			}
+
+			WhileHold++;
+		}
 
 		foreach (Emplacement emp in base.Emplacements) 
 		{

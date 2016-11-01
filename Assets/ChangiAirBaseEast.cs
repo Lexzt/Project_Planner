@@ -688,6 +688,7 @@ public class ChangiAirBaseEast : Base {
 			}
 		}
 
+		#region LastPass
 		// This is the last pass, where we will Assign specially with the new style.
 		List<StepClass> ListOfStepsWithUnassignedSticks = new List<StepClass> ();
 		List<int> NumberOfSticksUnassigned = new List<int> ();
@@ -709,11 +710,6 @@ public class ChangiAirBaseEast : Base {
 			}
 		}
 
-		for (int i = 0; i < 4; i++) 
-		{
-			Debug.Log (ListOfStepsWithUnassignedSticks [i].StartStepTime + " - " + NumberOfSticksUnassigned [i]);
-		}
-
 		// Now, I will find out which personal has not been assigned.
 		List<Person> UnassignedPeople = new List<Person>();
 		foreach (Batch batch in base.Batches) 
@@ -729,7 +725,7 @@ public class ChangiAirBaseEast : Base {
 		Debug.Log (UnassignedPeople.Count);
 
 		int WhileHold = 0;
-		while(WhileHold != 3)
+		while(WhileHold != 5)
 		{
 			// Now, for the last part, I need to check how many people can do that specific step.
 			for (int i = 0; i < ListOfStepsWithUnassignedSticks.Count; i++) 
@@ -800,6 +796,71 @@ public class ChangiAirBaseEast : Base {
 
 			WhileHold++;
 		}
+		#endregion
+
+		#region Check if can fill up Anymore
+		/*
+		 * This check based off all the sticks left, if there is a personal who can only do at that specific timeslot.
+		 */
+	
+
+		List<Person> UnassignedPeopleCheck = new List<Person>();
+		foreach (Batch batch in base.Batches) 
+		{
+			foreach (Person personal in batch.ListOfPeople) 
+			{
+				if (personal.NoOfSticks > 0) 
+				{
+					UnassignedPeopleCheck.Add(personal);
+				}
+			}
+		}
+
+		foreach(Person unassignedPerson in UnassignedPeopleCheck)
+		{
+			List<StepClass> UnassignedSteps = new List<StepClass>();
+			for (int i = 0; i < base.Steps.Count; i++)
+			{
+				for(int j = 0; j < base.Steps[i].ListOfSticks.Count; j++)
+				{
+					Stick tempData = base.Steps[i].ListOfSticks[j];
+					if(tempData.Assigned == false)
+					{
+						// Store the step
+						UnassignedSteps.Add(base.Steps[i]);
+						break;
+					}
+				}
+			}
+
+			List<StepClass> StepsHeCanUse = new List<StepClass>();
+			for (int i = 0; i < UnassignedSteps.Count; i++)
+			{
+				if(unassignedPerson.IsRested (UnassignedSteps[i].StartStepTime,UnassignedSteps[i].EndStepTime) &&
+					unassignedPerson.NoOfSticks - 1 >= 0)
+				{
+					Debug.Log("Adding step " + UnassignedSteps[i].StartStepTime);
+					StepsHeCanUse.Add(UnassignedSteps[i]);
+				}
+			}
+			Debug.Log(unassignedPerson.Name + " - " + UnassignedSteps.Count + " - " + StepsHeCanUse.Count);
+
+			if(StepsHeCanUse.Count == 1)
+			{
+				List<Stick> UnassignedStickForStep = new List<Stick>();
+				foreach(Stick value in StepsHeCanUse[0].ListOfSticks)
+				{
+					if(value.Assigned == false)
+					{
+						UnassignedStickForStep.Add(value);
+					}
+				}
+				int index = Random.Range(0,UnassignedStickForStep.Count);
+				Debug.Log(unassignedPerson.Name + " - " + UnassignedStickForStep[index].TimeStart + " - " + UnassignedStickForStep[index].Parent.NameOfEmplacement);
+				UnassignedStickForStep[index].AssignPerson(unassignedPerson);
+			}
+		}
+		#endregion
 
 		foreach (Emplacement emp in base.Emplacements) 
 		{

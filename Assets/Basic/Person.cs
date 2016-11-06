@@ -111,6 +111,61 @@ public class Person : MonoBehaviour {
 		//return false;
 	}
 
+	public bool IsRestedExcludingSticks (DateTime StickStartTiming, DateTime StickEndTiming, params Stick[] ExcludeSticks)
+	{
+		foreach (Stick lastStick in ListOfSticks) 
+		{
+			bool Ignore = false;
+			for(int i = 0; i < ExcludeSticks.Length; i++)
+			{
+				if(lastStick.TimeStart == ExcludeSticks[i].TimeStart && lastStick.TimeEnd == ExcludeSticks[i].TimeEnd)
+				{
+					Ignore = true;
+				}
+			}
+
+			if(Ignore == false)
+			{
+				int HoursDiff = 0;
+
+				// 
+				int FirstStartDiff = (int)(StickStartTiming - lastStick.TimeStart).TotalHours;
+				// The new stick starts AFTER the old stick starts.
+				if (FirstStartDiff > 0) 
+				{
+					// The new stick is starting after the old stick starts. 
+					int EndDiff = (int)(StickStartTiming - lastStick.TimeEnd).TotalHours;
+					//Debug.Log ("1: " + EndDiff + " - " + StickStartTiming.ToShortTimeString() + " - " + lastStick.TimeEnd.ToShortTimeString());
+					if (EndDiff > 0) 
+					{
+						// This means the old stick, ends before your new stick starts. 
+						HoursDiff = Mathf.Abs(EndDiff);
+						//if(HoursDiff
+					}
+				}
+				else if(FirstStartDiff < 0)
+				{
+					int EndDiff = (int)(StickEndTiming - lastStick.TimeStart).TotalHours;
+					//Debug.Log ("2: " + EndDiff + " - " + StickStartTiming.ToLocalTime() + lastStick.TimeEnd.ToLocalTime());
+					if (EndDiff < 0) 
+					{
+						// This means my new sticks, ends before my old stick starts.
+						HoursDiff = Mathf.Abs(EndDiff);
+					}
+				}
+				//Debug.Log ("3: " + HoursDiff);
+				if (HoursDiff < StaticVars.RestAfterSticks * StaticVars.StickInHours) 
+				{
+					return false;
+				}
+				HoursDiff = 0;
+			}
+		}
+		return true;
+		//}
+		//return false;
+	}
+
 	public void Reset ()
 	{
 		NoOfSticks = OriginNoOfSticks;

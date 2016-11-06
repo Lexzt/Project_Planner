@@ -14,6 +14,7 @@ public class Stick : MonoBehaviour {
 	public StickState State = StickState.ENABLED;
 	public int StepIndex = 0;
 	public bool Unique = false;
+	public Stick Neighbour = null;
 
 	// Use this for initialization
 	void Start () {
@@ -54,6 +55,15 @@ public class Stick : MonoBehaviour {
 
 	public void Reset ()
 	{
+		DutyPersonal = null;
+		Assigned = false;
+		GUI.transform.GetChild(0).GetComponent<Text>().text = "Nil";
+	}
+
+	public void SwapReset()
+	{
+		DutyPersonal.NoOfSticks++;
+		DutyPersonal.ListOfSticks.Remove(this);
 		DutyPersonal = null;
 		Assigned = false;
 		GUI.transform.GetChild(0).GetComponent<Text>().text = "Nil";

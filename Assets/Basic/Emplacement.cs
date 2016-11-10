@@ -150,21 +150,25 @@ public class Emplacement : MonoBehaviour {
 
 	public void RemoveStick (DateTime TimeStart, DateTime TimeEnd)
 	{
-		List<Stick> RebuildList = new List<Stick> ();
+		//List<Stick> RebuildList = new List<Stick> ();
 		foreach (Stick a in ListOfSticks) 
 		{
 			if (a.TimeStart >= TimeStart && a.TimeEnd <= TimeEnd) 
 			{
 				//Debug.Log ("Removing " + a.TimeStart.ToString () + " - "+ a.TimeEnd.ToString());
-				Destroy (a.GUI);
+				//Destroy (a.GUI);
 				//ToRemoveSticks.Add (a);
+				a.State = StickState.DISABLED;
+				a.GUI.GetComponent<Image> ().color = Color.gray;
+				Debug.Log (a.GUI.transform.GetChild(0).name);
+				a.GUI.transform.GetChild(0).GetComponent<Text> ().text = "";
 			}
-			else
-			{
-				RebuildList.Add (a);
-			}
+//			else
+//			{
+//				RebuildList.Add (a);
+//			}
 		}
-		ListOfSticks = RebuildList;
+		//ListOfSticks = RebuildList;
 	}
 
 	public void Reset ()

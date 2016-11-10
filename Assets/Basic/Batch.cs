@@ -7,7 +7,7 @@ public class Batch : MonoBehaviour {
 	public List<Person> ListOfPeople = new List<Person> ();
 	public string BatchName;
 	public int BatchNo;
-	public BatchClass ClassData;
+	public BatchClass ClassData = null;
 	public bool DoEasy = false;
 	public bool ICT = false;
 
@@ -43,6 +43,15 @@ public class Batch : MonoBehaviour {
 		foreach (Person personal in ListOfPeople) 
 		{
 			personal.Reset ();
+		}
+	}
+
+	public void AllReset ()
+	{
+		ClassData = null;
+		foreach (Person personal in ListOfPeople) 
+		{
+			personal.AllReset ();
 		}
 	}
 }

@@ -187,6 +187,15 @@ public class Person : MonoBehaviour {
 		}
 	}
 
+	public void AllReset ()
+	{
+		NoOfSticks = 0;
+		OriginNoOfSticks = 0;
+		ListOfSticks = new List<Stick>();
+		lastDoneEmplacement = null;
+		lastStickEndTiming = new DateTime();
+	}
+
 	// Use this for initialization
 	void Start () {
 	

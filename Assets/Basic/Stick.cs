@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
 using System.Collections;
 
-public class Stick : MonoBehaviour {
+public class Stick : MonoBehaviour, IPointerClickHandler {
 
 	public DateTime TimeStart;
 	public DateTime TimeEnd;
@@ -53,11 +55,41 @@ public class Stick : MonoBehaviour {
 		}
 	}
 
+	public void OnPointerClick(PointerEventData eventData)
+	{
+//		if (eventData.button == PointerEventData.InputButton.Left) 
+//		{
+//		}
+//		else if (eventData.button == PointerEventData.InputButton.Middle)
+//		{
+//
+//		}
+//		else if (eventData.button == PointerEventData.InputButton.Right)
+//		{
+//			Debug.Log ("Right click!");
+//		}
+
+		if (eventData.button == PointerEventData.InputButton.Right)
+		{
+			Debug.Log ("Right click!");
+			if (State == StickState.ENABLED) 
+			{
+				State = StickState.DISABLED;
+				gameObject.GetComponent<Image> ().color = Color.gray;
+			}
+			else if(State == StickState.DISABLED)
+			{
+				State = StickState.ENABLED;
+				gameObject.GetComponent<Image> ().color = Color.white;
+			}
+		}
+	}
+
 	public void Reset ()
 	{
 		DutyPersonal = null;
 		Assigned = false;
-		GUI.transform.GetChild(0).GetComponent<Text>().text = "Nil";
+		GUI.transform.GetChild(0).GetComponent<Text>().text = "";
 	}
 
 	public void SwapReset()
@@ -66,6 +98,6 @@ public class Stick : MonoBehaviour {
 		DutyPersonal.ListOfSticks.Remove(this);
 		DutyPersonal = null;
 		Assigned = false;
-		GUI.transform.GetChild(0).GetComponent<Text>().text = "Nil";
+		GUI.transform.GetChild(0).GetComponent<Text>().text = "";
 	}
 }

@@ -190,7 +190,7 @@ public class ChangiAirBaseEast : Base
         #endregion
 
         #region Calculate Sticks
-        	CalculateSticks(34, true);
+			CalculateSticks(true);
         #endregion
 
         #region Calculate Steps
@@ -610,34 +610,36 @@ public class ChangiAirBaseEast : Base
 			}
 		#endregion
 
-        #region Debug to check final reuslts
-        foreach (Emplacement emp in base.Emplacements)
-			{
-				emp.SetAllAssigned();
-				if (emp.GetAllAssigned() == false && !emp.IsSpecialRole())
-				{
-					Debug.Log(emp.NameOfEmplacement + " has " + emp.NumberOfSticksUnAssigned() + " sticks");
-				}
-			}
-
-			foreach (Batch batch in base.Batches)
-			{
-				foreach (Person personal in batch.ListOfPeople)
-				{
-					if (personal.NoOfSticks > 0)
-					{
-						Debug.Log(personal.name + " has " + personal.NoOfSticks + " left");
-					}
-				}
-			}
-        #endregion
+//        #region Debug to check final reuslts
+//        foreach (Emplacement emp in base.Emplacements)
+//			{
+//				emp.SetAllAssigned();
+//				if (emp.GetAllAssigned() == false && !emp.IsSpecialRole())
+//				{
+//					Debug.Log(emp.NameOfEmplacement + " has " + emp.NumberOfSticksUnAssigned() + " sticks");
+//				}
+//			}
+//
+//			foreach (Batch batch in base.Batches)
+//			{
+//				foreach (Person personal in batch.ListOfPeople)
+//				{
+//					if (personal.NoOfSticks > 0)
+//					{
+//						Debug.Log(personal.name + " has " + personal.NoOfSticks + " left");
+//					}
+//				}
+//			}
+//        #endregion
     }
 
     // Handles the keypress for assignment of sticks and reset primarily.
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.A))
         {
+			CalculateSticks (true);
+			CalculateSteps ();
             AssignSticks();
         }
 
@@ -651,8 +653,29 @@ public class ChangiAirBaseEast : Base
 	 * This function calculates the amount of sticks based off the number given to it,
 	 * and assigns it automatically with the Xin Jiao System.
 	 */
-    void CalculateSticks(int NoOfSticks, bool MaxXZ = true)
+    void CalculateSticks(bool MaxXZ = true)
     {
+		int NoOfSticks = 0;
+		foreach(Emplacement emp in base.Emplacements)
+		{
+			if(emp.IsSpecialRole() == false)
+			{
+				foreach(Stick value in emp.ListOfSticks)
+				{
+					if(value.State == StickState.ENABLED)
+					{
+						NoOfSticks++;
+					}
+				}
+			}
+		}
+		Debug.Log("Number of sticks: " + NoOfSticks);
+
+		foreach (Batch tempBatch in base.Batches) 
+		{
+			tempBatch.AllReset ();
+		}
+
         #region Calcuation of sticks
 			//int NoOfSticks = 34;
 			//bool MaxXZ = true;
@@ -976,7 +999,7 @@ public class ChangiAirBaseEast : Base
 					{
 						foreach (Stick stick in emp.ListOfSticks)
 						{
-							if (stick.Assigned == false && stick.StepIndex == i)
+							if (stick.Assigned == false && stick.StepIndex == i && stick.State == StickState.ENABLED)
 							{
 								tempStep.ListOfSticks.Add(stick);
 								break;
@@ -996,34 +1019,43 @@ public class ChangiAirBaseEast : Base
 				for (int i = 0; i < emp.ListOfSticks.Count; i++)
 				{
 					Stick stick = emp.ListOfSticks[i];
-					if ((stick.TimeEnd - stick.TimeStart).Hours % 3 != 0)
+					if(stick.State == StickState.ENABLED)
 					{
-						stick.Unique = true;
-					}
-
-					if (i + 1 == emp.ListOfSticks.Count)
-					{
-						stick.Unique = true;
-					}
-
-					if (i + 1 != emp.ListOfSticks.Count && (i - 1 >= 0))
-					{
-						Stick NextStick = emp.ListOfSticks[i + 1];
-						Stick PrevStick = emp.ListOfSticks[i - 1];
-						if (NextStick.TimeStart != stick.TimeEnd && PrevStick.TimeEnd != stick.TimeStart)
+						if ((stick.TimeEnd - stick.TimeStart).Hours % 3 != 0)
 						{
 							stick.Unique = true;
 						}
-					}
 
-					if (i == 0)
-					{
-						if (i + 1 != emp.ListOfSticks.Count)
+						if (i + 1 == emp.ListOfSticks.Count)
+						{
+							stick.Unique = true;
+						}
+
+						if (i + 1 != emp.ListOfSticks.Count && (i - 1 >= 0))
 						{
 							Stick NextStick = emp.ListOfSticks[i + 1];
-							if (NextStick.TimeStart != stick.TimeEnd)
+							Stick PrevStick = emp.ListOfSticks[i - 1];
+							
+							if (NextStick.TimeStart != stick.TimeEnd && PrevStick.TimeEnd != stick.TimeStart)
 							{
 								stick.Unique = true;
+							}
+
+							if(NextStick.State != StickState.ENABLED  && PrevStick.State != StickState.ENABLED)
+							{
+								stick.Unique = true;
+							}
+						}
+
+						if (i == 0)
+						{
+							if (i + 1 != emp.ListOfSticks.Count)
+							{
+								Stick NextStick = emp.ListOfSticks[i + 1];
+								if (NextStick.TimeStart != stick.TimeEnd && NextStick.State == StickState.ENABLED)
+								{
+									stick.Unique = true;
+								}
 							}
 						}
 					}
@@ -1063,30 +1095,33 @@ public class ChangiAirBaseEast : Base
             {
                 //Debug.Log(base.Steps[i].ListOfSticks[j].Parent.NameOfEmplacement + " - " +base.Steps[i].StartStepTime.ToString() + " - " + base.Steps[i].EndStepTime.ToString());
                 Stick tempData = base.Steps[i].ListOfSticks[j];
-                if (UniqueStatus != true && Easy == true)
-                {
-                    if (tempData.Assigned == false && tempData.Unique != true && tempData.Parent.Easy == true)
-                    {
-                        //Debug.Log("Assign 2");
-                        Assign(tempData, 2);
-                    }
-                }
-                else if (UniqueStatus == true && Easy == true)
-                {
-                    if (tempData.Assigned == false && tempData.Unique == true && tempData.Parent.Easy == true)
-                    {
-                        //Debug.Log("Assign 1");
-                        Assign(tempData, 1);
-                    }
-                }
-                else if (UniqueStatus == false && Easy != true)
-                {
-                    if (tempData.Assigned == false && tempData.Unique != true)
-                    {
-                        //Debug.Log("Assign 2");
-                        Assign(tempData, 2);
-                    }
-                }
+				if(tempData.State == StickState.ENABLED)
+				{
+	                if (UniqueStatus != true && Easy == true)
+	                {
+	                    if (tempData.Assigned == false && tempData.Unique != true && tempData.Parent.Easy == true)
+	                    {
+	                        //Debug.Log("Assign 2");
+	                        Assign(tempData, 2);
+	                    }
+	                }
+	                else if (UniqueStatus == true && Easy == true)
+	                {
+	                    if (tempData.Assigned == false && tempData.Unique == true && tempData.Parent.Easy == true)
+	                    {
+	                        //Debug.Log("Assign 1");
+	                        Assign(tempData, 1);
+	                    }
+	                }
+	                else if (UniqueStatus == false && Easy != true)
+	                {
+	                    if (tempData.Assigned == false && tempData.Unique != true)
+	                    {
+	                        //Debug.Log("Assign 2");
+	                        Assign(tempData, 2);
+	                    }
+	                }
+				}
             }
         }
     }

@@ -100,7 +100,7 @@ public class Emplacement : MonoBehaviour {
 		TotalAmtOfStick = (int)(StaticVars.EndDate - StaticVars.StartDate).TotalHours / StaticVars.StickInHours;
         CurrentRole = EmplacementType; 
 		GameObject EmplacementObject = new GameObject (NameOfEmplacement);
-		EmplacementObject.transform.parent = Parent.transform;
+		EmplacementObject.transform.SetParent(Parent.transform,false);
 		ListOfSticks = new List<Stick> ();
 		float x = StickGameObject.GetComponent<RectTransform> ().rect.xMax;
 		float y = StickGameObject.GetComponent<RectTransform> ().rect.yMax;
@@ -110,7 +110,7 @@ public class Emplacement : MonoBehaviour {
 		{
 			GameObject stickObject = Instantiate(StickGameObject) as GameObject;
 			stickObject.transform.SetParent (EmplacementObject.transform);
-			stickObject.GetComponent<RectTransform> ().position = new Vector3 (StaticVars.xPixelPadding + x + (i * width) + (i * StaticVars.StickPadding), Screen.height - y - StaticVars.yPixelPadding - (index * (height + StaticVars.StickPadding)));
+			stickObject.GetComponent<RectTransform> ().localPosition = new Vector3 (StaticVars.xPixelPadding + x + (i * width) + (i * StaticVars.StickPadding), Screen.height - y - StaticVars.yPixelPadding - (index * (height + StaticVars.StickPadding)));
 
 			Stick temp = stickObject.AddComponent<Stick> ();
 			// First Stick
@@ -215,15 +215,13 @@ public class Emplacement : MonoBehaviour {
 		for(int j = 0; j < ListOfSticks.Count; j++)
 		{
 			Stick tempStick = ListOfSticks[j];
-			Debug.Log(j + " - " + tempStick.State + " - " + NameOfEmplacement + " - " + ListOfSticks.Count);
-			if(lastStartSet && lastEndSet)
-				Debug.Log(lastStart.ToString("yyyy, M, dd, H, mm, ss") + " - " + lastEnd.ToString("yyyy, M, dd, H, mm, ss"));
+			// if(lastStartSet && lastEndSet)
+			// 	Debug.Log(lastStart.ToString("yyyy, M, dd, H, mm, ss") + " - " + lastEnd.ToString("yyyy, M, dd, H, mm, ss"));
 			
 			if(tempStick.State == StickState.DISABLED)
 			{
 				if(lastStartSet == false && lastEndSet == false)
 				{
-					Debug.Log("Here");
 					lastStart = tempStick.TimeStart;
 					lastEnd = tempStick.TimeEnd;
 					lastStartSet = true;

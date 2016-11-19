@@ -209,7 +209,12 @@ public class UserManagementSystem : MonoBehaviour
 		Dropdown rolesDropdown = AddUserPanel.transform.FindChild("AddDataPanel").FindChild ("Roles Panel").FindChild ("Dropdown").GetComponent<Dropdown> ();
 		string choice = rolesDropdown.options [rolesDropdown.value].text;
 		//Debug.Log (choice);
-		if (SelectedPersonel.ListOfRoles.Contains (StaticVars.RolesParseJson (choice)) == false) 
+		List<Roles> ListOfNewRoles = new List<Roles>();
+		foreach(Transform child in AddUserPanel.transform.FindChild("AddDataPanel").FindChild("Current Roles Panel"))
+		{
+			ListOfNewRoles.Add(StaticVars.RolesParseJson(child.name));
+		}
+		if (ListOfNewRoles.Contains (StaticVars.RolesParseJson (choice)) == false) 
 		{
 			//SelectedPersonel.ListOfRoles.Add (StaticVars.RolesParseJson (choice));
 

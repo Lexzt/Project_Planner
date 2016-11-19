@@ -2,6 +2,7 @@
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
 using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
@@ -64,8 +65,9 @@ public class ChangiAirBaseEast : Base
         GameObject EmplacementParents = new GameObject("Emplacements");
 
         // Parse the JSON to a JSONNode to use
-        TextAsset Json = Resources.Load(dataFile) as TextAsset;
-        root = JSON.Parse(Json.text);
+		string txt = (new StreamReader(Application.dataPath + "/" + "JsonData.txt")).ReadToEnd();
+        //TextAsset Json = Resources.Load(dataFile) as TextAsset;
+        root = JSON.Parse(txt);
         #region Batch Parsing
 			/*
 			* Here, I create the people object based off the JSON.
@@ -137,7 +139,7 @@ public class ChangiAirBaseEast : Base
 			for (int i = 0; i < root["Emplacements"].Count; i++)
 			{
 				GameObject EmpObj = new GameObject();
-				EmpObj.transform.parent = EmplacementParents.transform;
+				EmpObj.transform.SetParent(EmplacementParents.transform,false);
 
 				Emplacement Emp1 = EmpObj.AddComponent<Emplacement>();
 				Emp1.NameOfEmplacement = root["Emplacements"][i]["Name"];
@@ -164,8 +166,8 @@ public class ChangiAirBaseEast : Base
 			}
         #endregion
 
-        ParentObject.transform.localScale = new Vector3(0.7f, 0.7f, 0f);
-        ParentObject.transform.localPosition = new Vector3(-115f, 0f, 0f);
+       // ParentObject.transform.localScale = new Vector3(0.7f, 0.7f, 0f);
+        //ParentObject.transform.localPosition = new Vector3(-115f, 0f, 0f);
 
         // #region Removing of Sticks
 		// 	/*
@@ -683,6 +685,7 @@ public class ChangiAirBaseEast : Base
 			}
 			root.Add("Emplacements", empRoot);
 			Debug.Log(root.ToString());
+			System.IO.File.WriteAllText(Application.dataPath + "/" + "JsonData.txt", root.ToString());
 		}
     }
 

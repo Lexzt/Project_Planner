@@ -13,6 +13,7 @@ public class Batch : MonoBehaviour {
 	public bool DoEasy = false;
 	public bool ICT = false;
 	public DateTime ORD;
+	public GameObject BaseParent;
 
 	public Batch(Batch tBatch)
 	{
@@ -58,10 +59,13 @@ public class Batch : MonoBehaviour {
 
 		JSONNode personelArray = new JSONArray ();
 		int i = 0;
-		foreach (Person personel in ListOfPeople) 
+		if(ListOfPeople != null)
 		{
-			JSONNode data = personel.ToJSON ();
-			personelArray [i++] = data;
+			foreach (Person personel in ListOfPeople) 
+			{
+				JSONNode data = personel.ToJSON ();
+				personelArray [i++] = data;
+			}
 		}
 		node ["Personnels"] = personelArray;
 		return node;
@@ -74,5 +78,16 @@ public class Batch : MonoBehaviour {
 		{
 			personal.AllReset ();
 		}
+	}
+
+	public void RemoveMe()
+	{
+		// foreach(Person personal in ListOfPeople)
+		// {
+		// 	ListOfPeople.Remove(personal);
+		// 	Destroy(this.gameObject);
+		// }
+		BaseParent.GetComponent<Base>().Batches.Remove(this);
+		Destroy(this.gameObject);
 	}
 }

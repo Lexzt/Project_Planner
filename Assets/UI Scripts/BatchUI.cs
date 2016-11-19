@@ -41,4 +41,10 @@ public class BatchUI : MonoBehaviour {
 			UserManagementSystem.Instance ().SelectedBatch = BatchData;
 		}
 	}
+
+	public void RemoveBatch()
+	{
+		BatchData.RemoveMe();
+		Destroy(this.gameObject);
+	}
 }

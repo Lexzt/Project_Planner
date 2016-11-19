@@ -186,31 +186,85 @@
       "Name": "Viper 1 Sentry",
       "Role": "Sentry",
       "Pirority": 2,
-      "Easy": false
+      "Easy": false,
+      "RemoveStick": [
+        {
+          "RemoveStart": "2016, 8, 15, 14, 00, 00",
+          "RemoveEnd": "2016, 8, 17, 14, 00, 00"
+        }
+      ]
     },
     "Viper 1 Checker": {
       "Name": "Viper 1 Checker",
       "Role": "Checker",
       "Pirority": 2,
-      "Easy": false
+      "Easy": false,
+      "RemoveStick": [
+        {
+          "RemoveStart": "2016, 8, 15, 14, 00, 00",
+          "RemoveEnd": "2016, 8, 16, 6, 00, 00"
+        },
+        {
+          "RemoveStart": "2016, 8, 16, 9, 00, 00",
+          "RemoveEnd": "2016, 8, 16, 15, 00, 00"
+        },
+        {
+          "RemoveStart": "2016, 8, 16, 18, 00, 00",
+          "RemoveEnd": "2016, 8, 17, 14, 00, 00"
+        }
+      ]
     },
     "Python Sentry": {
       "Name": "Python Sentry",
       "Role": "Sentry",
       "Pirority": 4,
-      "Easy": true
+      "Easy": true,
+      "RemoveStick": [
+        {
+          "RemoveStart": "2016, 8, 15, 18, 00, 00",
+          "RemoveEnd": "2016, 8, 16, 6, 00, 00"
+        },
+        {
+          "RemoveStart": "2016, 8, 16, 18, 00, 00",
+          "RemoveEnd": "2016, 8, 17, 6, 00, 00"
+        },
+        {
+          "RemoveStart": "2016, 8, 16, 9, 00, 00",
+          "RemoveEnd": "2016, 8, 16, 15, 00, 00"
+        },
+        {
+          "RemoveStart": "2016, 8, 17, 9, 00, 00",
+          "RemoveEnd": "2016, 8, 17, 14, 00, 00"
+        }
+      ]
     },
     "Python Checker": {
       "Name": "Python Checker",
       "Role": "Checker",
       "Pirority": 4,
-      "Easy": true
+      "Easy": true,
+      "RemoveStick": [
+        {
+          "RemoveStart": "2016, 8, 15, 18, 00, 00",
+          "RemoveEnd": "2016, 8, 16, 6, 00, 00"
+        },
+        {
+          "RemoveStart": "2016, 8, 16, 18, 00, 00",
+          "RemoveEnd": "2016, 8, 17, 6, 00, 00"
+        }
+      ]
     },
     "Viper 2 Sentry": {
       "Name": "Viper 2 Sentry",
       "Role": "Sentry",
       "Pirority": 1,
-      "Easy": false
+      "Easy": false,
+      "RemoveStick": [
+        {
+          "RemoveStart": "2016, 8, 15, 18, 00, 00",
+          "RemoveEnd": "2016, 8, 17, 12, 00, 00"
+        }
+      ]
     },
     "Viper 2 Checker": {
       "Name": "Viper 2 Checker",
@@ -222,7 +276,21 @@
       "Name": "UVSS",
       "Role": "Checker",
       "Pirority": 3,
-      "Easy": true
+      "Easy": true,
+      "RemoveStick": [
+        {
+          "RemoveStart": "2016, 8, 15, 14, 00, 00",
+          "RemoveEnd": "2016, 8, 16, 6, 00, 00"
+        },
+        {
+          "RemoveStart": "2016, 8, 16, 9, 00, 00",
+          "RemoveEnd": "2016, 8, 16, 15, 00, 00"
+        },
+        {
+          "RemoveStart": "2016, 8, 16, 18, 00, 00",
+          "RemoveEnd": "2016, 8, 17, 14, 00, 00"
+        }
+      ]
     },
     "Giro": {
       "Name": "Pass Office",

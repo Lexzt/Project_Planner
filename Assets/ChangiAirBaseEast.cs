@@ -80,6 +80,7 @@ public class ChangiAirBaseEast : Base
 				tempBatch.BatchNo = j + 1;
 				tempBatch.DoEasy = root["Batches"][j]["DoEasy"].AsBool;
 				BatchObj.name = root["Batches"][j]["BatchName"];
+				tempBatch.BaseParent = this.gameObject;
 				base.Batches.Add(tempBatch);
 
 				for (int i = 0; i < root["Batches"][j]["Personnels"].Count; i++)
@@ -144,47 +145,62 @@ public class ChangiAirBaseEast : Base
 
 				EmpObj.name = Emp1.NameOfEmplacement;
 				Emp1.GenerateSticks(ParentObject, StickGameObject, StaticVars.RolesParseJson(root["Emplacements"][i]["Role"]), root["Emplacements"][i]["Pirority"].AsInt, i);
+				
 				base.Emplacements.Add(Emp1);
+				for(int j = 0; j < root["Emplacements"][i]["RemoveStick"].Count; j++)
+				{
+					DateTime parsedDateStart;
+					DateTime parsedDateEnd;
+ 					if (DateTime.TryParseExact(root["Emplacements"][i]["RemoveStick"][j]["RemoveStart"].Value, "yyyy, M, dd, H, mm, ss", null, System.Globalization.DateTimeStyles.None, out parsedDateStart) && 
+					 	DateTime.TryParseExact(root["Emplacements"][i]["RemoveStick"][j]["RemoveEnd"].Value, "yyyy, M, dd, H, mm, ss", null, System.Globalization.DateTimeStyles.None, out parsedDateEnd))
+					{
+						Emp1.RemoveStick(parsedDateStart,parsedDateEnd);
+					}
+					else
+					{
+						Debug.Log("Failed parse " + root["Emplacements"][i]["RemoveStick"][j]["RemoveStart"].Value + " - " + root["Emplacements"][i]["RemoveStick"][j]["RemoveEnd"].Value);
+					}
+				}
 			}
         #endregion
 
         ParentObject.transform.localScale = new Vector3(0.7f, 0.7f, 0f);
         ParentObject.transform.localPosition = new Vector3(-115f, 0f, 0f);
 
-        #region Removing of Sticks
-			/*
-			* Here, I remove the sticks for the specific time and emplacements.
-			* Current, I am hard coding it, to remove based off real emplacements. 
-			* However, In the end, I need to think of a way to soft code it, or parse it in via the JSON.
-			*/
-			// Viper 1 Sentry
-			base.Emplacements[0].RemoveStick(new DateTime(2016, 8, 15, 14, 00, 00), new DateTime(2016, 8, 17, 14, 00, 00));
+        // #region Removing of Sticks
+		// 	/*
+		// 	* Here, I remove the sticks for the specific time and emplacements.
+		// 	* Current, I am hard coding it, to remove based off real emplacements. 
+		// 	* However, In the end, I need to think of a way to soft code it, or parse it in via the JSON.
+		// 	*/
+		// 	// Viper 1 Sentry
+		// 	base.Emplacements[0].RemoveStick(new DateTime(2016, 8, 15, 14, 00, 00), new DateTime(2016, 8, 17, 14, 00, 00));
 
-			// Viper 1 Checker
-			base.Emplacements[1].RemoveStick(new DateTime(2016, 8, 15, 14, 00, 00), new DateTime(2016, 8, 16, 6, 00, 00));
-			base.Emplacements[1].RemoveStick(new DateTime(2016, 8, 16, 9, 00, 00), new DateTime(2016, 8, 16, 15, 00, 00));
-			base.Emplacements[1].RemoveStick(new DateTime(2016, 8, 16, 18, 00, 00), new DateTime(2016, 8, 17, 14, 00, 00));
+		// 	// Viper 1 Checker
+		// 	base.Emplacements[1].RemoveStick(new DateTime(2016, 8, 15, 14, 00, 00), new DateTime(2016, 8, 16, 6, 00, 00));
+		// 	base.Emplacements[1].RemoveStick(new DateTime(2016, 8, 16, 9, 00, 00), new DateTime(2016, 8, 16, 15, 00, 00));
+		// 	base.Emplacements[1].RemoveStick(new DateTime(2016, 8, 16, 18, 00, 00), new DateTime(2016, 8, 17, 14, 00, 00));
 
-			// UVSS
-			base.Emplacements[6].RemoveStick(new DateTime(2016, 8, 15, 14, 00, 00), new DateTime(2016, 8, 16, 6, 00, 00));
-			base.Emplacements[6].RemoveStick(new DateTime(2016, 8, 16, 9, 00, 00), new DateTime(2016, 8, 16, 15, 00, 00));
-			base.Emplacements[6].RemoveStick(new DateTime(2016, 8, 16, 18, 00, 00), new DateTime(2016, 8, 17, 14, 00, 00));
+		// 	// UVSS
+		// 	base.Emplacements[6].RemoveStick(new DateTime(2016, 8, 15, 14, 00, 00), new DateTime(2016, 8, 16, 6, 00, 00));
+		// 	base.Emplacements[6].RemoveStick(new DateTime(2016, 8, 16, 9, 00, 00), new DateTime(2016, 8, 16, 15, 00, 00));
+		// 	base.Emplacements[6].RemoveStick(new DateTime(2016, 8, 16, 18, 00, 00), new DateTime(2016, 8, 17, 14, 00, 00));
 
-			// Python Sentry
-			base.Emplacements[2].RemoveStick(new DateTime(2016, 8, 15, 18, 00, 00), new DateTime(2016, 8, 16, 6, 00, 00));
-			base.Emplacements[2].RemoveStick(new DateTime(2016, 8, 16, 18, 00, 00), new DateTime(2016, 8, 17, 6, 00, 00));
-			base.Emplacements[2].RemoveStick(new DateTime(2016, 8, 16, 9, 00, 00), new DateTime(2016, 8, 16, 15, 00, 00));
-			base.Emplacements[2].RemoveStick(new DateTime(2016, 8, 17, 9, 00, 00), new DateTime(2016, 8, 17, 14, 00, 00));
+		// 	// Python Sentry
+		// 	base.Emplacements[2].RemoveStick(new DateTime(2016, 8, 15, 18, 00, 00), new DateTime(2016, 8, 16, 6, 00, 00));
+		// 	base.Emplacements[2].RemoveStick(new DateTime(2016, 8, 16, 18, 00, 00), new DateTime(2016, 8, 17, 6, 00, 00));
+		// 	base.Emplacements[2].RemoveStick(new DateTime(2016, 8, 16, 9, 00, 00), new DateTime(2016, 8, 16, 15, 00, 00));
+		// 	base.Emplacements[2].RemoveStick(new DateTime(2016, 8, 17, 9, 00, 00), new DateTime(2016, 8, 17, 14, 00, 00));
 
-			// Python Checker
-			base.Emplacements[3].RemoveStick(new DateTime(2016, 8, 15, 18, 00, 00), new DateTime(2016, 8, 16, 6, 00, 00));
-			base.Emplacements[3].RemoveStick(new DateTime(2016, 8, 16, 18, 00, 00), new DateTime(2016, 8, 17, 6, 00, 00));
+		// 	// Python Checker
+		// 	base.Emplacements[3].RemoveStick(new DateTime(2016, 8, 15, 18, 00, 00), new DateTime(2016, 8, 16, 6, 00, 00));
+		// 	base.Emplacements[3].RemoveStick(new DateTime(2016, 8, 16, 18, 00, 00), new DateTime(2016, 8, 17, 6, 00, 00));
 
-			// Viper 2 Sentry
-			base.Emplacements[4].RemoveStick(new DateTime(2016, 8, 15, 18, 00, 00), new DateTime(2016, 8, 17, 12, 00, 00));
+		// 	// Viper 2 Sentry
+		// 	base.Emplacements[4].RemoveStick(new DateTime(2016, 8, 15, 18, 00, 00), new DateTime(2016, 8, 17, 12, 00, 00));
 
-			GenerateDictionary();
-        #endregion
+		// 	GenerateDictionary();
+        // #endregion
 
         #region ICT Handling
         //int TotalNumberOfSticksCoveredByICT = root["ICT"]["NumberOfICT"].AsInt * root["ICT"]["NumberOfStickforICTWeekDay"].AsInt;
@@ -659,6 +675,14 @@ public class ChangiAirBaseEast : Base
 			}
 			root.Add ("Batches", batchArray);
 			Debug.Log (root.ToString ());
+
+			JSONNode empRoot = new  JSONClass();
+			foreach(Emplacement emp in base.Emplacements)
+			{
+				empRoot.Add(emp.NameOfEmplacement,emp.ToJSON());
+			}
+			root.Add("Emplacements", empRoot);
+			Debug.Log(root.ToString());
 		}
     }
 

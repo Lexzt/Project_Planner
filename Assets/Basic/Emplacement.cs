@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using SimpleJSON;
 
 public enum Roles
 {
@@ -160,7 +161,7 @@ public class Emplacement : MonoBehaviour {
 				//ToRemoveSticks.Add (a);
 				a.State = StickState.DISABLED;
 				a.GUI.GetComponent<Image> ().color = Color.gray;
-				Debug.Log (a.GUI.transform.GetChild(0).name);
+				//Debug.Log (a.GUI.transform.GetChild(0).name);
 				a.GUI.transform.GetChild(0).GetComponent<Text> ().text = "";
 			}
 //			else
@@ -193,5 +194,79 @@ public class Emplacement : MonoBehaviour {
 			return false;
 		}
 		return false;
+	}
+
+	public JSONNode ToJSON()
+	{
+		JSONNode node = new JSONClass ();
+		node["Name"] = NameOfEmplacement;
+		node["Role"] = StaticVars.RolesParseJson(CurrentRole);
+		node["Pirority"].AsInt = Pirority;
+		node["Easy"].AsBool = Easy;
+
+		JSONNode removeArray = new JSONArray();
+
+		int i = 0;
+		bool lastStartSet = false;
+		bool lastEndSet = false;
+		DateTime lastStart = new DateTime();
+		DateTime lastEnd = new DateTime();
+
+		for(int j = 0; j < ListOfSticks.Count; j++)
+		{
+			Stick tempStick = ListOfSticks[j];
+			Debug.Log(j + " - " + tempStick.State + " - " + NameOfEmplacement + " - " + ListOfSticks.Count);
+			if(lastStartSet && lastEndSet)
+				Debug.Log(lastStart.ToString("yyyy, M, dd, H, mm, ss") + " - " + lastEnd.ToString("yyyy, M, dd, H, mm, ss"));
+			
+			if(tempStick.State == StickState.DISABLED)
+			{
+				if(lastStartSet == false && lastEndSet == false)
+				{
+					Debug.Log("Here");
+					lastStart = tempStick.TimeStart;
+					lastEnd = tempStick.TimeEnd;
+					lastStartSet = true;
+					lastEndSet = true;
+				}
+				else
+				{
+					lastEnd = tempStick.TimeEnd;
+				}
+
+				if(j + 1 == ListOfSticks.Count)
+				{
+					JSONNode removeNode = new JSONClass();
+					removeNode["RemoveStart"] =  lastStart.ToString("yyyy, M, dd, H, mm, ss");
+					removeNode["RemoveEnd"] =  lastEnd.ToString("yyyy, M, dd, H, mm, ss");
+					Debug.Log(NameOfEmplacement +  " Remove Node " + removeNode.ToString());
+					removeArray[i++] = removeNode;
+					
+					lastStart = new DateTime();
+					lastEnd = new DateTime();
+					lastStartSet = false;
+					lastEndSet = false;
+				}
+			}
+			else if(tempStick.State == StickState.ENABLED || j + 1 == ListOfSticks.Count) 
+			{ 
+				if(lastStartSet == true && lastEndSet == true)
+				{
+					JSONNode removeNode = new JSONClass();
+					removeNode["RemoveStart"] =  lastStart.ToString("yyyy, M, dd, H, mm, ss");
+					removeNode["RemoveEnd"] =  lastEnd.ToString("yyyy, M, dd, H, mm, ss");
+					Debug.Log(NameOfEmplacement +  " Remove Node " + removeNode.ToString());
+					removeArray[i++] = removeNode;
+
+					lastStart = new DateTime();
+					lastEnd = new DateTime();
+					lastStartSet = false;
+					lastEndSet = false;
+				}
+			}
+		}
+
+		node.Add("RemoveStick",removeArray);
+		return node;
 	}
 }

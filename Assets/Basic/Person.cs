@@ -214,6 +214,12 @@ public class Person : MonoBehaviour {
 		lastStickEndTiming = new DateTime();
 	}
 
+	public void RemoveMe()
+	{
+		Parent.ListOfPeople.Remove(this);
+		Destroy(this.gameObject);
+	}
+
 	// Use this for initialization
 	void Start () {
 	

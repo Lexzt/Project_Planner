@@ -5,6 +5,7 @@ using System.Collections;
 public class UserUI : MonoBehaviour {
 
 	public Person MainData;
+	public GameObject RemoveButton;
 
 	void Start () 
 	{
@@ -31,6 +32,8 @@ public class UserUI : MonoBehaviour {
 			UserManagementSystem.Instance ().SelectedPersonel = MainData;
 			UserManagementSystem.Instance ().DrawRoles (PersonData.ListOfRoles);
 			UserManagementSystem.Instance ().AddUserPanel.SetActive (false);
+			UserManagementSystem.Instance ().AddUserPanel.SetActive (false);
+			UserManagementSystem.Instance ().EditBatchPanel.SetActive (false);
 
 			GameObject UserPanel = UserManagementSystem.Instance ().EditUserPanel.transform.FindChild("UserDataPanel").gameObject;
 			UserManagementSystem.Instance ().EditUserPanel.SetActive (true);
@@ -49,5 +52,11 @@ public class UserUI : MonoBehaviour {
 //		{
 //			UserManagementSystem.Instance ().UserValuesPanel.SetActive (false);
 //		}
+	}
+
+	public void RemoveUser()
+	{
+		MainData.RemoveMe();
+		Destroy(this.gameObject);
 	}
 }

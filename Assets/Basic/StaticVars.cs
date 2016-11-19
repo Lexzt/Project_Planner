@@ -58,4 +58,31 @@ public static class StaticVars{
 			break;
 		}
 	}
+
+	public static string RolesParseJson(Roles role)
+	{
+		switch (role)
+		{
+		case Roles.eCHECKER:
+			return "Checker";
+			break;
+		case Roles.eSENTRY:
+			return "Sentry";
+			break;
+		case Roles.ePASS_OFFICE:
+			return "Giro";
+			break;
+		case Roles.eCONSOLE:
+			return "Console";
+			break;
+		case Roles.eDRIVER:
+			return "Driver";
+			break;
+		case Roles.eARMOURER:
+			return "Armorer";
+		default:
+			return "None";
+			break;
+		}
+	}
 }

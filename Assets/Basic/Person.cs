@@ -46,6 +46,24 @@ public class Person : MonoBehaviour {
 		ListOfSticks = new List<Stick> ();
 	}
 
+	public JSONNode ToJSON ()
+	{
+		JSONNode node = new JSONClass ();
+		node ["Name"] = Name;
+		node ["IC"] = IC;
+		node ["IC"] = IC;
+		node ["DOB"] = DOB.ToString();
+
+		JSONNode roleArray = new JSONArray ();
+		for(int i = 0; i < ListOfRoles.Count; i++) 
+		{
+			roleArray [i] = StaticVars.RolesParseJson(ListOfRoles [i]);
+		}
+
+		node.Add ("Roles",roleArray);
+		return node;
+	}
+
 	public bool IsSpecialRole ()
 	{
 		foreach (Roles tRole in ListOfRoles) 

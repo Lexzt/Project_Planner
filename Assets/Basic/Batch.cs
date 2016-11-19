@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using SimpleJSON;
 
 public class Batch : MonoBehaviour {
 
@@ -10,6 +12,7 @@ public class Batch : MonoBehaviour {
 	public BatchClass ClassData = null;
 	public bool DoEasy = false;
 	public bool ICT = false;
+	public DateTime ORD;
 
 	public Batch(Batch tBatch)
 	{
@@ -44,6 +47,24 @@ public class Batch : MonoBehaviour {
 		{
 			personal.Reset ();
 		}
+	}
+
+	public JSONNode ToJSON ()
+	{
+		JSONNode node = new JSONClass ();
+		node ["DoEasy"].AsBool = DoEasy;
+		node ["BatchName"] = BatchName;
+		node ["ORD Month And Year"] = ORD.ToString ();
+
+		JSONNode personelArray = new JSONArray ();
+		int i = 0;
+		foreach (Person personel in ListOfPeople) 
+		{
+			JSONNode data = personel.ToJSON ();
+			personelArray [i++] = data;
+		}
+		node ["Personnels"] = personelArray;
+		return node;
 	}
 
 	public void AllReset ()

@@ -52,6 +52,10 @@
      <Compile Include="Assets\Basic\StaticVars.cs" />
      <Compile Include="Assets\Basic\Stick.cs" />
      <Compile Include="Assets\ChangiAirBaseEast.cs" />
+     <Compile Include="Assets\UI Scripts\BatchUI.cs" />
+     <Compile Include="Assets\UI Scripts\UserParentUI.cs" />
+     <Compile Include="Assets\UI Scripts\UserUI.cs" />
+     <Compile Include="Assets\UserManagementSystem.cs" />
      <Compile Include="Assets\WeightedRandomizer\DynamicWeightedRandomizer.cs" />
      <Compile Include="Assets\WeightedRandomizer\IWeightedRandomizer.cs" />
      <Compile Include="Assets\WeightedRandomizer\RandomExtensionMethods.cs" />

@@ -39,7 +39,6 @@ public class StepClass
 
 public class ChangiAirBaseEast : Base
 {
-
     public DateTime StartDate;
     public DateTime EndDate;
 
@@ -67,7 +66,6 @@ public class ChangiAirBaseEast : Base
         // Parse the JSON to a JSONNode to use
         TextAsset Json = Resources.Load(dataFile) as TextAsset;
         root = JSON.Parse(Json.text);
-
         #region Batch Parsing
 			/*
 			* Here, I create the people object based off the JSON.
@@ -98,7 +96,10 @@ public class ChangiAirBaseEast : Base
 					Person.name = tempPerson.Name;
 					tempBatch.AddPersonal(tempPerson);
 				}
+				GetComponent<UserManagementSystem> ().AddBatchData (BatchObj);
 			}
+		GetComponent<UserManagementSystem> ().DrawUI();
+
         #endregion
 
         //		#region ICT Creation
@@ -647,6 +648,18 @@ public class ChangiAirBaseEast : Base
         {
             Reset();
         }
+
+		if (Input.GetKeyDown (KeyCode.U)) 
+		{
+			JSONNode root = new JSONClass ();
+			JSONNode batchArray = new JSONArray ();
+			foreach (Batch tempBatch in base.Batches) 
+			{
+				batchArray.Add (tempBatch.ToJSON ());
+			}
+			root.Add ("Batches", batchArray);
+			Debug.Log (root.ToString ());
+		}
     }
 
     /*

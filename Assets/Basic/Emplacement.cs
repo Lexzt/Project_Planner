@@ -94,12 +94,13 @@ public class Emplacement : MonoBehaviour {
 		return true;
 	}
 
-	public void GenerateSticks (GameObject Parent,GameObject StickGameObject,Roles EmplacementType,int tPirority,int index) 
+	public void GenerateSticks (GameObject Parent,GameObject HoriScrollRect, GameObject StickGameObject,Roles EmplacementType,int tPirority,int index) 
 	{
 		Pirority = tPirority;
 		TotalAmtOfStick = (int)(StaticVars.EndDate - StaticVars.StartDate).TotalHours / StaticVars.StickInHours;
         CurrentRole = EmplacementType; 
-		GameObject EmplacementObject = new GameObject (NameOfEmplacement);
+		GameObject EmplacementObject = Instantiate(HoriScrollRect) as GameObject;
+		EmplacementObject.name = NameOfEmplacement;
 		EmplacementObject.transform.SetParent(Parent.transform,false);
 		ListOfSticks = new List<Stick> ();
 		float x = StickGameObject.GetComponent<RectTransform> ().rect.xMax;
@@ -109,8 +110,8 @@ public class Emplacement : MonoBehaviour {
 		for (int i = 0; i < TotalAmtOfStick; i++) 
 		{
 			GameObject stickObject = Instantiate(StickGameObject) as GameObject;
-			stickObject.transform.SetParent (EmplacementObject.transform);
-			stickObject.GetComponent<RectTransform> ().localPosition = new Vector3 (StaticVars.xPixelPadding + x + (i * width) + (i * StaticVars.StickPadding), Screen.height - y - StaticVars.yPixelPadding - (index * (height + StaticVars.StickPadding)));
+			stickObject.transform.SetParent (EmplacementObject.transform,false);
+			//stickObject.GetComponent<RectTransform> ().localPosition = new Vector3 (StaticVars.xPixelPadding + x + (i * width) + (i * StaticVars.StickPadding), Screen.height - y - StaticVars.yPixelPadding - (index * (height + StaticVars.StickPadding)));
 
 			Stick temp = stickObject.AddComponent<Stick> ();
 			// First Stick
@@ -139,7 +140,10 @@ public class Emplacement : MonoBehaviour {
 			ListOfSticks.Add (temp);
 
 			stickObject.GetComponent<Button> ().onClick.AddListener(temp.onClick);
+			
 		}
+		
+
 
 //		if (StaticVars.EndDate < ListOfSticks [ListOfSticks.Count - 1].TimeEnd) 
 //		{

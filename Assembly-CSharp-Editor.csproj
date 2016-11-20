@@ -49,8 +49,23 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\VSCode\Plugins\Editor\VSCode.cs" />
+     <Compile Include="Assets\unity-ui-extensions\Scripts\Accordion\Editor\AccordionElementEditor.cs" />
+     <Compile Include="Assets\unity-ui-extensions\Scripts\Editor\CanvasGroupActivator.cs" />
+     <Compile Include="Assets\unity-ui-extensions\Scripts\Editor\CompressionTests.cs" />
+     <Compile Include="Assets\unity-ui-extensions\Scripts\Editor\UIExtensionsMenuOptions.cs" />
+     <Compile Include="Assets\unity-ui-extensions\Scripts\Editor\uGUITools.cs" />
+     <None Include="Assets\unity-ui-extensions\Shaders\UIAdditive.shader" />
+     <None Include="Assets\unity-ui-extensions\Shaders\SoftMaskShaderText.shader" />
+     <None Include="Assets\unity-ui-extensions\Shaders\UISoftAdditive.shader" />
      <None Include="Assets\JsonData.txt" />
+     <None Include="Assets\unity-ui-extensions\Shaders\UIParticleHidden.shader" />
+     <None Include="Assets\unity-ui-extensions\Shaders\SoftMaskShader.shader" />
+     <None Include="Assets\unity-ui-extensions\Scripts\Utilities\Serialization\Surrogates\SurrogatesReadMe.txt" />
+     <None Include="Assets\unity-ui-extensions\Shaders\UIImageCrop.shader" />
+     <None Include="Assets\unity-ui-extensions\Shaders\UILinearDodge.shader" />
      <None Include="Assets\Resources\New Text Document.txt" />
+     <None Include="Assets\unity-ui-extensions\Shaders\UIMultiply.shader" />
+     <None Include="Assets\unity-ui-extensions\Shaders\UIScreen.shader" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>D:/Unity 5.4.1f1/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>

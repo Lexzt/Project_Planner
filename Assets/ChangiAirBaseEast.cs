@@ -56,6 +56,10 @@ public class ChangiAirBaseEast : Base
 
     public string dataFile = "";
 
+	public GameObject ScrollRectContent;
+	public GameObject HoriObject;
+	public Vector2 CellSize;
+
     void Start()
     {
         Debug.Log("No Of Hours: " + (StaticVars.EndDate - StaticVars.StartDate).TotalHours);
@@ -146,7 +150,7 @@ public class ChangiAirBaseEast : Base
 				Emp1.Easy = root["Emplacements"][i]["Easy"].AsBool;
 
 				EmpObj.name = Emp1.NameOfEmplacement;
-				Emp1.GenerateSticks(ParentObject, StickGameObject, StaticVars.RolesParseJson(root["Emplacements"][i]["Role"]), root["Emplacements"][i]["Pirority"].AsInt, i);
+				Emp1.GenerateSticks(ScrollRectContent,HoriObject,StickGameObject, StaticVars.RolesParseJson(root["Emplacements"][i]["Role"]), root["Emplacements"][i]["Pirority"].AsInt, i);
 				
 				base.Emplacements.Add(Emp1);
 				for(int j = 0; j < root["Emplacements"][i]["RemoveStick"].Count; j++)
@@ -164,6 +168,13 @@ public class ChangiAirBaseEast : Base
 					}
 				}
 			}
+
+			RectTransform rt = ScrollRectContent.GetComponent (typeof (RectTransform)) as RectTransform;
+			int TotalAmtOfStick = (int)(StaticVars.EndDate - StaticVars.StartDate).TotalHours / StaticVars.StickInHours;
+			VerticalLayoutGroup grid = ScrollRectContent.GetComponent<VerticalLayoutGroup>();
+			RectOffset gridOffset = grid.padding;
+			float HoriPadding = 5;
+			rt.sizeDelta = new Vector2(gridOffset.left + (TotalAmtOfStick*CellSize.x) + ((TotalAmtOfStick - 1) * HoriPadding) + gridOffset.right,gridOffset.top + (root["Emplacements"].Count * CellSize.y) +((root["Emplacements"].Count - 1) * HoriPadding) + gridOffset.bottom);
         #endregion
 
        // ParentObject.transform.localScale = new Vector3(0.7f, 0.7f, 0f);

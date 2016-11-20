@@ -49,8 +49,18 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Plugins\SimpleJSON.cs" />
+     <None Include="Assets\unity-ui-extensions\Shaders\UIAdditive.shader" />
+     <None Include="Assets\unity-ui-extensions\Shaders\SoftMaskShaderText.shader" />
+     <None Include="Assets\unity-ui-extensions\Shaders\UISoftAdditive.shader" />
      <None Include="Assets\JsonData.txt" />
+     <None Include="Assets\unity-ui-extensions\Shaders\UIParticleHidden.shader" />
+     <None Include="Assets\unity-ui-extensions\Shaders\SoftMaskShader.shader" />
+     <None Include="Assets\unity-ui-extensions\Scripts\Utilities\Serialization\Surrogates\SurrogatesReadMe.txt" />
+     <None Include="Assets\unity-ui-extensions\Shaders\UIImageCrop.shader" />
+     <None Include="Assets\unity-ui-extensions\Shaders\UILinearDodge.shader" />
      <None Include="Assets\Resources\New Text Document.txt" />
+     <None Include="Assets\unity-ui-extensions\Shaders\UIMultiply.shader" />
+     <None Include="Assets\unity-ui-extensions\Shaders\UIScreen.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity 5.4.1f1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

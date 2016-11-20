@@ -94,7 +94,7 @@ public class Emplacement : MonoBehaviour {
 		return true;
 	}
 
-	public void GenerateSticks (GameObject Parent,GameObject HoriScrollRect, GameObject StickGameObject,Roles EmplacementType,int tPirority,int index) 
+	public void GenerateSticks (GameObject Parent,GameObject HoriScrollRect,GameObject RightLabelObject,GameObject StickGameObject,Roles EmplacementType,int tPirority,int index) 
 	{
 		Pirority = tPirority;
 		TotalAmtOfStick = (int)(StaticVars.EndDate - StaticVars.StartDate).TotalHours / StaticVars.StickInHours;
@@ -140,10 +140,13 @@ public class Emplacement : MonoBehaviour {
 			ListOfSticks.Add (temp);
 
 			stickObject.GetComponent<Button> ().onClick.AddListener(temp.onClick);
-			
 		}
 		
-
+		GameObject Text = Instantiate(RightLabelObject) as GameObject;
+		Text.transform.position = RightLabelObject.transform.position;
+		Text.name = "Name Of Emplacement";
+		Text.GetComponent<Text>().text = NameOfEmplacement;
+		Text.transform.SetParent(EmplacementObject.transform,false);
 
 //		if (StaticVars.EndDate < ListOfSticks [ListOfSticks.Count - 1].TimeEnd) 
 //		{
@@ -164,7 +167,7 @@ public class Emplacement : MonoBehaviour {
 				//Destroy (a.GUI);
 				//ToRemoveSticks.Add (a);
 				a.State = StickState.DISABLED;
-				a.GUI.GetComponent<Image> ().color = Color.gray;
+				a.GUI.GetComponent<Image> ().color = new Color(0.2f,0.2f,0.2f,1);
 				//Debug.Log (a.GUI.transform.GetChild(0).name);
 				a.GUI.transform.GetChild(0).GetComponent<Text> ().text = "";
 			}

@@ -59,6 +59,9 @@ public class ChangiAirBaseEast : Base
 	public GameObject ScrollRectContent;
 	public GameObject HoriObject;
 	public Vector2 CellSize;
+	public GameObject RightLabelObject;
+	public GameObject TopLabelObject;
+	public GameObject TimeObject;
 
     void Start()
     {
@@ -140,6 +143,16 @@ public class ChangiAirBaseEast : Base
 			* This section of code runs through the JSON and based off whats defined in the json,
 			* parses it into the object to create for the randomization.
 			*/
+			GameObject TimingObject = Instantiate(HoriObject) as GameObject;
+			TimingObject.name = "Times";
+			TimingObject.transform.SetParent(ScrollRectContent.transform,false);
+			int TotalAmtOfStick = (int)(StaticVars.EndDate - StaticVars.StartDate).TotalHours / StaticVars.StickInHours;
+			for(int j = 0; j < TotalAmtOfStick; j++)
+			{
+				GameObject TimeObj = Instantiate(TimeObject) as GameObject;
+				TimeObj.transform.SetParent(TimingObject.transform,false);
+			}
+
 			for (int i = 0; i < root["Emplacements"].Count; i++)
 			{
 				GameObject EmpObj = new GameObject();
@@ -148,9 +161,9 @@ public class ChangiAirBaseEast : Base
 				Emplacement Emp1 = EmpObj.AddComponent<Emplacement>();
 				Emp1.NameOfEmplacement = root["Emplacements"][i]["Name"];
 				Emp1.Easy = root["Emplacements"][i]["Easy"].AsBool;
-
+				
 				EmpObj.name = Emp1.NameOfEmplacement;
-				Emp1.GenerateSticks(ScrollRectContent,HoriObject,StickGameObject, StaticVars.RolesParseJson(root["Emplacements"][i]["Role"]), root["Emplacements"][i]["Pirority"].AsInt, i);
+				Emp1.GenerateSticks(ScrollRectContent,HoriObject,RightLabelObject,StickGameObject, StaticVars.RolesParseJson(root["Emplacements"][i]["Role"]), root["Emplacements"][i]["Pirority"].AsInt, i);
 				
 				base.Emplacements.Add(Emp1);
 				for(int j = 0; j < root["Emplacements"][i]["RemoveStick"].Count; j++)
@@ -170,11 +183,16 @@ public class ChangiAirBaseEast : Base
 			}
 
 			RectTransform rt = ScrollRectContent.GetComponent (typeof (RectTransform)) as RectTransform;
-			int TotalAmtOfStick = (int)(StaticVars.EndDate - StaticVars.StartDate).TotalHours / StaticVars.StickInHours;
 			VerticalLayoutGroup grid = ScrollRectContent.GetComponent<VerticalLayoutGroup>();
 			RectOffset gridOffset = grid.padding;
 			float HoriPadding = 5;
+			float DiffHalf = rt.sizeDelta.x;
 			rt.sizeDelta = new Vector2(gridOffset.left + (TotalAmtOfStick*CellSize.x) + ((TotalAmtOfStick - 1) * HoriPadding) + gridOffset.right,gridOffset.top + (root["Emplacements"].Count * CellSize.y) +((root["Emplacements"].Count - 1) * HoriPadding) + gridOffset.bottom);
+			rt.localPosition = new Vector3(rt.localPosition.x+((rt.sizeDelta.x - DiffHalf)/2),rt.localPosition.y,rt.localPosition.z);
+			for(int k = 0; k < TotalAmtOfStick; k++)
+			{
+				TimingObject.transform.GetChild(k).FindChild("Text").GetComponent<Text>().text = base.Emplacements[0].ListOfSticks[k].TimeStart.ToString("HH:mm") + " - " + base.Emplacements[0].ListOfSticks[k].TimeEnd.ToString("HH:mm");
+			}
         #endregion
 
        // ParentObject.transform.localScale = new Vector3(0.7f, 0.7f, 0f);

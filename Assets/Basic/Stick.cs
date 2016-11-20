@@ -75,7 +75,7 @@ public class Stick : MonoBehaviour, IPointerClickHandler {
 			if (State == StickState.ENABLED) 
 			{
 				State = StickState.DISABLED;
-				gameObject.GetComponent<Image> ().color = Color.gray;
+				gameObject.GetComponent<Image> ().color = new Color(0.2f,0.2f,0.2f,1);
 			}
 			else if(State == StickState.DISABLED)
 			{

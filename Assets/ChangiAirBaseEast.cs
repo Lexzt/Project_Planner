@@ -80,6 +80,7 @@ public class ChangiAirBaseEast : Base
 			* Here, I create the people object based off the JSON.
 			* This allows it to be dynamic to shuffle around.
 			*/
+			List<string> AutoCompleteList = new List<string>();
 			for (int j = 0; j < root["Batches"].Count; j++)
 			{
 				GameObject BatchObj = new GameObject();
@@ -105,11 +106,12 @@ public class ChangiAirBaseEast : Base
 					tempPerson.Parent = tempBatch;
 					Person.name = tempPerson.Name;
 					tempBatch.AddPersonal(tempPerson);
+					AutoCompleteList.Add(tempPerson.Name);
 				}
 				GetComponent<UserManagementSystem> ().AddBatchData (BatchObj);
 			}
-		GetComponent<UserManagementSystem> ().DrawUI();
-
+			GetComponent<NamePanel>().FillUpList(AutoCompleteList);
+			GetComponent<UserManagementSystem> ().DrawUI();
         #endregion
 
         //		#region ICT Creation

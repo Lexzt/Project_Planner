@@ -55,6 +55,7 @@
      <Compile Include="Assets\Basic\StaticVars.cs" />
      <Compile Include="Assets\Basic\Stick.cs" />
      <Compile Include="Assets\ChangiAirBaseEast.cs" />
+     <Compile Include="Assets\NamePanel.cs" />
      <Compile Include="Assets\UI Scripts\BatchUI.cs" />
      <Compile Include="Assets\UI Scripts\UserParentUI.cs" />
      <Compile Include="Assets\UI Scripts\UserUI.cs" />

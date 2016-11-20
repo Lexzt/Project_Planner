@@ -40,6 +40,17 @@ public class Stick : MonoBehaviour, IPointerClickHandler {
 		GUI.transform.GetChild(0).GetComponent<Text>().text = Data.name;
 	}
 
+	public void AssignPersonWithoutChecks (Person Data)
+	{
+		DutyPersonal = Data;
+		Assigned = true;
+		Data.lastStickEndTiming = TimeEnd;
+		Data.lastDoneEmplacement = Parent;
+		Data.ListOfSticks.Add (this);
+		// I need to update the ui here.
+		GUI.transform.GetChild(0).GetComponent<Text>().text = Data.name;
+	}
+
 	public void DefineTimeStart(DateTime Start, int NoOfSticks)
 	{
 		TimeStart = Start;
@@ -69,18 +80,27 @@ public class Stick : MonoBehaviour, IPointerClickHandler {
 //			Debug.Log ("Right click!");
 //		}
 
-		if (eventData.button == PointerEventData.InputButton.Right)
+		if(NamePanel.Instance.AutoCompleteBox.activeInHierarchy == false)
 		{
-			Debug.Log ("Right click!");
-			if (State == StickState.ENABLED) 
+			if (eventData.button == PointerEventData.InputButton.Left) 
 			{
-				State = StickState.DISABLED;
-				gameObject.GetComponent<Image> ().color = new Color(0.2f,0.2f,0.2f,1);
+				NamePanel.Instance.AutoCompleteBox.SetActive(true);
+				NamePanel.Instance.AutoCompleteBox.transform.FindChild("Name Panel").FindChild("InputField").GetComponent<InputField>().text = "";
+				NamePanel.Instance.SelectedStick = this;
 			}
-			else if(State == StickState.DISABLED)
+			else if (eventData.button == PointerEventData.InputButton.Right)
 			{
-				State = StickState.ENABLED;
-				gameObject.GetComponent<Image> ().color = Color.white;
+				Debug.Log ("Right click!");
+				if (State == StickState.ENABLED) 
+				{
+					State = StickState.DISABLED;
+					gameObject.GetComponent<Image> ().color = new Color(0.2f,0.2f,0.2f,1);
+				}
+				else if(State == StickState.DISABLED)
+				{
+					State = StickState.ENABLED;
+					gameObject.GetComponent<Image> ().color = Color.white;
+				}
 			}
 		}
 	}

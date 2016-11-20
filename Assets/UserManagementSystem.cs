@@ -163,6 +163,16 @@ public class UserManagementSystem : MonoBehaviour
 			UserObject.transform.localScale = Vector3.one;
 			UserObject.name = Name;
 			UserObject.GetComponent<UserUI> ().UpdateUI(SelectedPersonel);
+
+			List<string> AutoCompleteList = new List<string>();
+			foreach(Batch batchData in GetComponent<Base>().Batches)
+			{
+				foreach(Person personel in batchData.ListOfPeople)
+				{
+					AutoCompleteList.Add(personel.Name);
+				}
+			}
+			GetComponent<NamePanel>().FillUpList(AutoCompleteList);
 		}
 	}
 

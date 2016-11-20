@@ -59,6 +59,8 @@ namespace UnityEngine.UI.Extensions
             }
         }
 
+        public NamePanel NamePanelInstance;
+
         //    private int scrollOffset; //offset of the selected item
         //    private int _selectedIndex = 0;
 
@@ -76,10 +78,11 @@ namespace UnityEngine.UI.Extensions
         
         public void Awake()
         {
-            Initialize();
+            //Initialize();
+            //transform.parent.gameObject.SetActive(false);
         }
 
-        private bool Initialize()
+        public bool Initialize()
         {
             bool success = true;
             try
@@ -164,9 +167,9 @@ namespace UnityEngine.UI.Extensions
             _panelItems.Clear();
             foreach (string option in AvailableOptions)
             {
-                _panelItems.Add(option.ToLower());
+                _panelItems.Add(option);
             }
-            _panelItems.Sort();
+            //_panelItems.Sort();
 
             _prunedPanelItems.Clear();
             List<GameObject> itemObjs = new List<GameObject>(panelObjects.Values);
@@ -202,6 +205,12 @@ namespace UnityEngine.UI.Extensions
             }
         }
 
+        public void SetItemsAndRedraw(List<string> AvailChoices)
+        {
+            AvailableOptions = AvailChoices;
+            RebuildPanel();
+        }
+
         /// <summary>
         /// what happens when an item in the list is selected
         /// </summary>
@@ -212,6 +221,7 @@ namespace UnityEngine.UI.Extensions
             Text = item;
             _mainInput.text = Text;
             ToggleDropdownPanel(true);
+            NamePanelInstance.OnItemClicked(item);
         }
 
         //private void UpdateSelected()

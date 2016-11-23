@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UI.Extensions;
 using System.Collections;
 
 public class EmplacementUI : MonoBehaviour {
@@ -24,12 +25,15 @@ public class EmplacementUI : MonoBehaviour {
 
 	public void UpdateEmplacementPanel(Emplacement Data)
 	{
-		GameObject EmplacementEditUI = EmplacementManagementSystem.Instance ().EmplacementEditUI;
-		EmplacementEditUI.SetActive (true);
-		EmplacementEditUI.transform.FindChild ("AddDataPanel").FindChild ("Emplacement Name Panel").FindChild ("InputField").GetComponent<InputField> ().text = Data.NameOfEmplacement;
-		Debug.Log ((int)Data.CurrentRole + " - " + EmplacementEditUI.transform.FindChild ("AddDataPanel").FindChild ("Role Panel").FindChild ("Dropdown").GetComponent<Dropdown> ().value);
-		EmplacementEditUI.transform.FindChild ("AddDataPanel").FindChild ("Role Panel").FindChild ("Dropdown").GetComponent<Dropdown> ().value = (int)Data.CurrentRole;
-		Debug.Log ((int)Data.CurrentRole + " - " + EmplacementEditUI.transform.FindChild ("AddDataPanel").FindChild ("Role Panel").FindChild ("Dropdown").GetComponent<Dropdown> ().value);
-		EmplacementEditUI.transform.FindChild ("AddDataPanel").FindChild ("Do Easy Panel").FindChild ("Toggle").GetComponent<Toggle> ().isOn = Data.Easy;
+		if(EmplacementManagementSystem.Instance().isDragging == false)
+		{
+			GameObject EmplacementEditUI = EmplacementManagementSystem.Instance ().EmplacementEditUI;
+			EmplacementEditUI.SetActive (true);
+			EmplacementManagementSystem.Instance ().EmplacementAddUI.SetActive(false);
+			EmplacementEditUI.transform.FindChild ("AddDataPanel").FindChild ("Emplacement Name Panel").FindChild ("InputField").GetComponent<InputField> ().text = Data.NameOfEmplacement;
+			EmplacementEditUI.transform.FindChild ("AddDataPanel").FindChild ("Role Panel").FindChild ("Dropdown").GetComponent<Dropdown> ().value = (int)Data.CurrentRole;
+			EmplacementEditUI.transform.FindChild ("AddDataPanel").FindChild ("Do Easy Panel").FindChild ("Toggle").GetComponent<Toggle> ().isOn = Data.Easy;
+			EmplacementManagementSystem.Instance().SelectedEmplacement = MainData;
+		}
 	}
 }

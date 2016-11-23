@@ -14,11 +14,16 @@ public class EmplacementManagementSystem : MonoBehaviour
 	public GameObject EmplacementEditUI;
 	public GameObject EmplacementAddUI;
 
+	[Header("[Variables]")]
+	public bool isDragging;
+
 	private static EmplacementManagementSystem mInstance = null;
 	public static EmplacementManagementSystem Instance()
 	{
 		return mInstance;
 	}
+
+	public Emplacement SelectedEmplacement;
 
 	void Awake ()
 	{
@@ -32,7 +37,13 @@ public class EmplacementManagementSystem : MonoBehaviour
 	
 	void Update () 
 	{
-	
+		if(Input.GetKeyDown(KeyCode.B))
+		{
+			foreach(Transform child in EmplacementSpawnButtonParent.transform)
+			{
+				Debug.Log(child.name + " - " + child.GetSiblingIndex());
+			}
+		}
 	}
 
 	public void SwapActive ()
@@ -51,5 +62,79 @@ public class EmplacementManagementSystem : MonoBehaviour
 			EmpObj.name = emp.NameOfEmplacement;
 			EmpObj.GetComponent<EmplacementUI> ().UpdateUI (emp);
 		}
+	}
+
+	public void Dragging (bool tDrag)
+	{
+		isDragging = tDrag;
+	}
+
+	public void AddEmplacement ()
+	{
+		EmplacementAddUI.SetActive(true);
+		EmplacementEditUI.SetActive(false);
+	}
+
+	public void AddEmplacementAndSave()
+	{
+		string EmplacementName = EmplacementAddUI.transform.FindChild("AddDataPanel").FindChild("Emplacement Name Panel").FindChild("InputField").GetComponent<InputField>().text;
+		Roles CurrentRole = ((Roles) EmplacementAddUI.transform.FindChild("AddDataPanel").FindChild("Role Panel").FindChild("Dropdown").GetComponent<Dropdown>().value);
+		bool DoEasy = EmplacementAddUI.transform.FindChild("AddDataPanel").FindChild("Do Easy Panel").FindChild("Toggle").GetComponent<Toggle>().isOn;
+
+		Emplacement NewEmp = GetComponent<ChangiAirBaseEast>().AddEmplacement(EmplacementName,CurrentRole,DoEasy,0);
+
+		GameObject EmpObj = Instantiate (EmplacementButton) as GameObject;
+		EmpObj.transform.SetParent (EmplacementSpawnButtonParent.transform, false);
+		EmpObj.transform.FindChild ("Text").GetComponent<Text> ().text = NewEmp.NameOfEmplacement;
+		EmpObj.name = NewEmp.NameOfEmplacement;
+		EmpObj.GetComponent<EmplacementUI> ().UpdateUI (NewEmp);
+	}
+
+	public void EditEmplacementAndSave()
+	{
+		if(SelectedEmplacement != null)
+		{
+			string EmplacementName = EmplacementEditUI.transform.FindChild("AddDataPanel").FindChild("Emplacement Name Panel").FindChild("InputField").GetComponent<InputField>().text;
+			Roles CurrentRole = ((Roles) EmplacementEditUI.transform.FindChild("AddDataPanel").FindChild("Role Panel").FindChild("Dropdown").GetComponent<Dropdown>().value);
+			bool DoEasy = EmplacementEditUI.transform.FindChild("AddDataPanel").FindChild("Do Easy Panel").FindChild("Toggle").GetComponent<Toggle>().isOn;
+
+			string OldEmpName = SelectedEmplacement.NameOfEmplacement;
+
+			foreach(Transform child in GameObject.Find("Emplacements").transform)
+			{
+				if(child.name == SelectedEmplacement.NameOfEmplacement)
+				{
+					child.GetComponent<Emplacement>().NameOfEmplacement = EmplacementName;
+					child.GetComponent<Emplacement>().CurrentRole = CurrentRole;
+					child.GetComponent<Emplacement>().Easy = DoEasy;
+					child.gameObject.name = EmplacementName; 
+					break;
+				}
+			}
+
+			foreach(Transform child in EmplacementSpawnButtonParent.transform)
+			{
+				if(child.name == OldEmpName)
+				{
+					child.FindChild("Text").GetComponent<Text>().text = EmplacementName;
+					child.gameObject.name = EmplacementName; 
+					break;
+				}
+			}
+		}
+	}
+
+	public void EnableEmplacementManagementSystem ()
+	{
+		EmplacementParentUI.SetActive(true);
+		EmplacementOutsideButton.SetActive(false);
+		GetComponent<UserManagementSystem>().UserManagementSystemOutsideButton.SetActive(false);
+	}
+
+	public void DisableEmplacementManagementSystem ()
+	{
+		EmplacementParentUI.SetActive(false);
+		EmplacementOutsideButton.SetActive(true);
+		GetComponent<UserManagementSystem>().UserManagementSystemOutsideButton.SetActive(true);
 	}
 }

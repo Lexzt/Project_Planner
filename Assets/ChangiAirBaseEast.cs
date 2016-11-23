@@ -110,7 +110,7 @@ public class ChangiAirBaseEast : Base
 				}
 				GetComponent<UserManagementSystem> ().AddBatchData (BatchObj);
 			}
-			//GetComponent<NamePanel>().FillUpList(AutoCompleteList);
+			GetComponent<NamePanel>().FillUpList(AutoCompleteList);
 			GetComponent<UserManagementSystem> ().DrawUI();
         #endregion
 
@@ -165,7 +165,7 @@ public class ChangiAirBaseEast : Base
 				Emp1.Easy = root["Emplacements"][i]["Easy"].AsBool;
 				
 				EmpObj.name = Emp1.NameOfEmplacement;
-				Emp1.GenerateSticks(ScrollRectContent,HoriObject,RightLabelObject,StickGameObject, StaticVars.RolesParseJson(root["Emplacements"][i]["Role"]), root["Emplacements"][i]["Pirority"].AsInt, i);
+				Emp1.GenerateSticks(ScrollRectContent,HoriObject,RightLabelObject,StickGameObject, StaticVars.RolesParseJson(root["Emplacements"][i]["Role"]), root["Emplacements"][i]["Pirority"].AsInt);
 				
 				base.Emplacements.Add(Emp1);
 				for(int j = 0; j < root["Emplacements"][i]["RemoveStick"].Count; j++)
@@ -183,6 +183,8 @@ public class ChangiAirBaseEast : Base
 					}
 				}
 			}
+
+			base.Emplacements.Sort((a,b) => a.Pirority.CompareTo(b.Pirority));
 
 			RectTransform rt = ScrollRectContent.GetComponent (typeof (RectTransform)) as RectTransform;
 			VerticalLayoutGroup grid = ScrollRectContent.GetComponent<VerticalLayoutGroup>();
@@ -722,6 +724,21 @@ public class ChangiAirBaseEast : Base
 			System.IO.File.WriteAllText(Application.dataPath + "/" + "JsonData.txt", root.ToString());
 		}
     }
+
+	public Emplacement AddEmplacement (string EmplacementName, Roles EmplacementRole, bool EmplacementEasy, int Pirority)
+	{
+		GameObject EmpObj = new GameObject();
+		EmpObj.transform.SetParent(GameObject.Find("Emplacements").transform,false);
+
+		Emplacement Emp1 = EmpObj.AddComponent<Emplacement>();
+		Emp1.NameOfEmplacement = EmplacementName;
+		Emp1.Easy = EmplacementEasy;
+		
+		EmpObj.name = Emp1.NameOfEmplacement;
+		Emp1.GenerateSticks(ScrollRectContent,HoriObject,RightLabelObject,StickGameObject, EmplacementRole, Pirority);
+		Emp1.Reset();
+		return Emp1;	
+	}
 
     /*
 	 * This function calculates the amount of sticks based off the number given to it,

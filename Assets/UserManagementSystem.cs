@@ -20,6 +20,8 @@ public class UserManagementSystem : MonoBehaviour
 	public GameObject EditUserPanel;
 	public GameObject AddBatchPanel;
 	public GameObject EditBatchPanel;
+	public GameObject UserManagementSystemOutsideButton;
+	public GameObject UserManagementSystemUI;
 
 	[Header("[List Datas]")]
 	public List<GameObject> ListOfBatchData = new List<GameObject>();
@@ -372,8 +374,17 @@ public class UserManagementSystem : MonoBehaviour
 		SelectedBatch.DoEasy = EditBatchPanel.transform.FindChild("AddDataPanel").FindChild("Do Easy Panel").FindChild("Toggle").GetComponent<Toggle>().isOn;
 	}
 
-	public void SwapUserManagementSystemActive (GameObject UMS)
+	public void EnableUserManagementSystem()
 	{
-		UMS.SetActive(!UMS.activeInHierarchy);
+		UserManagementSystemOutsideButton.SetActive(false);
+		UserManagementSystemUI.SetActive(true);
+		GetComponent<EmplacementManagementSystem>().EmplacementOutsideButton.SetActive(false);
+	}
+
+	public void DisableUserManagementSystem()
+	{
+		UserManagementSystemOutsideButton.SetActive(true);
+		UserManagementSystemUI.SetActive(false);
+		GetComponent<EmplacementManagementSystem>().EmplacementOutsideButton.SetActive(true);
 	}
 }

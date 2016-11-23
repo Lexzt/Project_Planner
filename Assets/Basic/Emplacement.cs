@@ -94,7 +94,7 @@ public class Emplacement : MonoBehaviour {
 		return true;
 	}
 
-	public void GenerateSticks (GameObject Parent,GameObject HoriScrollRect,GameObject RightLabelObject,GameObject StickGameObject,Roles EmplacementType,int tPirority,int index) 
+	public void GenerateSticks (GameObject Parent,GameObject HoriScrollRect,GameObject RightLabelObject,GameObject StickGameObject,Roles EmplacementType,int tPirority) 
 	{
 		Pirority = tPirority;
 		TotalAmtOfStick = (int)(StaticVars.EndDate - StaticVars.StartDate).TotalHours / StaticVars.StickInHours;

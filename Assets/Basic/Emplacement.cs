@@ -7,7 +7,7 @@ using SimpleJSON;
 
 public enum Roles
 {
-    eNONE,
+    eNONE = -1,
     eSENTRY,
     eCHECKER,
     ePASS_OFFICE,

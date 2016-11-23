@@ -59,7 +59,7 @@ namespace UnityEngine.UI.Extensions
             }
         }
 
-        public NamePanel NamePanelInstance;
+        //public NamePanel NamePanelInstance;
 
         //    private int scrollOffset; //offset of the selected item
         //    private int _selectedIndex = 0;
@@ -221,7 +221,7 @@ namespace UnityEngine.UI.Extensions
             Text = item;
             _mainInput.text = Text;
             ToggleDropdownPanel(true);
-            NamePanelInstance.OnItemClicked(item);
+            //NamePanelInstance.OnItemClicked(item);
         }
 
         //private void UpdateSelected()

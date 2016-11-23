@@ -110,7 +110,7 @@ public class ChangiAirBaseEast : Base
 				}
 				GetComponent<UserManagementSystem> ().AddBatchData (BatchObj);
 			}
-			GetComponent<NamePanel>().FillUpList(AutoCompleteList);
+			//GetComponent<NamePanel>().FillUpList(AutoCompleteList);
 			GetComponent<UserManagementSystem> ().DrawUI();
         #endregion
 
@@ -195,6 +195,9 @@ public class ChangiAirBaseEast : Base
 			{
 				TimingObject.transform.GetChild(k).FindChild("Text").GetComponent<Text>().text = base.Emplacements[0].ListOfSticks[k].TimeStart.ToString("HH:mm") + " - " + base.Emplacements[0].ListOfSticks[k].TimeEnd.ToString("HH:mm");
 			}
+
+			GetComponent<EmplacementManagementSystem> ().DrawUI();
+
         #endregion
 
        // ParentObject.transform.localScale = new Vector3(0.7f, 0.7f, 0f);

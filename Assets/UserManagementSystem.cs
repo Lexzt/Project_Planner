@@ -39,6 +39,7 @@ public class UserManagementSystem : MonoBehaviour
 	{
 		return mInstance;
 	}
+
 	void Awake ()
 	{
 		if(!mInstance) mInstance = this;
@@ -172,7 +173,7 @@ public class UserManagementSystem : MonoBehaviour
 					AutoCompleteList.Add(personel.Name);
 				}
 			}
-			GetComponent<NamePanel>().FillUpList(AutoCompleteList);
+			//GetComponent<NamePanel>().FillUpList(AutoCompleteList);
 		}
 	}
 

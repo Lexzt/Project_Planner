@@ -80,13 +80,13 @@ public class Stick : MonoBehaviour, IPointerClickHandler {
 //			Debug.Log ("Right click!");
 //		}
 
-		if(NamePanel.Instance.AutoCompleteBox.activeInHierarchy == false)
+		//if(NamePanel.Instance.AutoCompleteBox.activeInHierarchy == false)
 		{
 			if (eventData.button == PointerEventData.InputButton.Left) 
 			{
-				NamePanel.Instance.AutoCompleteBox.SetActive(true);
-				NamePanel.Instance.AutoCompleteBox.transform.FindChild("Name Panel").FindChild("InputField").GetComponent<InputField>().text = "";
-				NamePanel.Instance.SelectedStick = this;
+				//NamePanel.Instance.AutoCompleteBox.SetActive(true);
+				//NamePanel.Instance.AutoCompleteBox.transform.FindChild("Name Panel").FindChild("InputField").GetComponent<InputField>().text = "";
+				//NamePanel.Instance.SelectedStick = this;
 			}
 			else if (eventData.button == PointerEventData.InputButton.Right)
 			{

@@ -120,4 +120,10 @@ public class Stick : MonoBehaviour, IPointerClickHandler {
 		Assigned = false;
 		GUI.transform.GetChild(0).GetComponent<Text>().text = "";
 	}
+
+	public void RemoveStick ()
+	{
+		Destroy(GUI);
+		Destroy(this);
+	}
 }

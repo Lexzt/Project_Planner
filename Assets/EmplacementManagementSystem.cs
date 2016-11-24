@@ -39,10 +39,7 @@ public class EmplacementManagementSystem : MonoBehaviour
 	{
 		if(Input.GetKeyDown(KeyCode.B))
 		{
-			foreach(Transform child in EmplacementSpawnButtonParent.transform)
-			{
-				Debug.Log(child.name + " - " + child.GetSiblingIndex());
-			}
+			
 		}
 	}
 
@@ -88,6 +85,8 @@ public class EmplacementManagementSystem : MonoBehaviour
 		EmpObj.transform.FindChild ("Text").GetComponent<Text> ().text = NewEmp.NameOfEmplacement;
 		EmpObj.name = NewEmp.NameOfEmplacement;
 		EmpObj.GetComponent<EmplacementUI> ().UpdateUI (NewEmp);
+
+		EmplacementAddUI.SetActive(false);
 	}
 
 	public void EditEmplacementAndSave()
@@ -136,5 +135,20 @@ public class EmplacementManagementSystem : MonoBehaviour
 		EmplacementParentUI.SetActive(false);
 		EmplacementOutsideButton.SetActive(true);
 		GetComponent<UserManagementSystem>().UserManagementSystemOutsideButton.SetActive(true);
+	}
+
+	public void OnDragEnd ()
+	{
+		int NewPirority = 1;
+		foreach(Transform child in EmplacementSpawnButtonParent.transform)
+		{
+			if(child.name != "Fake")
+			{
+				if(child.GetComponent<EmplacementUI>().MainData.IsSpecialRole() == false)
+				{
+					child.GetComponent<EmplacementUI>().MainData.Pirority = NewPirority++;
+				}
+			}
+		}
 	}
 }

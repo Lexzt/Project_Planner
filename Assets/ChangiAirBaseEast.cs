@@ -1546,4 +1546,16 @@ public class ChangiAirBaseEast : Base
             }
         }
     }
+
+	public void RemoveEmplacement (string EmpName)
+	{
+		foreach(Transform child in ScrollRectContent.transform)
+		{
+			if(child.name == EmpName)
+			{
+				Destroy(child.gameObject);
+				break;
+			}
+		}
+	}
 }

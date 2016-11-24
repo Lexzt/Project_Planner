@@ -274,4 +274,13 @@ public class Emplacement : MonoBehaviour {
 		node.Add("RemoveStick",removeArray);
 		return node;
 	}
+
+	public void RemoveEmplacement ()
+	{
+		foreach(Stick temp in ListOfSticks)
+		{
+			temp.RemoveStick();
+		}
+		Destroy(this.gameObject);
+	}
 }

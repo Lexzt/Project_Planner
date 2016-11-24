@@ -36,4 +36,11 @@ public class EmplacementUI : MonoBehaviour {
 			EmplacementManagementSystem.Instance().SelectedEmplacement = MainData;
 		}
 	}
+
+	public void RemoveEmplacement ()
+	{
+		GameObject.Find("Main").GetComponent<ChangiAirBaseEast>().RemoveEmplacement(MainData.NameOfEmplacement);
+		MainData.RemoveEmplacement();
+		Destroy(this.gameObject);
+	}
 }

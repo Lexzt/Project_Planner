@@ -35,6 +35,7 @@ public class UserManagementSystem : MonoBehaviour
 	[Header("[Runtime Values]")]
 	public Batch SelectedBatch = null;
 	public Person SelectedPersonel = null;
+	public bool isDragging;
 
 	private static UserManagementSystem mInstance = null;
 	public static UserManagementSystem Instance()
@@ -106,16 +107,19 @@ public class UserManagementSystem : MonoBehaviour
 			BatchObj.GetComponent<BatchUI> ().UserParentObject = UserParent;
 			BatchObj.GetComponent<Button> ().onClick.AddListener(() => DisableOtherUserParent());
 			BatchObj.GetComponent<Button> ().onClick.AddListener(() => BatchObj.GetComponent<BatchUI> ().SwapUserParent ());
-			BatchObj.GetComponent<Button> ().onClick.AddListener(() => {AddPersonelButton.SetActive (true);});
+			BatchObj.GetComponent<Button> ().onClick.AddListener(() => {if(isDragging == false) AddPersonelButton.SetActive (true);});
 			BatchObj.GetComponent<Button> ().onClick.AddListener(() => EditBatch());
 		}
 	}
 
 	public void DisableOtherUserParent ()
 	{
-		foreach (GameObject Obj in ListOfUserParents) 
+		if(isDragging ==  false)
 		{
-			Obj.SetActive (false);
+			foreach (GameObject Obj in ListOfUserParents) 
+			{
+				Obj.SetActive (false);
+			}
 		}
 	}
 
@@ -346,13 +350,16 @@ public class UserManagementSystem : MonoBehaviour
 
 	public void EditBatch()
 	{
-		EditBatchPanel.SetActive(true);
-		AddBatchPanel.SetActive(false);
-		EditUserPanel.SetActive(false);
-		AddUserPanel.SetActive(false);
-		EditBatchPanel.transform.FindChild("AddDataPanel").FindChild("Batch Name Panel").FindChild("InputField").GetComponent<InputField>().text = SelectedBatch.BatchName;
-		EditBatchPanel.transform.FindChild("AddDataPanel").FindChild("Batch Number Panel").FindChild("InputField").GetComponent<InputField>().text = SelectedBatch.BatchNo.ToString();
-		EditBatchPanel.transform.FindChild("AddDataPanel").FindChild("Do Easy Panel").FindChild("Toggle").GetComponent<Toggle>().isOn = SelectedBatch.DoEasy;
+		if(isDragging == false)
+		{
+			EditBatchPanel.SetActive(true);
+			AddBatchPanel.SetActive(false);
+			EditUserPanel.SetActive(false);
+			AddUserPanel.SetActive(false);
+			EditBatchPanel.transform.FindChild("AddDataPanel").FindChild("Batch Name Panel").FindChild("InputField").GetComponent<InputField>().text = SelectedBatch.BatchName;
+			EditBatchPanel.transform.FindChild("AddDataPanel").FindChild("Batch Number Panel").FindChild("InputField").GetComponent<InputField>().text = SelectedBatch.BatchNo.ToString();
+			EditBatchPanel.transform.FindChild("AddDataPanel").FindChild("Do Easy Panel").FindChild("Toggle").GetComponent<Toggle>().isOn = SelectedBatch.DoEasy;
+		}
 	}
 
 	public void EditBatchAndSave ()
@@ -386,5 +393,25 @@ public class UserManagementSystem : MonoBehaviour
 		UserManagementSystemOutsideButton.SetActive(true);
 		UserManagementSystemUI.SetActive(false);
 		GetComponent<EmplacementManagementSystem>().EmplacementOutsideButton.SetActive(true);
+	}
+
+	public void Dragging (bool tDrag)
+	{
+		isDragging = tDrag;
+	}
+
+	public void OnDragEnd ()
+	{
+		// int NewPirority = 1;
+		// foreach(Transform child in EmplacementSpawnButtonParent.transform)
+		// {
+		// 	if(child.name != "Fake")
+		// 	{
+		// 		if(child.GetComponent<EmplacementUI>().MainData.IsSpecialRole() == false)
+		// 		{
+		// 			child.GetComponent<EmplacementUI>().MainData.Pirority = NewPirority++;
+		// 		}
+		// 	}
+		// }
 	}
 }

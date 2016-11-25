@@ -35,10 +35,13 @@ public class BatchUI : MonoBehaviour {
 
 	public void SwapUserParent ()
 	{
-		UserParentObject.SetActive (!UserParentObject.activeInHierarchy);
-		if (UserParentObject.activeInHierarchy == true) 
+		if(UserManagementSystem.Instance().isDragging == false)
 		{
-			UserManagementSystem.Instance ().SelectedBatch = BatchData;
+			UserParentObject.SetActive (!UserParentObject.activeInHierarchy);
+			if (UserParentObject.activeInHierarchy == true) 
+			{
+				UserManagementSystem.Instance ().SelectedBatch = BatchData;
+			}
 		}
 	}
 

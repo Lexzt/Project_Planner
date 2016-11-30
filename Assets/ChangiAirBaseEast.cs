@@ -245,11 +245,11 @@ public class ChangiAirBaseEast : Base
         #endregion
 
         #region Calculate Sticks
-			CalculateSticks(true);
+			//CalculateSticks(true);
         #endregion
 
         #region Calculate Steps
-        	CalculateSteps();
+        	//CalculateSteps();
         #endregion
 
         // Reset all emplacement to NIL before we try to assign.
@@ -295,16 +295,21 @@ public class ChangiAirBaseEast : Base
 	 */
     public void AssignSticks()
     {
-        OrderSteps();
+        //OrderSteps();
 
-        AssignPass(false, true);
-        AssignPass(true, true);
-        AssignPass(false, false);
+//        AssignPass(false, true);
+//        AssignPass(true, true);
+//        AssignPass(false, false);
+
+		AssignPass(false, true);
+		AssignPass(true, true);
+		AssignPass(false, false);
 
        // DebugEmplacements();
        // DebugPersonel();
 
-        while (PossibilityCheck() == false)
+		int MaxChecks = 0;
+		while (PossibilityCheck() == false)
         {
             Debug.Log("Loop!");
 
@@ -312,187 +317,28 @@ public class ChangiAirBaseEast : Base
             AssignPass(false, true);
             AssignPass(true, true);
             AssignPass(false, false);
+			MaxChecks++;
+			if (MaxChecks == 5) 
+			{
+				break;
+			}
         }
 
+		DebugEmplacements ();
+		DebugPersonel ();
+
 		#region LastPass
-			// This is the last pass, where we will Assign specially with the new style.
-			List<StepClass> ListOfStepsWithUnassignedSticks = new List<StepClass>();
-			List<int> NumberOfSticksUnassigned = new List<int>();
-			List<Person> UnassignedPeople = new List<Person>();
-			GenerateUnassignedStepsAndSticks(ref ListOfStepsWithUnassignedSticks, ref NumberOfSticksUnassigned);
-			GenerateUnassignedPersonels(ref UnassignedPeople);
-
-			// Debug.Log(UnassignedPeople.Count);
-
-			// // Here, I need to do an important check, 
-			// // To check if there is someone to be able to do at that timeslot based off the number of sticks left avaliable on that time.
-			// // The amount of sticks left unassigned in a step is in the list of int
-			// // And the step is in the list.
-			// // So, I just need to cycle through them.
-			// if (ListOfStepsWithUnassignedSticks.Count == NumberOfSticksUnassigned.Count)
-			// {
-			// 	List<int> ListOfPeopleWhoCanDoThatStep = new List<int>();
-			// 	for (int i = 0; i < ListOfStepsWithUnassignedSticks.Count; i++)
-			// 	{
-			// 		int Counter = 0;
-			// 		foreach (Person personal in UnassignedPeople)
-			// 		{
-			// 			if (personal.IsRested(ListOfStepsWithUnassignedSticks[i].StartStepTime, ListOfStepsWithUnassignedSticks[i].EndStepTime))
-			// 			{
-			// 				//Debug.Log(personal.Name);
-			// 				Counter++;
-			// 			}
-			// 		}
-			// 		//Debug.Log(ListOfStepsWithUnassignedSticks[i].StartStepTime + " has " + NumberOfSticksUnassigned[i] + " sticks and " + Counter + " people who can do it.");
-			// 		if (Counter >= NumberOfSticksUnassigned[i])
-			// 		{
-			// 			//Debug.Log(ListOfStepsWithUnassignedSticks[i].StartStepTime + " has no problem");
-			// 		}
-			// 		else
-			// 		{
-			// 			//Debug.Log(ListOfStepsWithUnassignedSticks[i].StartStepTime + " has problem " + NumberOfSticksUnassigned[i] + " - " + Counter);
-			// 		}
-			// 	}
-			// }
-			// else
-			// {
-			// 	Debug.Log("Smth wrong!!");
-			// }
-
-			int WhileHold = 0;
-			while (WhileHold != 5)
-			{
-				// Now, for the last part, I need to check how many people can do that specific step.
-				for (int i = 0; i < ListOfStepsWithUnassignedSticks.Count; i++)
-				{
-					List<Person> NumberOfPeopleWhoCanDoThatStick = new List<Person>();
-					for (int j = 0; j < ListOfStepsWithUnassignedSticks[i].ListOfSticks.Count; j++)
-					{
-						Stick tempData = ListOfStepsWithUnassignedSticks[i].ListOfSticks[j];
-						if (tempData.Assigned == false && tempData.Unique == true)
-						{
-							foreach (Person personal in UnassignedPeople)
-							{
-								if (personal.IsRested(tempData.TimeStart, tempData.TimeEnd) &&
-									personal.ListOfRoles.Contains(tempData.Parent.CurrentRole) &&
-									personal.NoOfSticks - 1 >= 0)
-								{
-									NumberOfPeopleWhoCanDoThatStick.Add(personal);
-								}
-							}
-							break;
-						}
-					}
-
-					//Debug.Log (ListOfStepsWithUnassignedSticks[i].StartStepTime + " - " + NumberOfPeopleWhoCanDoThatStick.Count + " - " + NumberOfSticksUnassigned [i]);
-					if (NumberOfPeopleWhoCanDoThatStick.Count == NumberOfSticksUnassigned[i])
-					{
-						//Debug.Log (ListOfStepsWithUnassignedSticks [i].StartStepTime + " has " + NumberOfSticksUnassigned [i] + " unassigned sticks, and " + NumberOfPeopleWhoCanDoThatStick.Count + " people can do it");
-						//					foreach (Person people in NumberOfPeopleWhoCanDoThatStick) 
-						//					{
-						//						Debug.Log ("Person are " + people.Name);
-						//					}
-
-						for (int j = 0; j < ListOfStepsWithUnassignedSticks[i].ListOfSticks.Count; j++)
-						{
-							Stick tempData = ListOfStepsWithUnassignedSticks[i].ListOfSticks[j];
-							if (tempData.Assigned == false && tempData.Unique == true)
-							{
-								int index = Random.Range(0, NumberOfPeopleWhoCanDoThatStick.Count);
-								tempData.AssignPerson(NumberOfPeopleWhoCanDoThatStick[index]);
-								NumberOfPeopleWhoCanDoThatStick.RemoveAt(index);
-								NumberOfSticksUnassigned[i]--;
-							}
-						}
-					}
-
-					if (NumberOfSticksUnassigned[i] == 0)
-					{
-						ListOfStepsWithUnassignedSticks.RemoveAt(i);
-						NumberOfSticksUnassigned.RemoveAt(i);
-					}
-				}
-
-				// The idea is that, if all the emplacement is a ssigned, break the loop.
-				bool AllAssigned = true;
-				foreach (Emplacement emp in base.Emplacements)
-				{
-					if (emp.GetAllAssigned() == false)
-					{
-						AllAssigned = false;
-						break;
-					}
-				}
-				if (AllAssigned == true)
-				{
-					Debug.Log("Breaking loop cause all assigned!");
-					break;
-				}
-
-				WhileHold++;
-			}
+//			int WhileHold = 0;
+//			while (WhileHold != 3)
+//			{
+//				LastPass();
+//				CheckAvail();
+//
+//				WhileHold++;
+//			}
         #endregion
 
         #region Check if can fill up Anymore
-			/*
-			* This check based off all the sticks left, if there is a personal who can only do at that specific timeslot.
-			*/
-			List<Person> UnassignedPeopleCheck = new List<Person>();
-			foreach (Batch batch in base.Batches)
-			{
-				foreach (Person personal in batch.ListOfPeople)
-				{
-					if (personal.NoOfSticks > 0)
-					{
-						UnassignedPeopleCheck.Add(personal);
-					}
-				}
-			}
-
-			foreach (Person unassignedPerson in UnassignedPeopleCheck)
-			{
-				List<StepClass> UnassignedSteps = new List<StepClass>();
-				for (int i = 0; i < base.Steps.Count; i++)
-				{
-					for (int j = 0; j < base.Steps[i].ListOfSticks.Count; j++)
-					{
-						Stick tempData = base.Steps[i].ListOfSticks[j];
-						if (tempData.Assigned == false)
-						{
-							// Store the step
-							UnassignedSteps.Add(base.Steps[i]);
-							break;
-						}
-					}
-				}
-
-				List<StepClass> StepsHeCanUse = new List<StepClass>();
-				for (int i = 0; i < UnassignedSteps.Count; i++)
-				{
-					if (unassignedPerson.IsRested(UnassignedSteps[i].StartStepTime, UnassignedSteps[i].EndStepTime) &&
-						unassignedPerson.NoOfSticks - 1 >= 0)
-					{
-						//Debug.Log("Adding step " + UnassignedSteps[i].StartStepTime);
-						StepsHeCanUse.Add(UnassignedSteps[i]);
-					}
-				}
-				//Debug.Log(unassignedPerson.Name + " - " + UnassignedSteps.Count + " - " + StepsHeCanUse.Count);
-
-				if (StepsHeCanUse.Count == 1)
-				{
-					List<Stick> UnassignedStickForStep = new List<Stick>();
-					foreach (Stick value in StepsHeCanUse[0].ListOfSticks)
-					{
-						if (value.Assigned == false)
-						{
-							UnassignedStickForStep.Add(value);
-						}
-					}
-					int index = Random.Range(0, UnassignedStickForStep.Count);
-					//Debug.Log(unassignedPerson.Name + " - " + UnassignedStickForStep[index].TimeStart + " - " + UnassignedStickForStep[index].Parent.NameOfEmplacement);
-					UnassignedStickForStep[index].AssignPerson(unassignedPerson);
-				}
-			}
         #endregion
 
         // #region Single pass Swap Check
@@ -591,78 +437,78 @@ public class ChangiAirBaseEast : Base
        // DebugPersonel();
 
 		#region Swap Check 2 Sticks
-			UnassignedPeople = new List<Person>();
-			GenerateUnassignedPersonels(ref UnassignedPeople);
-
-			List<Stick> UnassignedSticks = new List<Stick>();
-			GenerateUnassignedSticks(ref UnassignedSticks);
-			foreach(Stick otherStick in UnassignedSticks)
-			{
-				//Debug.Log(UnassignedSticks.Count + " - " + otherStick.TimeStart.ToString() + " - " + otherStick.TimeEnd.ToString());
-				for(int i = 0; i < UnassignedPeople.Count; i++)
-				{
-					//Debug.Log(UnassignedPeople.Count + UnassignedPeople[i].Name);
-					if(UnassignedPeople[i].NoOfSticks == 1)
-					{
-						for(int j = 0; j < UnassignedPeople[i].ListOfSticks.Count; j++)
-						{
-							Stick tempStick = UnassignedPeople[i].ListOfSticks[j];
-							if(tempStick.Unique == true)
-							{
-								//Debug.Log("Swapping Reset! " + tempStick.TimeStart.ToString() + " - " + tempStick.TimeEnd.ToString() + " \\ " + tempStick.Parent.NameOfEmplacement);
-								tempStick.SwapReset();
-								// I need to find someone to take over the tempStick duties before I exit this loop.
-								// Prefer if the person can swap without doing multiple checks.
-								bool exit = false; 
-								for(int k = 0; k < base.Steps.Count; k++)
-								{
-									for(int l = 0; l < base.Steps[k].ListOfSticks.Count; l++)
-									{
-										if(exit == false)
-										{
-											Stick otherPersonDuty = base.Steps[k].ListOfSticks[l];
-											if(otherPersonDuty.Assigned == true)
-											{
-												if(otherPersonDuty.Unique == false && otherPersonDuty.Neighbour != null)
-												{
-													Stick[] tempArray = new Stick[2]{otherPersonDuty,otherPersonDuty.Neighbour};
-													// Debug.Log("1:" + otherPersonDuty.DutyPersonal.Name + " - " +otherPersonDuty.TimeStart + " \\" + otherPersonDuty.TimeEnd + " - " + otherPersonDuty.Parent.NameOfEmplacement);
-													// Debug.Log("2: " + 	otherPersonDuty.DutyPersonal.IsRested(tempStick.TimeStart,tempStick.TimeEnd) + " - " + 
-													// 	otherPersonDuty.Neighbour.DutyPersonal.IsRested(tempStick.TimeStart,tempStick.TimeEnd) + " - " + 
-													// 	UnassignedPeople[i].IsRested(otherPersonDuty.TimeStart,otherPersonDuty.TimeEnd) + " - " +  
-													// 	otherPersonDuty.DutyPersonal.IsRestedExcludingSticks(otherStick.TimeStart,otherStick.TimeEnd, tempArray));
-													// Debug.Log("3: " + otherPersonDuty.DutyPersonal.Name + " - " + UnassignedPeople[i].Name);
-													// Debug.Log("4: " + otherStick.TimeStart + " - " + otherStick.TimeEnd);
-													// Debug.Log("5: " + tempStick.TimeStart + " - " + tempStick.TimeEnd);
-													if(	otherPersonDuty.DutyPersonal.IsRestedExcludingSticks(tempStick.TimeStart,tempStick.TimeEnd, tempArray) && 
-														otherPersonDuty.Neighbour.DutyPersonal.IsRestedExcludingSticks(tempStick.TimeStart,tempStick.TimeEnd, tempArray) &&
-														UnassignedPeople[i].IsRested(otherPersonDuty.TimeStart,otherPersonDuty.TimeEnd) && 
-														otherPersonDuty.DutyPersonal.IsRestedExcludingSticks(otherStick.TimeStart,otherStick.TimeEnd, tempArray))
-													{
-														// Debug.Log("2: " + otherPersonDuty.DutyPersonal.Name + " - " +otherPersonDuty.TimeStart + " \\" + otherPersonDuty.TimeEnd + " - " + otherPersonDuty.Parent.NameOfEmplacement);
-														Person OtherDutyPerson = otherPersonDuty.DutyPersonal;
-														otherPersonDuty.SwapReset();
-														otherPersonDuty.Neighbour.SwapReset();
-														otherPersonDuty.AssignPerson(UnassignedPeople[i]);
-														otherPersonDuty.Neighbour.AssignPerson(UnassignedPeople[i]);
-														tempStick.AssignPerson(OtherDutyPerson);
-														otherStick.AssignPerson(OtherDutyPerson);
-														exit = true;
-														break;
-													}
-												} 
-											}
-										}
-									}
-								}
-								break;
-							}
-						}
-					}
-				}
-
-				//AssignPass(false, false);
-			}
+//			UnassignedPeople = new List<Person>();
+//			GenerateUnassignedPersonels(ref UnassignedPeople);
+//
+//			List<Stick> UnassignedSticks = new List<Stick>();
+//			GenerateUnassignedSticks(ref UnassignedSticks);
+//			foreach(Stick otherStick in UnassignedSticks)
+//			{
+//				//Debug.Log(UnassignedSticks.Count + " - " + otherStick.TimeStart.ToString() + " - " + otherStick.TimeEnd.ToString());
+//				for(int i = 0; i < UnassignedPeople.Count; i++)
+//				{
+//					//Debug.Log(UnassignedPeople.Count + UnassignedPeople[i].Name);
+//					if(UnassignedPeople[i].NoOfSticks == 1)
+//					{
+//						for(int j = 0; j < UnassignedPeople[i].ListOfSticks.Count; j++)
+//						{
+//							Stick tempStick = UnassignedPeople[i].ListOfSticks[j];
+//							if(tempStick.Unique == true)
+//							{
+//								//Debug.Log("Swapping Reset! " + tempStick.TimeStart.ToString() + " - " + tempStick.TimeEnd.ToString() + " \\ " + tempStick.Parent.NameOfEmplacement);
+//								tempStick.SwapReset();
+//								// I need to find someone to take over the tempStick duties before I exit this loop.
+//								// Prefer if the person can swap without doing multiple checks.
+//								bool exit = false; 
+//								for(int k = 0; k < base.Steps.Count; k++)
+//								{
+//									for(int l = 0; l < base.Steps[k].ListOfSticks.Count; l++)
+//									{
+//										if(exit == false)
+//										{
+//											Stick otherPersonDuty = base.Steps[k].ListOfSticks[l];
+//											if(otherPersonDuty.Assigned == true)
+//											{
+//												if(otherPersonDuty.Unique == false && otherPersonDuty.Neighbour != null)
+//												{
+//													Stick[] tempArray = new Stick[2]{otherPersonDuty,otherPersonDuty.Neighbour};
+//													// Debug.Log("1:" + otherPersonDuty.DutyPersonal.Name + " - " +otherPersonDuty.TimeStart + " \\" + otherPersonDuty.TimeEnd + " - " + otherPersonDuty.Parent.NameOfEmplacement);
+//													// Debug.Log("2: " + 	otherPersonDuty.DutyPersonal.IsRested(tempStick.TimeStart,tempStick.TimeEnd) + " - " + 
+//													// 	otherPersonDuty.Neighbour.DutyPersonal.IsRested(tempStick.TimeStart,tempStick.TimeEnd) + " - " + 
+//													// 	UnassignedPeople[i].IsRested(otherPersonDuty.TimeStart,otherPersonDuty.TimeEnd) + " - " +  
+//													// 	otherPersonDuty.DutyPersonal.IsRestedExcludingSticks(otherStick.TimeStart,otherStick.TimeEnd, tempArray));
+//													// Debug.Log("3: " + otherPersonDuty.DutyPersonal.Name + " - " + UnassignedPeople[i].Name);
+//													// Debug.Log("4: " + otherStick.TimeStart + " - " + otherStick.TimeEnd);
+//													// Debug.Log("5: " + tempStick.TimeStart + " - " + tempStick.TimeEnd);
+//													if(	otherPersonDuty.DutyPersonal.IsRestedExcludingSticks(tempStick.TimeStart,tempStick.TimeEnd, tempArray) && 
+//														otherPersonDuty.Neighbour.DutyPersonal.IsRestedExcludingSticks(tempStick.TimeStart,tempStick.TimeEnd, tempArray) &&
+//														UnassignedPeople[i].IsRested(otherPersonDuty.TimeStart,otherPersonDuty.TimeEnd) && 
+//														otherPersonDuty.DutyPersonal.IsRestedExcludingSticks(otherStick.TimeStart,otherStick.TimeEnd, tempArray))
+//													{
+//														Debug.Log("2: " + tempStick.Parent.NameOfEmplacement + " - " + otherPersonDuty.DutyPersonal.Name + " - " +otherPersonDuty.TimeStart + " \\" + otherPersonDuty.TimeEnd + " - " + otherPersonDuty.Parent.NameOfEmplacement);
+//														Person OtherDutyPerson = otherPersonDuty.DutyPersonal;
+//														otherPersonDuty.SwapReset();
+//														otherPersonDuty.Neighbour.SwapReset();
+//														otherPersonDuty.AssignPerson(UnassignedPeople[i]);
+//														otherPersonDuty.Neighbour.AssignPerson(UnassignedPeople[i]);
+//														tempStick.AssignPerson(OtherDutyPerson);
+//														otherStick.AssignPerson(OtherDutyPerson);
+//														exit = true;
+//														break;
+//													}
+//												} 
+//											}
+//										}
+//									}
+//								}
+//								break;
+//							}
+//						}
+//					}
+//				}
+//
+//				//AssignPass(false, false);
+//			}
 		#endregion
 
 //        #region Debug to check final reuslts
@@ -717,11 +563,24 @@ public class ChangiAirBaseEast : Base
 			JSONNode empRoot = new  JSONClass();
 			foreach(Emplacement emp in base.Emplacements)
 			{
+				Debug.Log (emp.NameOfEmplacement);
 				empRoot.Add(emp.NameOfEmplacement,emp.ToJSON());
 			}
 			root.Add("Emplacements", empRoot);
 			Debug.Log(root.ToString());
-			System.IO.File.WriteAllText(Application.dataPath + "/" + "JsonData.txt", root.ToString());
+			//System.IO.File.WriteAllText(Application.dataPath + "/" + "JsonData.txt", root.ToString());
+		}
+
+		if (Input.GetKeyDown (KeyCode.P)) 
+		{
+			CalculateSticks (true);
+			CalculateSteps ();
+
+			//OrderSteps();
+
+			AssignPass(false, true);
+			AssignPass(false, false);
+			AssignPass(true, true);
 		}
     }
 
@@ -737,6 +596,8 @@ public class ChangiAirBaseEast : Base
 		EmpObj.name = Emp1.NameOfEmplacement;
 		Emp1.GenerateSticks(ScrollRectContent,HoriObject,RightLabelObject,StickGameObject, EmplacementRole, Pirority);
 		Emp1.Reset();
+
+		base.Emplacements.Add (Emp1);
 		return Emp1;	
 	}
 
@@ -767,6 +628,14 @@ public class ChangiAirBaseEast : Base
 			tempBatch.AllReset ();
 		}
 
+		JSONNode subRoot = new JSONClass ();
+		JSONNode batchArray = new JSONArray ();
+		foreach (Batch tempBatch in base.Batches) 
+		{
+			batchArray.Add (tempBatch.ToJSON ());
+		}
+		subRoot.Add ("Batches", batchArray);
+
         #region Calcuation of sticks
 			//int NoOfSticks = 34;
 			//bool MaxXZ = true;
@@ -775,7 +644,7 @@ public class ChangiAirBaseEast : Base
 			// Aka, driver, console. This will be soft coded in the future so that they can choose who to pull.
 
 			// To do this, we create a new json node, so we dont override it by accident.
-			JSONNode subNode = JSON.Parse(root.ToString());
+			JSONNode subNode = JSON.Parse(subRoot.ToString());
 
 			Debug.Log("Subnode: " + subNode.ToString());
 			// Now, we start by removing the drivers and console personal.
@@ -1227,7 +1096,7 @@ public class ChangiAirBaseEast : Base
                 Debug.Log(emp.NameOfEmplacement + " has " + emp.NumberOfSticksUnAssigned() + " sticks");
 				foreach(Stick temp in emp.ListOfSticks)
 				{
-					if(temp.Assigned == false)
+					if(temp.Assigned == false && temp.State == StickState.ENABLED)
 					{
 						Debug.Log("Time: " + temp.TimeStart.ToString() + " - " + temp.TimeEnd.ToString());
 					}
@@ -1352,7 +1221,7 @@ public class ChangiAirBaseEast : Base
 
     void Assign(Stick stickData, int NoToAssign)
     {
-        //Debug.Log(stickData.Parent.NameOfEmplacement);
+        Debug.Log(stickData.Parent.NameOfEmplacement);
         // So now I have created the list. I need to find the right guy for it.
         // The first check finds the people who are avaliable to do the stick selected.
         List<Batch> FinalizedBatchList = new List<Batch>();
@@ -1369,7 +1238,8 @@ public class ChangiAirBaseEast : Base
                     TempBatch.ListOfPeople = new List<Person>();
                     foreach (Person personal in batch.ListOfPeople)
                     {
-                        //Debug.Log(personal.Name + " - " + stickData.TimeStart + " - " + personal.lastStickEndTiming + " - " + (stickData.TimeStart - personal.lastStickEndTiming).Hours + " - " + personal.IsRested(stickData.TimeStart, stickData.TimeEnd).ToString() + " - " + personal.ListOfRoles.Contains(stickData.Parent.CurrentRole).ToString() + " - " + (personal.NoOfSticks - NoToAssign >= 0).ToString());
+                   		Debug.Log(personal.Name + " - " + stickData.TimeStart + " - " + personal.lastStickEndTiming + " - " + (stickData.TimeStart - personal.lastStickEndTiming).Hours + " - " + personal.IsRested(stickData.TimeStart, stickData.TimeEnd).ToString() + " - " + personal.ListOfRoles.Contains(stickData.Parent.CurrentRole).ToString() + " - " + (personal.NoOfSticks - NoToAssign >= 0).ToString());
+						
                         if (personal.IsRested(stickData.TimeStart, stickData.TimeEnd) &&
                             personal.ListOfRoles.Contains(stickData.Parent.CurrentRole) &&
                             personal.NoOfSticks - NoToAssign >= 0)
@@ -1393,7 +1263,8 @@ public class ChangiAirBaseEast : Base
                 TempBatch.ListOfPeople = new List<Person>();
                 foreach (Person personal in batch.ListOfPeople)
                 {
-                    //Debug.Log (personal.Name + " - " + stickData.TimeStart + " - " + personal.lastStickEndTiming + " - " + (stickData.TimeStart - personal.lastStickEndTiming).Hours + " - " + personal.IsRested (stickData.TimeStart,stickData.TimeEnd).ToString() + " - " + personal.ListOfRoles.Contains (stickData.Parent.CurrentRole).ToString() + " - " + (personal.NoOfSticks - NoToAssign >= 0).ToString());
+//                  Debug.Log (personal.Name + " - " + stickData.TimeStart + " - " + personal.lastStickEndTiming + " - " + (stickData.TimeStart - personal.lastStickEndTiming).Hours + " - " + personal.IsRested (stickData.TimeStart,stickData.TimeEnd).ToString() + " - " + personal.ListOfRoles.Contains (stickData.Parent.CurrentRole).ToString() + " - " + (personal.NoOfSticks - NoToAssign >= 0).ToString());
+					
                     if (personal.IsRested(stickData.TimeStart, stickData.TimeEnd) &&
                         personal.ListOfRoles.Contains(stickData.Parent.CurrentRole) &&
                         personal.NoOfSticks - NoToAssign >= 0
@@ -1526,14 +1397,14 @@ public class ChangiAirBaseEast : Base
                 string Name = randomizer.NextWithReplacement();
 
                 Person personalToAssign = (FinalizedListOfPersonal.Find(x => x.Name == Name));
-                //Debug.Log("Assigning " + Name + " with weight " + randomizer.GetWeight (Name));
+           		//Debug.Log("Assigning " + Name + " with weight " + randomizer.GetWeight (Name));
                 stickData.AssignPerson(personalToAssign);
             }
             else
             {
                 //Person personalToAssign = temp.ListOfPeople [Random.Range (0, temp.ListOfPeople.Count - 1)];
                 string Name = randomizer.NextWithReplacement();
-                //Debug.Log("Assigning " + Name + " with weight " + randomizer.GetWeight (Name));
+            	//Debug.Log("Assigning " + Name + " with weight " + randomizer.GetWeight (Name));
                 Person personalToAssign = (FinalizedListOfPersonal.Find(x => x.Name == Name));
                 stickData.AssignPerson(personalToAssign);
 				stickData.Neighbour = stickData.Parent.ListOfSticks[stickData.Parent.ListOfSticks.FindIndex(x => x.TimeStart == stickData.TimeStart) + 1];
@@ -1555,6 +1426,218 @@ public class ChangiAirBaseEast : Base
 			{
 				Destroy(child.gameObject);
 				break;
+			}
+		}
+	}
+
+	public void LastPass ()
+	{
+		List<StepClass> ListOfStepsWithUnassignedSticks = new List<StepClass>();
+		List<int> NumberOfSticksUnassigned = new List<int>();
+		List<Person> UnassignedPeople = new List<Person>();
+		GenerateUnassignedStepsAndSticks(ref ListOfStepsWithUnassignedSticks, ref NumberOfSticksUnassigned);
+		GenerateUnassignedPersonels(ref UnassignedPeople);
+
+		// Now, for the last part, I need to check how many people can do that specific step.
+		for (int i = 0; i < ListOfStepsWithUnassignedSticks.Count; i++)
+		{
+			List<Person> NumberOfPeopleWhoCanDoThatStick = new List<Person>();
+			for (int j = 0; j < ListOfStepsWithUnassignedSticks[i].ListOfSticks.Count; j++)
+			{
+				Stick tempData = ListOfStepsWithUnassignedSticks[i].ListOfSticks[j];
+				if (tempData.Assigned == false && tempData.Unique == true)
+				{
+					Debug.Log(tempData.TimeStart + tempData.Parent.NameOfEmplacement);
+					foreach (Person personal in UnassignedPeople)
+					{
+						Debug.Log((personal.IsRested(tempData.TimeStart, tempData.TimeEnd)).ToString() + " - " + personal.ListOfRoles.Contains(tempData.Parent.CurrentRole).ToString()  + " - " + (personal.NoOfSticks - 1 >= 0).ToString() + " - " + personal.Name);
+						if (personal.IsRested(tempData.TimeStart, tempData.TimeEnd) &&
+							personal.ListOfRoles.Contains(tempData.Parent.CurrentRole) &&
+							personal.NoOfSticks - 1 >= 0)
+						{
+							NumberOfPeopleWhoCanDoThatStick.Add(personal);
+						}
+					}
+					break;
+				}
+			}
+
+			Debug.Log (ListOfStepsWithUnassignedSticks[i].StartStepTime + " - " + NumberOfPeopleWhoCanDoThatStick.Count + " - " + NumberOfSticksUnassigned [i]);
+			if (NumberOfPeopleWhoCanDoThatStick.Count == NumberOfSticksUnassigned[i])
+			{
+				Debug.Log (ListOfStepsWithUnassignedSticks [i].StartStepTime + " has " + NumberOfSticksUnassigned [i] + " unassigned sticks, and " + NumberOfPeopleWhoCanDoThatStick.Count + " people can do it");
+				bool AllSameRoles = true;
+				int CurrentNoOfRoles = -1;
+				foreach (Person people in NumberOfPeopleWhoCanDoThatStick) 
+				{
+					//Debug.Log ("Person are " + people.Name);
+					if (CurrentNoOfRoles == -1) 
+					{
+						CurrentNoOfRoles = people.ListOfRoles.Count;
+					}
+					else 
+					{
+						if (CurrentNoOfRoles != people.ListOfRoles.Count) 
+						{
+							AllSameRoles = false;
+						}
+					}
+				}
+
+				if(AllSameRoles)
+				{
+					for (int j = 0; j < ListOfStepsWithUnassignedSticks[i].ListOfSticks.Count; j++)
+					{
+						Stick tempData = ListOfStepsWithUnassignedSticks[i].ListOfSticks[j];
+						if (tempData.Assigned == false && tempData.Unique == true)
+						{
+							int index = Random.Range(0, NumberOfPeopleWhoCanDoThatStick.Count);
+							Debug.Log(tempData.Parent.NameOfEmplacement + " - " + NumberOfPeopleWhoCanDoThatStick[index].Name); 
+							tempData.AssignPerson(NumberOfPeopleWhoCanDoThatStick[index]);
+							Debug.Log(tempData.Assigned + " - " + tempData.DutyPersonal.Name);
+							NumberOfPeopleWhoCanDoThatStick.RemoveAt(index);
+							NumberOfSticksUnassigned[i]--;
+						}
+					}
+				}
+				else
+				{
+					for (int j = 0; j < ListOfStepsWithUnassignedSticks[i].ListOfSticks.Count; j++)
+					{
+						Person LowestRolePerson = null;
+						foreach (Person people in NumberOfPeopleWhoCanDoThatStick) 
+						{
+							if (LowestRolePerson == null) 
+							{
+								LowestRolePerson = people;
+							}
+							else
+							{
+								if (LowestRolePerson.ListOfRoles.Count > people.ListOfRoles.Count) 
+								{
+									LowestRolePerson = people;
+								}
+							}
+						}
+
+						if(LowestRolePerson != null)
+						{
+							Stick tempData = ListOfStepsWithUnassignedSticks[i].ListOfSticks[j];
+							if (LowestRolePerson.ListOfRoles.Contains (tempData.Parent.CurrentRole)) 
+							{
+								tempData.AssignPerson(LowestRolePerson);
+								NumberOfPeopleWhoCanDoThatStick.Remove (LowestRolePerson);
+								LowestRolePerson = null;
+							}
+						}
+					}
+				}
+			}
+
+			if (NumberOfSticksUnassigned[i] == 0)
+			{
+				ListOfStepsWithUnassignedSticks.RemoveAt(i);
+				NumberOfSticksUnassigned.RemoveAt(i);
+			}
+		}
+
+		// The idea is that, if all the emplacement is a ssigned, break the loop.
+		bool AllAssigned = true;
+		foreach (Emplacement emp in base.Emplacements)
+		{
+			if (emp.GetAllAssigned() == false)
+			{
+				AllAssigned = false;
+				break;
+			}
+		}
+		if (AllAssigned == true)
+		{
+			Debug.Log("Breaking loop cause all assigned!");
+			return;
+		}
+	}
+
+	public void CheckAvail ()
+	{
+		/*
+			* This check based off all the sticks left, if there is a personal who can only do at that specific timeslot.
+			*/
+		List<Person> UnassignedPeopleCheck = new List<Person>();
+		foreach (Batch batch in base.Batches)
+		{
+			foreach (Person personal in batch.ListOfPeople)
+			{
+				if (personal.NoOfSticks > 0)
+				{
+					UnassignedPeopleCheck.Add(personal);
+				}
+			}
+		}
+
+		foreach (Person unassignedPerson in UnassignedPeopleCheck)
+		{
+			//List<StepClass> UnassignedSteps = new List<StepClass>();
+			List<Stick> UnassignedSticksForPerson = new List<Stick>();
+			for (int i = 0; i < base.Steps.Count; i++)
+			{
+				for (int j = 0; j < base.Steps[i].ListOfSticks.Count; j++)
+				{
+					Stick tempData = base.Steps[i].ListOfSticks[j];
+					if (tempData.Assigned == false && unassignedPerson.ListOfRoles.Contains(tempData.Parent.CurrentRole))
+					{
+						// Store the step
+						//UnassignedSteps.Add(base.Steps[i]);
+						UnassignedSticksForPerson.Add(tempData);
+						break;
+					}
+				}
+			}
+
+			//List<StepClass> StepsHeCanUse = new List<StepClass>();
+			List<Stick> SticksHeCanDo = new List<Stick>();
+			for (int i = 0; i < UnassignedSticksForPerson.Count; i++)
+			{
+				if (unassignedPerson.IsRested(UnassignedSticksForPerson[i].TimeStart, UnassignedSticksForPerson[i].TimeEnd) &&
+					unassignedPerson.NoOfSticks - 1 >= 0 )
+				{
+					// I cannot just add the step here. I need to find out more, On which specific Step if he can do.
+					Debug.Log("Adding step " + UnassignedSticksForPerson[i].TimeStart + " - " + UnassignedSticksForPerson[i].Parent.NameOfEmplacement + " - " + unassignedPerson.Name + " - " + unassignedPerson.NoOfSticks);
+					SticksHeCanDo.Add(UnassignedSticksForPerson[i]);
+				}
+			}
+			Debug.Log(unassignedPerson.Name + " - " + UnassignedSticksForPerson.Count + " - " + SticksHeCanDo.Count);
+
+			if (SticksHeCanDo.Count == 1)
+			{
+				List<Stick> UnassignedStickForStep = new List<Stick>();
+				foreach (Stick value in SticksHeCanDo)
+				{
+					if (value.Assigned == false &&
+						unassignedPerson.ListOfRoles.Contains(value.Parent.CurrentRole)) 
+					{
+						UnassignedStickForStep.Add(value);
+					}
+				}
+				int index = Random.Range(0, UnassignedStickForStep.Count);
+				while(unassignedPerson.ListOfRoles.Contains(UnassignedStickForStep[index].Parent.CurrentRole) == false)
+				{
+					index = Random.Range(0, UnassignedStickForStep.Count);
+				}
+				Debug.Log(unassignedPerson.Name + " - " + UnassignedStickForStep[index].TimeStart + " - " + UnassignedStickForStep[index].Parent.NameOfEmplacement);
+				UnassignedStickForStep[index].AssignPerson(unassignedPerson);
+			}
+
+			if (SticksHeCanDo.Count == UnassignedSticksForPerson.Count)
+			{
+				foreach (Stick value in SticksHeCanDo)
+				{
+					if (value.Assigned == false &&
+						unassignedPerson.ListOfRoles.Contains(value.Parent.CurrentRole)) 
+					{
+						value.AssignPerson(unassignedPerson);
+					}
+				}
 			}
 		}
 	}

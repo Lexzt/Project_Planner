@@ -156,6 +156,11 @@ public class Emplacement : MonoBehaviour {
 //		}
 	}
 
+	public void RemarkSticks()
+	{
+
+	}
+
 	public void RemoveStick (DateTime TimeStart, DateTime TimeEnd)
 	{
 		//List<Stick> RebuildList = new List<Stick> ();

@@ -37,10 +37,7 @@ public class EmplacementManagementSystem : MonoBehaviour
 	
 	void Update () 
 	{
-		if(Input.GetKeyDown(KeyCode.B))
-		{
-			
-		}
+		
 	}
 
 	public void SwapActive ()
@@ -139,16 +136,16 @@ public class EmplacementManagementSystem : MonoBehaviour
 
 	public void OnDragEnd ()
 	{
-		int NewPirority = 1;
-		foreach(Transform child in EmplacementSpawnButtonParent.transform)
-		{
-			if(child.name != "Fake")
-			{
-				if(child.GetComponent<EmplacementUI>().MainData.IsSpecialRole() == false)
-				{
-					child.GetComponent<EmplacementUI>().MainData.Pirority = NewPirority++;
-				}
-			}
-		}
+//		int NewPirority = 1;
+//		foreach(Transform child in EmplacementSpawnButtonParent.transform)
+//		{
+//			if(child.name != "Fake")
+//			{
+//				if(child.GetComponent<EmplacementUI>().MainData.IsSpecialRole() == false)
+//				{
+//					child.GetComponent<EmplacementUI>().MainData.Pirority = NewPirority++;
+//				}
+//			}
+//		}
 	}
 }

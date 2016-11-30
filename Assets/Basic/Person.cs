@@ -95,11 +95,12 @@ public class Person : MonoBehaviour {
 			// 
 			int FirstStartDiff = (int)(StickStartTiming - lastStick.TimeStart).TotalHours;
 			// The new stick starts AFTER the old stick starts.
+			//Debug.Log ("0: " + StickStartTiming.ToString() + " - " + lastStick.TimeEnd.ToString());
 			if (FirstStartDiff > 0) 
 			{
 				// The new stick is starting after the old stick starts. 
 				int EndDiff = (int)(StickStartTiming - lastStick.TimeEnd).TotalHours;
-				//Debug.Log ("1: " + EndDiff + " - " + StickStartTiming.ToShortTimeString() + " - " + lastStick.TimeEnd.ToShortTimeString());
+				//Debug.Log ("1: " + EndDiff + " - " + StickStartTiming.ToString() + " - " + lastStick.TimeEnd.ToString());
 				if (EndDiff > 0) 
 				{
 					// This means the old stick, ends before your new stick starts. 
@@ -110,7 +111,7 @@ public class Person : MonoBehaviour {
 			else if(FirstStartDiff < 0)
 			{
 				int EndDiff = (int)(StickEndTiming - lastStick.TimeStart).TotalHours;
-				//Debug.Log ("2: " + EndDiff + " - " + StickStartTiming.ToLocalTime() + lastStick.TimeEnd.ToLocalTime());
+				//Debug.Log ("2: " + EndDiff + " - " + StickStartTiming.ToString() + lastStick.TimeEnd.ToString());
 				if (EndDiff < 0) 
 				{
 					// This means my new sticks, ends before my old stick starts.

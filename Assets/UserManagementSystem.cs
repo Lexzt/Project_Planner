@@ -162,6 +162,7 @@ public class UserManagementSystem : MonoBehaviour
 				new System.DateTime(),
 				NodeArray);
 			SelectedPersonel.Parent = SelectedBatch;
+			SelectedPersonel.gameObject.name = Name;
 			SelectedBatch.AddPersonal(SelectedPersonel);
 
 			GameObject UserObject = Instantiate (UserUIObject) as GameObject;

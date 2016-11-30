@@ -1,2 +1,20 @@
 Base path: D:/Unity 5.4.1f1/Editor/Data
 Cmd: getPlatforms
+Cmd: preprocess
+  insize=1765 outsize=987 ok=1
+Cmd: preprocess
+  insize=1800 outsize=1022 ok=1
+Cmd: preprocess
+  insize=3169 outsize=1320 ok=1
+Cmd: preprocess
+  insize=3528 outsize=1307 ok=1
+Cmd: preprocess
+  insize=1797 outsize=1019 ok=1
+Cmd: preprocess
+  insize=1440 outsize=633 ok=1
+Cmd: preprocess
+  insize=796 outsize=353 ok=1
+Cmd: preprocess
+  insize=1745 outsize=993 ok=1
+Cmd: preprocess
+  insize=1782 outsize=1004 ok=1

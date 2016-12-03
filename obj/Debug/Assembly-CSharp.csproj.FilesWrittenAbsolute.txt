@@ -14,3 +14,7 @@
 /Users/mac/Project_Planner/Temp/bin/Debug/Unity.CecilTools.dll
 /Users/mac/Project_Planner/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/mac/Project_Planner/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/mac/Project_Planner/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/mac/Project_Planner/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/mac/Project_Planner/obj/Debug/Assembly-CSharp.dll
+/Users/mac/Project_Planner/obj/Debug/Assembly-CSharp.dll.mdb

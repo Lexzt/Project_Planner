@@ -41,7 +41,7 @@ public class Emplacement : MonoBehaviour {
 
 	public bool IsSpecialRole ()
 	{
-		if (CurrentRole == Roles.eCONSOLE || CurrentRole == Roles.eDRIVER || CurrentRole == Roles.ePASS_OFFICE) 
+		if (CurrentRole == Roles.eCONSOLE || CurrentRole == Roles.eDRIVER || CurrentRole == Roles.ePASS_OFFICE || CurrentRole == Roles.eARMOURER) 
 		{
 			return true;
 		}

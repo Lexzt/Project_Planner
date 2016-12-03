@@ -254,6 +254,8 @@ public class ChangiAirBaseEast : Base
 
         // Reset all emplacement to NIL before we try to assign.
         Reset();
+
+		CalculateSticks (true);
     }
 
     /*

@@ -206,52 +206,127 @@ public class CombinationAssign : MonoBehaviour {
 	bool AssignAndCheckR(List<TempPerson> C,string trace = "",int depth = 0)
     {
 		//foreach (TempPerson c in C)
-		for(int i = 0 ; i < C.Count; i++)
-        {
-			TempPerson c = C [i];
- 		    if (c.IsAssignable())
-    	    {
-				//foreach (TempStick s in c.ListOfPossibleSticks)
-				for(int j = 0; j < c.ListOfPossibleSticks.Count; j++)
-	            {
-					string msg = ("\tDepth: " + depth + ", i: " + i + " ," + c.PersonData.Name + ", j: " + j);
-					debug+=trace + msg+ "\n";
-					TempStick s = c.ListOfPossibleSticks [j];
-					if (stop)
-	                {
-						throw new UnityException ("Force stopped");
-	                }
-	                Progress++;
-	                if (++Progress >= ProgressStepSize)
-	                {
-						Progress = 0;
-						RealProgressStep++;
-					}
-					if (!s.IsAssigned() && CanDo(c.PersonData,s.StickData))
+		// for (int i = 0; i < C.Count; i++)
+        // {
+        //     TempPerson c = C[i];
+        //     if (c.IsAssignable())
+        //     {
+        //         //foreach (TempStick s in c.ListOfPossibleSticks)
+        //         for (int j = 0; j < c.ListOfPossibleSticks.Count; j++)
+        //         {
+        //             string msg = ("\tDepth: " + depth + ", i: " + i + " ," + c.PersonData.Name + ", j: " + j + " | ");
+        //             debug += trace + msg + "\n";
+        //             TempStick s = c.ListOfPossibleSticks[j];
+        //             if (stop)
+        //             {
+        //                 throw new UnityException("Force stopped");
+        //             }
+        //             Progress++;
+        //             if (++Progress >= ProgressStepSize)
+        //             {
+        //                 Progress = 0;
+        //                 RealProgressStep++;
+        //             }
+        //             debug += ("\t|" + !s.IsAssigned() + " - " + CanDo(c.PersonData, s.StickData) + "|\n");
+        //             if (!s.IsAssigned() && CanDo(c.PersonData, s.StickData))
+        //             {
+        //                 debug += ("\t| (Assigned) " + c.PersonData.Name + " | " + s.StickData.TimeStart.ToShortTimeString() + " | " + s.StickData.Parent.NameOfEmplacement + " | \n");
+        //                 c.Assign(s);
+        //                 s.SetAssigned(c);
+
+        //                 //						if (s.StickData.Unique == false) 
+        //                 //						{
+        //                 //							c.Assign(c.ListOfPossibleSticks [j + 1]);
+        //                 //							c.ListOfPossibleSticks [j + 1].SetAssigned(c);
+        //                 //						}
+
+        //                 if (AllAssigned())
+        //                 {
+        //                     debug += ("\t| (Combination Generated) ");
+        //                     foreach (TempStick v in Sticks)
+        //                     {
+        //                         debug += ("|" + v.PersonData.Name + " - " + v.StickData.TimeStart + " - " + v.StickData.Parent.NameOfEmplacement + "| ");
+        //                     }
+        //                     debug += "\n";
+        //                     Combinations.Add(new Combi(Sticks));
+        //                     // c.Unassign (s);
+        //                     // s.SetUnassigned ();
+        //                     return true;
+        //                 }
+
+        //                 AssignAndCheckR(C, trace + msg, depth + 1);
+        //                 c.Unassign(s);
+        //                 s.SetUnassigned();
+        //             }
+        //         }
+        //     }
+        // }
+        // return false;
+
+ 		List<TempStick> allsticks = new List<TempStick>();
+        List<Emplacement> AllEmp = GetComponent<Base>().Emplacements;
+		foreach (Emplacement emp in AllEmp) 
+		{
+			if(!emp.IsSpecialRole())
+			{
+				foreach (Stick stick in emp.ListOfSticks) 
+				{
+					if (stick.State == StickState.ENABLED) 
 					{
-						debug += (" | " + c.PersonData.Name + " | " + s.StickData.TimeStart.ToShortTimeString() + " | ");
-						c.Assign(s);
-						s.SetAssigned(c);
-
-//						if (s.StickData.Unique == false) 
-//						{
-//							c.Assign(c.ListOfPossibleSticks [j + 1]);
-//							c.ListOfPossibleSticks [j + 1].SetAssigned(c);
-//						}
-
-						if (AllAssigned())
-						{
-							Combinations.Add(new Combi(Sticks));
-							return true;
-						}
-
-						AssignAndCheckR(C,trace + msg,depth+1);
-						c.Unassign (s);
-						s.SetUnassigned ();
+						allsticks.Add (new TempStick (stick));
 					}
-                 }
-             }
-         }
+				}
+			}
+		}
+
+		for(int j = 0; j < allsticks.Count; j++)
+		{
+			TempStick s = allsticks[j];
+			for (int i = 0; i < C.Count; i++)
+        	{
+           		TempPerson c = C[i];
+                if (c.IsAssignable())
+                {
+                    string msg = ("\tDepth: " + depth + ", i: " + i + " ," + c.PersonData.Name + ", j: " + j + " | ");
+                    debug += trace + msg + "\n";
+                    if (stop)
+                    {
+                        throw new UnityException("Force stopped");
+                    }
+                    Progress++;
+                    if (++Progress >= ProgressStepSize)
+                    {
+                        Progress = 0;
+                        RealProgressStep++;
+                    }
+                    debug += ("\t|" + !s.IsAssigned() + " - " + CanDo(c.PersonData, s.StickData) + "|\n");
+                    if (!s.IsAssigned() && CanDo(c.PersonData, s.StickData))
+                    {
+                        debug += ("\t| (Assigned) " + c.PersonData.Name + " | " + s.StickData.TimeStart.ToShortTimeString() + " | " + s.StickData.Parent.NameOfEmplacement + " | \n");
+                        c.Assign(s);
+                        s.SetAssigned(c);
+
+                        if (AllAssigned())
+                        {
+                            debug += ("\t| (Combination Generated) ");
+                            foreach (TempStick v in Sticks)
+                            {
+                                debug += ("|" + v.PersonData.Name + " - " + v.StickData.TimeStart + " - " + v.StickData.Parent.NameOfEmplacement + "| ");
+                            }
+                            debug += "\n";
+                            Combinations.Add(new Combi(Sticks));
+                            // c.Unassign (s);
+                            // s.SetUnassigned ();
+                            return true;
+                        }
+
+                        AssignAndCheckR(C, trace + msg, depth + 1);
+                        c.Unassign(s);
+                        s.SetUnassigned();
+                    }
+                }
+			}
+		}
 		return false;
      }
 

@@ -1,1 +1,172 @@
-{"Batches":[ {"DoEasy":"false", "BatchName":"XZ23", "ORD Month And Year":"01/01/0001 00:00:00", "Personnels":[ {"Name":"XZ 11", "IC":"S1234567C", "DOB":"01/01/0001 00:00:00", "Roles":[ "Sentry", "Checker" ]}, {"Name":"XZ 12", "IC":"S1234567D", "DOB":"01/01/0001 00:00:00", "Roles":[ "Sentry", "Checker" ]}, {"Name":"XZ 13", "IC":"S1234567D", "DOB":"01/01/0001 00:00:00", "Roles":[ "Sentry", "Checker" ]}, {"Name":"XZ 14", "IC":"S1234567D", "DOB":"01/01/0001 00:00:00", "Roles":[ "Sentry", "Checker" ]} ]} ], "Emplacements":{"East Control":{"Name":"East Control", "Role":"Console", "Pirority":"0", "Easy":"true", "RemoveStick":[  ]}, "Mystic":{"Name":"Mystic", "Role":"Driver", "Pirority":"0", "Easy":"true", "RemoveStick":[  ]}, "Pass Office":{"Name":"Pass Office", "Role":"Giro", "Pirority":"0", "Easy":"true", "RemoveStick":[  ]}, "Viper 2 Checker":{"Name":"Viper 2 Checker", "Role":"Checker", "Pirority":"1", "Easy":"false", "RemoveStick":[ {"RemoveStart":"2016, 8, 15, 21, 00, 00", "RemoveEnd":"2016, 8, 17, 14, 00, 00"} ]}, "Viper 2 Sentry":{"Name":"Viper 2 Sentry", "Role":"Sentry", "Pirority":"1", "Easy":"false", "RemoveStick":[ {"RemoveStart":"2016, 8, 15, 21, 00, 00", "RemoveEnd":"2016, 8, 17, 14, 00, 00"} ]}, "Viper 1 Checker":{"Name":"Viper 1 Checker", "Role":"Checker", "Pirority":"2", "Easy":"false", "RemoveStick":[ {"RemoveStart":"2016, 8, 15, 14, 00, 00", "RemoveEnd":"2016, 8, 17, 14, 00, 00"} ]}, "Viper 1 Sentry":{"Name":"Viper 1 Sentry", "Role":"Sentry", "Pirority":"2", "Easy":"false", "RemoveStick":[ {"RemoveStart":"2016, 8, 15, 14, 00, 00", "RemoveEnd":"2016, 8, 17, 14, 00, 00"} ]}, "UVSS":{"Name":"UVSS", "Role":"Checker", "Pirority":"3", "Easy":"true", "RemoveStick":[ {"RemoveStart":"2016, 8, 15, 14, 00, 00", "RemoveEnd":"2016, 8, 17, 14, 00, 00"} ]}, "Python Checker":{"Name":"Python Checker", "Role":"Checker", "Pirority":"4", "Easy":"true", "RemoveStick":[ {"RemoveStart":"2016, 8, 15, 14, 00, 00", "RemoveEnd":"2016, 8, 17, 14, 00, 00"} ]}, "Python Sentry":{"Name":"Python Sentry", "Role":"Sentry", "Pirority":"4", "Easy":"true", "RemoveStick":[ {"RemoveStart":"2016, 8, 15, 14, 00, 00", "RemoveEnd":"2016, 8, 17, 14, 00, 00"} ]}}}
+{
+  "Batches": [
+    {
+      "DoEasy": "false",
+      "BatchName": "XZ23",
+      "ORD Month And Year": "1/1/0001 12:00:00 AM",
+      "Personnels": [
+        {
+          "Name": "XZ 11",
+          "IC": "S1234567C",
+          "DOB": "1/1/0001 12:00:00 AM",
+          "Roles": [
+            "Sentry",
+            "Checker"
+          ]
+        },
+        {
+          "Name": "XZ 12",
+          "IC": "S1234567D",
+          "DOB": "1/1/0001 12:00:00 AM",
+          "Roles": [
+            "Sentry",
+            "Checker"
+          ]
+        },
+        {
+          "Name": "XZ 13",
+          "IC": "S1234567D",
+          "DOB": "1/1/0001 12:00:00 AM",
+          "Roles": [
+            "Sentry",
+            "Checker"
+          ]
+        },
+        {
+          "Name": "XZ 14",
+          "IC": "S1234567D",
+          "DOB": "1/1/0001 12:00:00 AM",
+          "Roles": [
+            "Sentry",
+            "Checker"
+          ]
+        },
+        {
+          "Name": "XZ 15",
+          "IC": "S1234567D",
+          "DOB": "1/1/0001 12:00:00 AM",
+          "Roles": [
+            "Sentry",
+            "Checker"
+          ]
+        },
+        {
+          "Name": "XZ 16",
+          "IC": "S1234567D",
+          "DOB": "1/1/0001 12:00:00 AM",
+          "Roles": [
+            "Sentry",
+            "Checker"
+          ]
+        }
+      ]
+    }
+  ],
+  "Emplacements": {
+    "Pass Office": {
+      "Name": "Pass Office",
+      "Role": "Giro",
+      "Pirority": "0",
+      "Easy": "true",
+      "RemoveStick": []
+    },
+    "Mystic": {
+      "Name": "Mystic",
+      "Role": "Driver",
+      "Pirority": "0",
+      "Easy": "true",
+      "RemoveStick": []
+    },
+    "East Control": {
+      "Name": "East Control",
+      "Role": "Console",
+      "Pirority": "0",
+      "Easy": "true",
+      "RemoveStick": []
+    },
+    "Viper 2 Sentry": {
+      "Name": "Viper 2 Sentry",
+      "Role": "Sentry",
+      "Pirority": "1",
+      "Easy": "false",
+      "RemoveStick": [
+        {
+          "RemoveStart": "2016, 8, 16, 3, 00, 00",
+          "RemoveEnd": "2016, 8, 17, 14, 00, 00"
+        }
+      ]
+    },
+    "Viper 2 Checker": {
+      "Name": "Viper 2 Checker",
+      "Role": "Checker",
+      "Pirority": "1",
+      "Easy": "false",
+      "RemoveStick": [
+        {
+          "RemoveStart": "2016, 8, 16, 3, 00, 00",
+          "RemoveEnd": "2016, 8, 17, 14, 00, 00"
+        }
+      ]
+    },
+    "Viper 1 Sentry": {
+      "Name": "Viper 1 Sentry",
+      "Role": "Sentry",
+      "Pirority": "2",
+      "Easy": "false",
+      "RemoveStick": [
+        {
+          "RemoveStart": "2016, 8, 15, 14, 00, 00",
+          "RemoveEnd": "2016, 8, 17, 14, 00, 00"
+        }
+      ]
+    },
+    "Viper 1 Checker": {
+      "Name": "Viper 1 Checker",
+      "Role": "Checker",
+      "Pirority": "2",
+      "Easy": "false",
+      "RemoveStick": [
+        {
+          "RemoveStart": "2016, 8, 15, 14, 00, 00",
+          "RemoveEnd": "2016, 8, 17, 14, 00, 00"
+        }
+      ]
+    },
+    "UVSS": {
+      "Name": "UVSS",
+      "Role": "Checker",
+      "Pirority": "3",
+      "Easy": "true",
+      "RemoveStick": [
+        {
+          "RemoveStart": "2016, 8, 15, 14, 00, 00",
+          "RemoveEnd": "2016, 8, 17, 14, 00, 00"
+        }
+      ]
+    },
+    "Python Sentry": {
+      "Name": "Python Sentry",
+      "Role": "Sentry",
+      "Pirority": "4",
+      "Easy": "true",
+      "RemoveStick": [
+        {
+          "RemoveStart": "2016, 8, 15, 14, 00, 00",
+          "RemoveEnd": "2016, 8, 17, 14, 00, 00"
+        }
+      ]
+    },
+    "Python Checker": {
+      "Name": "Python Checker",
+      "Role": "Checker",
+      "Pirority": "4",
+      "Easy": "true",
+      "RemoveStick": [
+        {
+          "RemoveStart": "2016, 8, 15, 14, 00, 00",
+          "RemoveEnd": "2016, 8, 17, 14, 00, 00"
+        }
+      ]
+    }
+  }
+}

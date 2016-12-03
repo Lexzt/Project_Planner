@@ -10,7 +10,7 @@ public enum StickState
 }
 
 public static class StaticVars{
-	public static int MaxNoPerMountWeekDay = 1;
+	public static int MaxNoPerMountWeekDay = 2;
 	public static int MaxNoPerMountWeekEnd = 10;
 	public static int MaxNoOfDutyInARow = 2;
 	public static int StickInHours = 3;

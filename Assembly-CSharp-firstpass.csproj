@@ -56,8 +56,10 @@
      <None Include="Assets\unity-ui-extensions\Shaders\UIParticleHidden.shader" />
      <None Include="Assets\unity-ui-extensions\Shaders\SoftMaskShader.shader" />
      <None Include="Assets\unity-ui-extensions\Scripts\Utilities\Serialization\Surrogates\SurrogatesReadMe.txt" />
+     <None Include="Assets\debug.txt" />
      <None Include="Assets\unity-ui-extensions\Shaders\UIImageCrop.shader" />
      <None Include="Assets\unity-ui-extensions\Shaders\UILinearDodge.shader" />
+     <None Include="Assets\order.txt" />
      <None Include="Assets\Resources\New Text Document.txt" />
      <None Include="Assets\unity-ui-extensions\Shaders\UIMultiply.shader" />
      <None Include="Assets\backup.txt" />

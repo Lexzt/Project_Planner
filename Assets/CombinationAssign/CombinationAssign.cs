@@ -286,6 +286,12 @@ public class CombinationAssign : MonoBehaviour
 					c.Assign(s);
 					s.SetAssigned(c);
 
+                    if (s.StickData.Unique == false) 
+                    {
+                        c.Assign(c.ListOfPossibleSticks [depth + 1]);
+                        c.ListOfPossibleSticks [depth + 1].SetAssigned(c);
+                    }
+
 					if (AllAssigned())
 					{
 						Combinations.Add(new Combi(Sticks));
@@ -297,6 +303,12 @@ public class CombinationAssign : MonoBehaviour
 					AssignAndCheckR(C, depth + 1);
 					c.Unassign(s);
 					s.SetUnassigned();
+
+                    if (s.StickData.Unique == false) 
+                    {
+                        c.Unassign(c.ListOfPossibleSticks [depth + 1]);
+                        c.ListOfPossibleSticks [depth + 1].SetUnassigned();
+                    }
 				}
             }
         }
@@ -306,10 +318,11 @@ public class CombinationAssign : MonoBehaviour
 
     public bool CanDo(Person p, Stick s)
     {
-        if (p.IsRested(s.TimeStart, s.TimeEnd) &&
+        if (
 			p.ListOfRoles.Contains(s.Parent.CurrentRole) &&
             p.NoOfSticks > 0)
         {
+            if(p.IsRested(s.TimeStart, s.TimeEnd))
             return true;
         }
         return false;
@@ -325,5 +338,40 @@ public class CombinationAssign : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public bool CheckContiguous(TempStick s, TempPerson p)
+    {
+        List<TempStick> contiguousSticks;
+        foreach (TempStick assignedStick in p.ListOfAssginedSticks)
+        {
+            if (IsConnected(assignedStick, s))
+            {
+                contiguousSticks.Add(assignedStick);
+            }
+        }
+        if (contiguousStick.Count < 2)
+        {
+            if (contiguousStick.Count == 0)
+            {
+                return true;
+            }
+            foreach (assignedStick)
+            {
+                if (IsConnected(assignedStick, contiguousStick[0]))
+                {
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool IsConnected()
+    {
+        
     }
 }

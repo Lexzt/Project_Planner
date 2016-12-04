@@ -1,0 +1,172 @@
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 
+	|True - True|
+	| (Assigned) XZ 11 | 2:00 PM | Viper 2 Sentry | 
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 0 ,XZ 11, j: 0 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 0 ,XZ 11, j: 1 | 
+	|True - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 0 ,XZ 11, j: 2 | 
+	|True - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 0 ,XZ 11, j: 3 | 
+	|True - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 0 | 
+	|False - True|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 
+	|True - True|
+	| (Assigned) XZ 12 | 6:00 PM | Viper 2 Sentry | 
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 0 ,XZ 11, j: 0 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 0 ,XZ 11, j: 1 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 0 ,XZ 11, j: 2 | 
+	|True - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 0 ,XZ 11, j: 3 | 
+	|True - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 1 ,XZ 12, j: 0 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 1 ,XZ 12, j: 1 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 1 ,XZ 12, j: 2 | 
+	|True - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 1 ,XZ 12, j: 3 | 
+	|True - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 2 ,XZ 13, j: 0 | 
+	|False - True|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 2 ,XZ 13, j: 1 | 
+	|False - True|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 2 ,XZ 13, j: 2 | 
+	|True - True|
+	| (Assigned) XZ 13 | 2:00 PM | Viper 2 Checker | 
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 2 ,XZ 13, j: 2 | 	Depth: 3, i: 0 ,XZ 11, j: 0 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 2 ,XZ 13, j: 2 | 	Depth: 3, i: 0 ,XZ 11, j: 1 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 2 ,XZ 13, j: 2 | 	Depth: 3, i: 0 ,XZ 11, j: 2 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 2 ,XZ 13, j: 2 | 	Depth: 3, i: 0 ,XZ 11, j: 3 | 
+	|True - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 2 ,XZ 13, j: 2 | 	Depth: 3, i: 1 ,XZ 12, j: 0 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 2 ,XZ 13, j: 2 | 	Depth: 3, i: 1 ,XZ 12, j: 1 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 2 ,XZ 13, j: 2 | 	Depth: 3, i: 1 ,XZ 12, j: 2 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 2 ,XZ 13, j: 2 | 	Depth: 3, i: 1 ,XZ 12, j: 3 | 
+	|True - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 2 ,XZ 13, j: 2 | 	Depth: 3, i: 2 ,XZ 13, j: 0 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 2 ,XZ 13, j: 2 | 	Depth: 3, i: 2 ,XZ 13, j: 1 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 2 ,XZ 13, j: 2 | 	Depth: 3, i: 2 ,XZ 13, j: 2 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 2 ,XZ 13, j: 2 | 	Depth: 3, i: 2 ,XZ 13, j: 3 | 
+	|True - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 2 ,XZ 13, j: 2 | 	Depth: 3, i: 3 ,XZ 14, j: 0 | 
+	|False - True|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 2 ,XZ 13, j: 2 | 	Depth: 3, i: 3 ,XZ 14, j: 1 | 
+	|False - True|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 2 ,XZ 13, j: 2 | 	Depth: 3, i: 3 ,XZ 14, j: 2 | 
+	|False - True|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 2 ,XZ 13, j: 2 | 	Depth: 3, i: 3 ,XZ 14, j: 3 | 
+	|True - True|
+	| (Assigned) XZ 14 | 6:00 PM | Viper 2 Checker | 
+	| (Combination Generated) |XZ 11 - 8/15/2016 2:00:00 PM - Viper 2 Sentry| |XZ 12 - 8/15/2016 6:00:00 PM - Viper 2 Sentry| |XZ 13 - 8/15/2016 2:00:00 PM - Viper 2 Checker| |XZ 14 - 8/15/2016 6:00:00 PM - Viper 2 Checker| 
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 2 ,XZ 13, j: 3 | 
+	|False - True|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 3 ,XZ 14, j: 0 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 3 ,XZ 14, j: 1 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 3 ,XZ 14, j: 2 | 
+	|True - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 1 | 	Depth: 2, i: 3 ,XZ 14, j: 3 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 2 | 
+	|True - True|
+	| (Assigned) XZ 12 | 2:00 PM | Viper 2 Checker | 
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 2 | 	Depth: 2, i: 0 ,XZ 11, j: 0 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 2 | 	Depth: 2, i: 0 ,XZ 11, j: 1 | 
+	|True - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 2 | 	Depth: 2, i: 0 ,XZ 11, j: 2 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 2 | 	Depth: 2, i: 0 ,XZ 11, j: 3 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 2 | 	Depth: 2, i: 1 ,XZ 12, j: 0 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 2 | 	Depth: 2, i: 1 ,XZ 12, j: 1 | 
+	|True - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 2 | 	Depth: 2, i: 1 ,XZ 12, j: 2 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 2 | 	Depth: 2, i: 1 ,XZ 12, j: 3 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 2 | 	Depth: 2, i: 2 ,XZ 13, j: 0 | 
+	|False - True|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 2 | 	Depth: 2, i: 2 ,XZ 13, j: 1 | 
+	|True - True|
+	| (Assigned) XZ 13 | 6:00 PM | Viper 2 Sentry | 
+	| (Combination Generated) |XZ 11 - 8/15/2016 2:00:00 PM - Viper 2 Sentry| |XZ 13 - 8/15/2016 6:00:00 PM - Viper 2 Sentry| |XZ 12 - 8/15/2016 2:00:00 PM - Viper 2 Checker| |XZ 14 - 8/15/2016 6:00:00 PM - Viper 2 Checker| 
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 1 ,XZ 12, j: 3 | 
+	|False - True|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 2 ,XZ 13, j: 0 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 2 ,XZ 13, j: 1 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 2 ,XZ 13, j: 2 | 
+	|True - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 2 ,XZ 13, j: 3 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 3 ,XZ 14, j: 0 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 3 ,XZ 14, j: 1 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 3 ,XZ 14, j: 2 | 
+	|True - False|
+	Depth: 0, i: 0 ,XZ 11, j: 0 | 	Depth: 1, i: 3 ,XZ 14, j: 3 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 1 | 
+	|False - True|
+	Depth: 0, i: 0 ,XZ 11, j: 2 | 
+	|True - True|
+	| (Assigned) XZ 11 | 2:00 PM | Viper 2 Checker | 
+	Depth: 0, i: 0 ,XZ 11, j: 2 | 	Depth: 1, i: 0 ,XZ 11, j: 0 | 
+	|True - False|
+	Depth: 0, i: 0 ,XZ 11, j: 2 | 	Depth: 1, i: 0 ,XZ 11, j: 1 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 2 | 	Depth: 1, i: 0 ,XZ 11, j: 2 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 2 | 	Depth: 1, i: 0 ,XZ 11, j: 3 | 
+	|False - False|
+	Depth: 0, i: 0 ,XZ 11, j: 2 | 	Depth: 1, i: 1 ,XZ 12, j: 0 | 
+	|True - True|
+	| (Assigned) XZ 12 | 2:00 PM | Viper 2 Sentry | 
+	| (Combination Generated) |XZ 12 - 8/15/2016 2:00:00 PM - Viper 2 Sentry| |XZ 13 - 8/15/2016 6:00:00 PM - Viper 2 Sentry| |XZ 11 - 8/15/2016 2:00:00 PM - Viper 2 Checker| |XZ 14 - 8/15/2016 6:00:00 PM - Viper 2 Checker| 
+	Depth: 0, i: 0 ,XZ 11, j: 3 | 
+	|False - True|
+	Depth: 0, i: 1 ,XZ 12, j: 0 | 
+	|False - False|
+	Depth: 0, i: 1 ,XZ 12, j: 1 | 
+	|False - False|
+	Depth: 0, i: 1 ,XZ 12, j: 2 | 
+	|True - False|
+	Depth: 0, i: 1 ,XZ 12, j: 3 | 
+	|False - False|
+	Depth: 0, i: 2 ,XZ 13, j: 0 | 
+	|False - False|
+	Depth: 0, i: 2 ,XZ 13, j: 1 | 
+	|False - False|
+	Depth: 0, i: 2 ,XZ 13, j: 2 | 
+	|True - False|
+	Depth: 0, i: 2 ,XZ 13, j: 3 | 
+	|False - False|
+	Depth: 0, i: 3 ,XZ 14, j: 0 | 
+	|False - False|
+	Depth: 0, i: 3 ,XZ 14, j: 1 | 
+	|False - False|
+	Depth: 0, i: 3 ,XZ 14, j: 2 | 
+	|True - False|
+	Depth: 0, i: 3 ,XZ 14, j: 3 | 
+	|False - False|
+
+UnityEngine.Debug:Log(Object)
+CombinationAssign:Update() (at Assets/CombinationAssign/CombinationAssign.cs:116)

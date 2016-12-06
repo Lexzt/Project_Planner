@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System;
+using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -110,13 +112,24 @@ public class CombinationAssign : MonoBehaviour
         if (stop == true && Input.GetKeyDown(KeyCode.Y))
         {
             Combinations = new List<Combi>();
-            debug = "";
+			debug = new StringBuilder();
             stop = false;
             List<TempPerson> tp = PrepareAACR();
-            //AssignAndCheckR(tp,"",0);
-            AssignAndCheckR(tp,0);
-            Debug.Log(debug);
-            System.IO.File.WriteAllText(Application.dataPath + "/" + "debug.txt", debug);
+			StringBuilder sb = new StringBuilder ();
+			foreach (TempPerson p in tp) 
+			{
+				sb.Append (p.PersonData.Name + "\n");
+				foreach (TempStick s in p.ListOfPossibleSticks) 
+				{
+					sb.Append ("\t" + s.StickData.TimeStart + " - " + s.StickData.Parent.NameOfEmplacement + "\n");
+				}
+			}
+			System.IO.File.WriteAllText(Application.dataPath + "/" + "debug1.txt", sb.ToString());
+			sb = new StringBuilder ();
+            AssignAndCheckR(tp,sb,0);
+            //AssignAndCheckR(tp,0);
+            //Debug.Log(debug);
+            //System.IO.File.WriteAllText(Application.dataPath + "/" + "debug.txt", debug);
             stop = true;
         }
 
@@ -124,6 +137,8 @@ public class CombinationAssign : MonoBehaviour
         {
             if (Combinations != null)
             {
+				StringBuilder sb = new StringBuilder ();
+				sb.Append ("No Of Combinations: " + Combinations.Count + "\n");
                 Debug.Log(Combinations.Count);
                 foreach (Emplacement emp in GetComponent<Base>().Emplacements)
                 {
@@ -138,15 +153,18 @@ public class CombinationAssign : MonoBehaviour
                 int index = 0;
                 foreach (Combi comb in Combinations)
                 {
-                    order += index++ + "|\n";
+                    //order += index++ + "|\n";
+					sb.Append (index++ + "|\n");
                     foreach (TempStick s in comb.Combination)
                     {
-                        order += s.StickData.TimeStart + " - " + s.StickData.Parent.NameOfEmplacement + " - " + s.PersonData.Name + "\n";
+						sb.Append (s.StickData.TimeStart + " - " + s.StickData.Parent.NameOfEmplacement + " - " + s.PersonData.Name + "\n");
+                        //order += s.StickData.TimeStart + " - " + s.StickData.Parent.NameOfEmplacement + " - " + s.PersonData.Name + "\n";
                     }
-                    order += "|\n";
+					sb.Append ("|\n");
+                    //order += "|\n";
                 }
-                Debug.Log(order);
-                System.IO.File.WriteAllText(Application.dataPath + "/" + "order.txt", order);
+                //Debug.Log(order);
+				System.IO.File.WriteAllText(Application.dataPath + "/" + "order.txt", sb.ToString());
 
                 order = "";
             }
@@ -185,7 +203,7 @@ public class CombinationAssign : MonoBehaviour
         {
             foreach (TempStick tick in s)
             {
-                if (CanDo(p.PersonData, tick.StickData))
+                if (CanDo(p, tick))
                     p.ListOfPossibleSticks.Add(tick);
             }
         }
@@ -205,8 +223,9 @@ public class CombinationAssign : MonoBehaviour
         Sticks = s;
         return c;
     }
-    string debug = "";
-    bool AssignAndCheckR(List<TempPerson> C, string trace = "", int depth = 0)
+	StringBuilder debug = new StringBuilder();
+	int count = 0;
+	bool AssignAndCheckR(List<TempPerson> C, StringBuilder trace, int depth = 0)
     {
         for (int i = 0; i < C.Count; i++)
         {
@@ -214,7 +233,7 @@ public class CombinationAssign : MonoBehaviour
             if (c.IsAssignable())
             {
 				string msg = ("\tDepth: " + depth + ", i: " + i + " ," + c.PersonData.Name + ", j: " + depth + " | ");
-				debug += trace + msg + "\n";
+				debug.Append (trace.ToString() + msg + "\n");
 				TempStick s = c.ListOfPossibleSticks[depth];
 				if (stop)
 				{
@@ -226,35 +245,32 @@ public class CombinationAssign : MonoBehaviour
 					Progress = 0;
 					RealProgressStep++;
 				}
-				debug += ("\t|" + !s.IsAssigned() + " - " + CanDo(c.PersonData, s.StickData) + "|\n");
-				if (!s.IsAssigned() && CanDo(c.PersonData, s.StickData))
+				debug.Append ("\t|" + !s.IsAssigned () + " - " + CanDo (c, s));
+				debug.Append ("\n");
+				if (!s.IsAssigned() && CanDo(c, s))
 				{
-					debug += ("\t| (Assigned) " + c.PersonData.Name + " | " + s.StickData.TimeStart.ToShortTimeString() + " | " + s.StickData.Parent.NameOfEmplacement + " | \n");
+					debug.Append("\t| (Assigned) " + c.PersonData.Name + " | " + s.StickData.TimeStart.ToShortTimeString() + " | " + s.StickData.Parent.NameOfEmplacement + " | ");
+					debug.Append ("\n");
 					c.Assign(s);
 					s.SetAssigned(c);
 
-					//						if (s.StickData.Unique == false) 
-					//						{
-					//							c.Assign(c.ListOfPossibleSticks [j + 1]);
-					//							c.ListOfPossibleSticks [j + 1].SetAssigned(c);
-					//						}
-
 					if (AllAssigned())
 					{
-						debug += ("\t| (Combination Generated) ");
+						debug.Append("\t| (Combination Generated) ");
 						foreach (TempStick v in Sticks)
 						{
-							debug += ("|" + v.PersonData.Name + " - " + v.StickData.TimeStart + " - " + v.StickData.Parent.NameOfEmplacement + "| ");
+							debug.Append("|" + v.PersonData.Name + " - " + v.StickData.TimeStart + " - " + v.StickData.Parent.NameOfEmplacement + "| ");
 						}
-						debug += "\n";
+						debug.Append("\n");
 						Combinations.Add(new Combi(Sticks));
 						c.Unassign(s);
 						s.SetUnassigned();
 						// return true;
 						continue;
 					}
-
-					AssignAndCheckR(C, trace + msg, depth + 1);
+					StringBuilder tempbuilder = new StringBuilder (trace.ToString() + msg);
+					System.IO.File.WriteAllText(Application.dataPath + "/" + "debug2.txt", tempbuilder.ToString());
+					AssignAndCheckR(C, tempbuilder, depth + 1);
 					c.Unassign(s);
 					s.SetUnassigned();
 				}
@@ -281,16 +297,10 @@ public class CombinationAssign : MonoBehaviour
 					Progress = 0;
 					RealProgressStep++;
 				}
-				if (!s.IsAssigned() && CanDo(c.PersonData, s.StickData))
+				if (!s.IsAssigned() && CanDo(c, s))
 				{
 					c.Assign(s);
 					s.SetAssigned(c);
-
-                    if (s.StickData.Unique == false) 
-                    {
-                        c.Assign(c.ListOfPossibleSticks [depth + 1]);
-                        c.ListOfPossibleSticks [depth + 1].SetAssigned(c);
-                    }
 
 					if (AllAssigned())
 					{
@@ -303,12 +313,6 @@ public class CombinationAssign : MonoBehaviour
 					AssignAndCheckR(C, depth + 1);
 					c.Unassign(s);
 					s.SetUnassigned();
-
-                    if (s.StickData.Unique == false) 
-                    {
-                        c.Unassign(c.ListOfPossibleSticks [depth + 1]);
-                        c.ListOfPossibleSticks [depth + 1].SetUnassigned();
-                    }
 				}
             }
         }
@@ -316,13 +320,13 @@ public class CombinationAssign : MonoBehaviour
     }
 
 
-    public bool CanDo(Person p, Stick s)
+	public bool CanDo(TempPerson p, TempStick s)
     {
         if (
-			p.ListOfRoles.Contains(s.Parent.CurrentRole) &&
-            p.NoOfSticks > 0)
+			p.PersonData.ListOfRoles.Contains(s.StickData.Parent.CurrentRole) &&
+			p.PersonData.NoOfSticks > 0)
         {
-            if(p.IsRested(s.TimeStart, s.TimeEnd))
+			if(p.PersonData.IsRested(s.StickData.TimeStart, s.StickData.TimeEnd) || CheckContiguous(s,p))
             return true;
         }
         return false;
@@ -342,7 +346,7 @@ public class CombinationAssign : MonoBehaviour
 
     public bool CheckContiguous(TempStick s, TempPerson p)
     {
-        List<TempStick> contiguousSticks;
+		List<TempStick> contiguousSticks = new List<TempStick> ();
         foreach (TempStick assignedStick in p.ListOfAssginedSticks)
         {
             if (IsConnected(assignedStick, s))
@@ -350,19 +354,20 @@ public class CombinationAssign : MonoBehaviour
                 contiguousSticks.Add(assignedStick);
             }
         }
-        if (contiguousStick.Count < 2)
+		if (contiguousSticks.Count < 2)
         {
-            if (contiguousStick.Count == 0)
+			if (contiguousSticks.Count == 0)
             {
-                return true;
+                return false;
             }
-            foreach (assignedStick)
+			foreach (TempStick tempAssignedStick in p.ListOfAssginedSticks)
             {
-                if (IsConnected(assignedStick, contiguousStick[0]))
+				if (IsConnected(tempAssignedStick, contiguousSticks[0]))
                 {
                     return false;
                 }
             }
+			return true;
         }
         else
         {
@@ -370,8 +375,20 @@ public class CombinationAssign : MonoBehaviour
         }
     }
 
-    public bool IsConnected()
+	public bool IsConnected(TempStick s1, TempStick s2)
     {
-        
+		if(s1.StickData.Parent == s2.StickData.Parent)
+		{
+			TimeSpan ts = s1.StickData.TimeEnd - s2.StickData.TimeStart;
+			if (ts.TotalHours > 0) 
+			{
+				ts = s2.StickData.TimeEnd - s1.StickData.TimeStart;
+			}
+			if (Mathf.FloorToInt ((float)ts.TotalHours) == 0) 
+			{
+				return true;	
+			}
+		}
+		return false;
     }
 }

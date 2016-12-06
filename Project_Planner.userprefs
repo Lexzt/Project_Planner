@@ -2,17 +2,22 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/CombinationAssign/CombinationAssign.cs">
     <Files>
-      <File FileName="Assets/CombinationAssign/CombinationAssign.cs" Line="162" Column="1" />
+      <File FileName="Assets/CombinationAssign/CombinationAssign.cs" Line="282" Column="1" />
       <File FileName="Assets/CombinationAssign/Job.cs" Line="1" Column="1" />
       <File FileName="Assets/CombinationAssign/ThreadedJob.cs" Line="1" Column="1" />
-      <File FileName="Assets/Basic/StaticVars.cs" Line="1" Column="1" />
-      <File FileName="Assets/ChangiAirBaseEast.cs" Line="259" Column="1" />
+      <File FileName="Assets/Basic/StaticVars.cs" Line="13" Column="44" />
+      <File FileName="Assets/ChangiAirBaseEast.cs" Line="695" Column="1" />
       <File FileName="Assets/Basic/Batch.cs" Line="5" Column="1" />
+      <File FileName="Assets/Basic/Emplacement.cs" Line="44" Column="139" />
+      <File FileName="Assets/Basic/Stick.cs" Line="31" Column="2" />
+      <File FileName="Assets/Basic/Person.cs" Line="91" Column="1" />
+      <File FileName="Assets/JsonData.txt" Line="2" Column="1" />
     </Files>
     <Pads>
       <Pad Id="MonoDevelop.Debugger.WatchPad">
         <State>
           <Value>C[0].ListOfPossibleSticks.Count</Value>
+          <Value>stop</Value>
         </State>
       </Pad>
     </Pads>

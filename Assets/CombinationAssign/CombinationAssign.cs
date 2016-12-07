@@ -126,8 +126,8 @@ public class CombinationAssign : MonoBehaviour
 			}
 			System.IO.File.WriteAllText(Application.dataPath + "/" + "debug1.txt", sb.ToString());
 			sb = new StringBuilder ();
-            AssignAndCheckR(tp,sb,0);
-            //AssignAndCheckR(tp,0);
+            //AssignAndCheckR(tp,sb,0);
+            AssignAndCheckR(tp,0);
             //Debug.Log(debug);
             //System.IO.File.WriteAllText(Application.dataPath + "/" + "debug.txt", debug);
             stop = true;
@@ -235,7 +235,12 @@ public class CombinationAssign : MonoBehaviour
 				string msg = ("\tDepth: " + depth + ", i: " + i + " ," + c.PersonData.Name + ", ListOfPossibleSticks.Count: " + c.ListOfPossibleSticks.Count + " | ");
 				debug.Append (trace.ToString() + msg);
 				debug.Append (Environment.NewLine);
-				TempStick s = c.ListOfPossibleSticks[depth];
+                TempStick s = Sticks[depth];
+                if(!c.ListOfPossibleSticks.Contains(s))
+                {
+                    continue;
+                }
+
 				if (stop)
 				{
 					throw new UnityException("Force stopped");
@@ -287,7 +292,12 @@ public class CombinationAssign : MonoBehaviour
             TempPerson c = C[i];
             if (c.IsAssignable())
             {
-				TempStick s = c.ListOfPossibleSticks[depth];
+				TempStick s = Sticks[depth];
+                if(!c.ListOfPossibleSticks.Contains(s))
+                {
+                    continue;
+                }
+
 				if (stop)
 				{
 					throw new UnityException("Force stopped");

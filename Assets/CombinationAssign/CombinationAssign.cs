@@ -232,8 +232,9 @@ public class CombinationAssign : MonoBehaviour
             TempPerson c = C[i];
             if (c.IsAssignable())
             {
-				string msg = ("\tDepth: " + depth + ", i: " + i + " ," + c.PersonData.Name + ", j: " + depth + " | ");
-				debug.Append (trace.ToString() + msg + "\n");
+				string msg = ("\tDepth: " + depth + ", i: " + i + " ," + c.PersonData.Name + ", ListOfPossibleSticks.Count: " + c.ListOfPossibleSticks.Count + " | ");
+				debug.Append (trace.ToString() + msg);
+				debug.Append (Environment.NewLine);
 				TempStick s = c.ListOfPossibleSticks[depth];
 				if (stop)
 				{
@@ -246,11 +247,11 @@ public class CombinationAssign : MonoBehaviour
 					RealProgressStep++;
 				}
 				debug.Append ("\t|" + !s.IsAssigned () + " - " + CanDo (c, s));
-				debug.Append ("\n");
+				debug.Append (Environment.NewLine);
 				if (!s.IsAssigned() && CanDo(c, s))
 				{
 					debug.Append("\t| (Assigned) " + c.PersonData.Name + " | " + s.StickData.TimeStart.ToShortTimeString() + " | " + s.StickData.Parent.NameOfEmplacement + " | ");
-					debug.Append ("\n");
+					debug.Append (Environment.NewLine);
 					c.Assign(s);
 					s.SetAssigned(c);
 
@@ -261,7 +262,7 @@ public class CombinationAssign : MonoBehaviour
 						{
 							debug.Append("|" + v.PersonData.Name + " - " + v.StickData.TimeStart + " - " + v.StickData.Parent.NameOfEmplacement + "| ");
 						}
-						debug.Append("\n");
+						debug.Append(Environment.NewLine);
 						Combinations.Add(new Combi(Sticks));
 						c.Unassign(s);
 						s.SetUnassigned();

@@ -22,14 +22,17 @@ public class TempPerson
     public List<TempStick> ListOfPossibleSticks = new List<TempStick>();
     public List<TempStick> ListOfAssginedSticks = new List<TempStick>();
     public Person PersonData;
+	public int NoOfSticks = 0;
     public TempPerson(TempPerson objToCopy)
     {
         ListOfPossibleSticks = objToCopy.ListOfPossibleSticks;
         ListOfAssginedSticks = objToCopy.ListOfAssginedSticks;
+		NoOfSticks = objToCopy.NoOfSticks;
     }
     public TempPerson(Person p)
     {
         PersonData = p;
+		NoOfSticks = p.NoOfSticks;
     }
     public void Assign(TempStick s)
     {
@@ -43,7 +46,7 @@ public class TempPerson
     }
     public bool IsAssignable()
     {
-        if (PersonData.NoOfSticks > 0)
+		if (NoOfSticks > ListOfAssginedSticks.Count)
             return true;
         else
             return false;
@@ -126,8 +129,8 @@ public class CombinationAssign : MonoBehaviour
 			}
 			System.IO.File.WriteAllText(Application.dataPath + "/" + "debug1.txt", sb.ToString());
 			sb = new StringBuilder ();
-            AssignAndCheckR(tp,sb,0);
-            //AssignAndCheckR(tp,0);
+            //AssignAndCheckR(tp,sb,0);
+            AssignAndCheckR(tp,0);
             //Debug.Log(debug);
             //System.IO.File.WriteAllText(Application.dataPath + "/" + "debug.txt", debug);
             stop = true;
@@ -211,7 +214,7 @@ public class CombinationAssign : MonoBehaviour
         string debuglog = "\n";
         foreach (TempPerson p in c)
         {
-            debuglog += (p.PersonData.Name + " - " + p.ListOfPossibleSticks.Count + "\n");
+			debuglog += (p.PersonData.Name + " - " + p.ListOfPossibleSticks.Count + " - " + p.NoOfSticks + "\n");
             foreach (TempStick st in p.ListOfPossibleSticks)
             {
                 debuglog += ("|" + st.StickData.TimeStart + " - " + st.StickData.Parent.NameOfEmplacement + "|\n");
@@ -235,7 +238,11 @@ public class CombinationAssign : MonoBehaviour
 				string msg = ("\tDepth: " + depth + ", i: " + i + " ," + c.PersonData.Name + ", ListOfPossibleSticks.Count: " + c.ListOfPossibleSticks.Count + " | ");
 				debug.Append (trace.ToString() + msg);
 				debug.Append (Environment.NewLine);
-				TempStick s = c.ListOfPossibleSticks[depth];
+				TempStick s = Sticks[depth];
+				if (!c.ListOfPossibleSticks.Contains (s)) 
+				{
+					continue;
+				}
 				if (stop)
 				{
 					throw new UnityException("Force stopped");
@@ -287,7 +294,11 @@ public class CombinationAssign : MonoBehaviour
             TempPerson c = C[i];
             if (c.IsAssignable())
             {
-				TempStick s = c.ListOfPossibleSticks[depth];
+				TempStick s = Sticks[depth];
+				if (!c.ListOfPossibleSticks.Contains (s)) 
+				{
+					continue;
+				}
 				if (stop)
 				{
 					throw new UnityException("Force stopped");
@@ -325,10 +336,12 @@ public class CombinationAssign : MonoBehaviour
     {
         if (
 			p.PersonData.ListOfRoles.Contains(s.StickData.Parent.CurrentRole) &&
-			p.PersonData.NoOfSticks > 0)
+			p.ListOfAssginedSticks.Count < p.NoOfSticks)
         {
-			if(p.PersonData.IsRested(s.StickData.TimeStart, s.StickData.TimeEnd) || CheckContiguous(s,p))
-            return true;
+			if (p.PersonData.IsRested (s.StickData.TimeStart, s.StickData.TimeEnd) || CheckContiguous (s, p)) 
+			{
+				return true;
+			}
         }
         return false;
     }

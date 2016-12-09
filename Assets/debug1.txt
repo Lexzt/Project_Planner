@@ -1,347 +1,347 @@
 XZ 11
-	08/15/2016 14:00:00 - Viper 2 Checker
-	08/15/2016 18:00:00 - Viper 2 Checker
-	08/15/2016 21:00:00 - Viper 2 Checker
-	08/16/2016 00:00:00 - Viper 2 Checker
-	08/16/2016 03:00:00 - Viper 2 Checker
-	08/16/2016 06:00:00 - Viper 2 Checker
-	08/16/2016 09:00:00 - Viper 2 Checker
-	08/16/2016 12:00:00 - Viper 2 Checker
-	08/16/2016 15:00:00 - Viper 2 Checker
-	08/16/2016 18:00:00 - Viper 2 Checker
-	08/16/2016 21:00:00 - Viper 2 Checker
-	08/17/2016 00:00:00 - Viper 2 Checker
-	08/17/2016 03:00:00 - Viper 2 Checker
-	08/17/2016 06:00:00 - Viper 2 Checker
-	08/17/2016 09:00:00 - Viper 2 Checker
-	08/17/2016 12:00:00 - Viper 2 Checker
-	08/15/2016 14:00:00 - Viper 2 Sentry
-	08/16/2016 06:00:00 - Viper 2 Sentry
-	08/16/2016 09:00:00 - Viper 2 Sentry
-	08/16/2016 12:00:00 - Viper 2 Sentry
-	08/16/2016 15:00:00 - Viper 2 Sentry
-	08/17/2016 12:00:00 - Viper 2 Sentry
-	08/16/2016 06:00:00 - UVSS
-	08/16/2016 15:00:00 - UVSS
-	08/15/2016 14:00:00 - Python Checker
-	08/16/2016 06:00:00 - Python Checker
-	08/16/2016 09:00:00 - Python Checker
-	08/16/2016 12:00:00 - Python Checker
-	08/16/2016 15:00:00 - Python Checker
-	08/17/2016 06:00:00 - Python Checker
-	08/17/2016 09:00:00 - Python Checker
-	08/17/2016 12:00:00 - Python Checker
-	08/15/2016 14:00:00 - Python Sentry
-	08/16/2016 06:00:00 - Python Sentry
-	08/16/2016 09:00:00 - Python Sentry
-	08/16/2016 12:00:00 - Python Sentry
-	08/16/2016 15:00:00 - Python Sentry
-	08/17/2016 06:00:00 - Python Sentry
+	8/15/2016 2:00:00 PM - Viper 2 Checker
+	8/15/2016 6:00:00 PM - Viper 2 Checker
+	8/15/2016 9:00:00 PM - Viper 2 Checker
+	8/16/2016 12:00:00 AM - Viper 2 Checker
+	8/16/2016 3:00:00 AM - Viper 2 Checker
+	8/16/2016 6:00:00 AM - Viper 2 Checker
+	8/16/2016 9:00:00 AM - Viper 2 Checker
+	8/16/2016 12:00:00 PM - Viper 2 Checker
+	8/16/2016 3:00:00 PM - Viper 2 Checker
+	8/16/2016 6:00:00 PM - Viper 2 Checker
+	8/16/2016 9:00:00 PM - Viper 2 Checker
+	8/17/2016 12:00:00 AM - Viper 2 Checker
+	8/17/2016 3:00:00 AM - Viper 2 Checker
+	8/17/2016 6:00:00 AM - Viper 2 Checker
+	8/17/2016 9:00:00 AM - Viper 2 Checker
+	8/17/2016 12:00:00 PM - Viper 2 Checker
+	8/15/2016 2:00:00 PM - Viper 2 Sentry
+	8/16/2016 6:00:00 AM - Viper 2 Sentry
+	8/16/2016 9:00:00 AM - Viper 2 Sentry
+	8/16/2016 12:00:00 PM - Viper 2 Sentry
+	8/16/2016 3:00:00 PM - Viper 2 Sentry
+	8/17/2016 12:00:00 PM - Viper 2 Sentry
+	8/16/2016 6:00:00 AM - UVSS
+	8/16/2016 3:00:00 PM - UVSS
+	8/15/2016 2:00:00 PM - Python Checker
+	8/16/2016 6:00:00 AM - Python Checker
+	8/16/2016 9:00:00 AM - Python Checker
+	8/16/2016 12:00:00 PM - Python Checker
+	8/16/2016 3:00:00 PM - Python Checker
+	8/17/2016 6:00:00 AM - Python Checker
+	8/17/2016 9:00:00 AM - Python Checker
+	8/17/2016 12:00:00 PM - Python Checker
+	8/15/2016 2:00:00 PM - Python Sentry
+	8/16/2016 6:00:00 AM - Python Sentry
+	8/16/2016 9:00:00 AM - Python Sentry
+	8/16/2016 12:00:00 PM - Python Sentry
+	8/16/2016 3:00:00 PM - Python Sentry
+	8/17/2016 6:00:00 AM - Python Sentry
 XZ 12
-	08/15/2016 14:00:00 - Viper 2 Checker
-	08/15/2016 18:00:00 - Viper 2 Checker
-	08/15/2016 21:00:00 - Viper 2 Checker
-	08/16/2016 00:00:00 - Viper 2 Checker
-	08/16/2016 03:00:00 - Viper 2 Checker
-	08/16/2016 06:00:00 - Viper 2 Checker
-	08/16/2016 09:00:00 - Viper 2 Checker
-	08/16/2016 12:00:00 - Viper 2 Checker
-	08/16/2016 15:00:00 - Viper 2 Checker
-	08/16/2016 18:00:00 - Viper 2 Checker
-	08/16/2016 21:00:00 - Viper 2 Checker
-	08/17/2016 00:00:00 - Viper 2 Checker
-	08/17/2016 03:00:00 - Viper 2 Checker
-	08/17/2016 06:00:00 - Viper 2 Checker
-	08/17/2016 09:00:00 - Viper 2 Checker
-	08/17/2016 12:00:00 - Viper 2 Checker
-	08/15/2016 14:00:00 - Viper 2 Sentry
-	08/16/2016 06:00:00 - Viper 2 Sentry
-	08/16/2016 09:00:00 - Viper 2 Sentry
-	08/16/2016 12:00:00 - Viper 2 Sentry
-	08/16/2016 15:00:00 - Viper 2 Sentry
-	08/17/2016 12:00:00 - Viper 2 Sentry
-	08/16/2016 06:00:00 - UVSS
-	08/16/2016 15:00:00 - UVSS
-	08/15/2016 14:00:00 - Python Checker
-	08/16/2016 06:00:00 - Python Checker
-	08/16/2016 09:00:00 - Python Checker
-	08/16/2016 12:00:00 - Python Checker
-	08/16/2016 15:00:00 - Python Checker
-	08/17/2016 06:00:00 - Python Checker
-	08/17/2016 09:00:00 - Python Checker
-	08/17/2016 12:00:00 - Python Checker
-	08/15/2016 14:00:00 - Python Sentry
-	08/16/2016 06:00:00 - Python Sentry
-	08/16/2016 09:00:00 - Python Sentry
-	08/16/2016 12:00:00 - Python Sentry
-	08/16/2016 15:00:00 - Python Sentry
-	08/17/2016 06:00:00 - Python Sentry
+	8/15/2016 2:00:00 PM - Viper 2 Checker
+	8/15/2016 6:00:00 PM - Viper 2 Checker
+	8/15/2016 9:00:00 PM - Viper 2 Checker
+	8/16/2016 12:00:00 AM - Viper 2 Checker
+	8/16/2016 3:00:00 AM - Viper 2 Checker
+	8/16/2016 6:00:00 AM - Viper 2 Checker
+	8/16/2016 9:00:00 AM - Viper 2 Checker
+	8/16/2016 12:00:00 PM - Viper 2 Checker
+	8/16/2016 3:00:00 PM - Viper 2 Checker
+	8/16/2016 6:00:00 PM - Viper 2 Checker
+	8/16/2016 9:00:00 PM - Viper 2 Checker
+	8/17/2016 12:00:00 AM - Viper 2 Checker
+	8/17/2016 3:00:00 AM - Viper 2 Checker
+	8/17/2016 6:00:00 AM - Viper 2 Checker
+	8/17/2016 9:00:00 AM - Viper 2 Checker
+	8/17/2016 12:00:00 PM - Viper 2 Checker
+	8/15/2016 2:00:00 PM - Viper 2 Sentry
+	8/16/2016 6:00:00 AM - Viper 2 Sentry
+	8/16/2016 9:00:00 AM - Viper 2 Sentry
+	8/16/2016 12:00:00 PM - Viper 2 Sentry
+	8/16/2016 3:00:00 PM - Viper 2 Sentry
+	8/17/2016 12:00:00 PM - Viper 2 Sentry
+	8/16/2016 6:00:00 AM - UVSS
+	8/16/2016 3:00:00 PM - UVSS
+	8/15/2016 2:00:00 PM - Python Checker
+	8/16/2016 6:00:00 AM - Python Checker
+	8/16/2016 9:00:00 AM - Python Checker
+	8/16/2016 12:00:00 PM - Python Checker
+	8/16/2016 3:00:00 PM - Python Checker
+	8/17/2016 6:00:00 AM - Python Checker
+	8/17/2016 9:00:00 AM - Python Checker
+	8/17/2016 12:00:00 PM - Python Checker
+	8/15/2016 2:00:00 PM - Python Sentry
+	8/16/2016 6:00:00 AM - Python Sentry
+	8/16/2016 9:00:00 AM - Python Sentry
+	8/16/2016 12:00:00 PM - Python Sentry
+	8/16/2016 3:00:00 PM - Python Sentry
+	8/17/2016 6:00:00 AM - Python Sentry
 Clement
-	08/15/2016 14:00:00 - Viper 2 Checker
-	08/15/2016 18:00:00 - Viper 2 Checker
-	08/15/2016 21:00:00 - Viper 2 Checker
-	08/16/2016 00:00:00 - Viper 2 Checker
-	08/16/2016 03:00:00 - Viper 2 Checker
-	08/16/2016 06:00:00 - Viper 2 Checker
-	08/16/2016 09:00:00 - Viper 2 Checker
-	08/16/2016 12:00:00 - Viper 2 Checker
-	08/16/2016 15:00:00 - Viper 2 Checker
-	08/16/2016 18:00:00 - Viper 2 Checker
-	08/16/2016 21:00:00 - Viper 2 Checker
-	08/17/2016 00:00:00 - Viper 2 Checker
-	08/17/2016 03:00:00 - Viper 2 Checker
-	08/17/2016 06:00:00 - Viper 2 Checker
-	08/17/2016 09:00:00 - Viper 2 Checker
-	08/17/2016 12:00:00 - Viper 2 Checker
-	08/16/2016 06:00:00 - UVSS
-	08/16/2016 15:00:00 - UVSS
-	08/15/2016 14:00:00 - Python Checker
-	08/16/2016 06:00:00 - Python Checker
-	08/16/2016 09:00:00 - Python Checker
-	08/16/2016 12:00:00 - Python Checker
-	08/16/2016 15:00:00 - Python Checker
-	08/17/2016 06:00:00 - Python Checker
-	08/17/2016 09:00:00 - Python Checker
-	08/17/2016 12:00:00 - Python Checker
+	8/15/2016 2:00:00 PM - Viper 2 Checker
+	8/15/2016 6:00:00 PM - Viper 2 Checker
+	8/15/2016 9:00:00 PM - Viper 2 Checker
+	8/16/2016 12:00:00 AM - Viper 2 Checker
+	8/16/2016 3:00:00 AM - Viper 2 Checker
+	8/16/2016 6:00:00 AM - Viper 2 Checker
+	8/16/2016 9:00:00 AM - Viper 2 Checker
+	8/16/2016 12:00:00 PM - Viper 2 Checker
+	8/16/2016 3:00:00 PM - Viper 2 Checker
+	8/16/2016 6:00:00 PM - Viper 2 Checker
+	8/16/2016 9:00:00 PM - Viper 2 Checker
+	8/17/2016 12:00:00 AM - Viper 2 Checker
+	8/17/2016 3:00:00 AM - Viper 2 Checker
+	8/17/2016 6:00:00 AM - Viper 2 Checker
+	8/17/2016 9:00:00 AM - Viper 2 Checker
+	8/17/2016 12:00:00 PM - Viper 2 Checker
+	8/16/2016 6:00:00 AM - UVSS
+	8/16/2016 3:00:00 PM - UVSS
+	8/15/2016 2:00:00 PM - Python Checker
+	8/16/2016 6:00:00 AM - Python Checker
+	8/16/2016 9:00:00 AM - Python Checker
+	8/16/2016 12:00:00 PM - Python Checker
+	8/16/2016 3:00:00 PM - Python Checker
+	8/17/2016 6:00:00 AM - Python Checker
+	8/17/2016 9:00:00 AM - Python Checker
+	8/17/2016 12:00:00 PM - Python Checker
 Cheong
 Teng Feng
 CH
 XZ 24
-	08/15/2016 14:00:00 - Viper 2 Checker
-	08/15/2016 18:00:00 - Viper 2 Checker
-	08/15/2016 21:00:00 - Viper 2 Checker
-	08/16/2016 00:00:00 - Viper 2 Checker
-	08/16/2016 03:00:00 - Viper 2 Checker
-	08/16/2016 06:00:00 - Viper 2 Checker
-	08/16/2016 09:00:00 - Viper 2 Checker
-	08/16/2016 12:00:00 - Viper 2 Checker
-	08/16/2016 15:00:00 - Viper 2 Checker
-	08/16/2016 18:00:00 - Viper 2 Checker
-	08/16/2016 21:00:00 - Viper 2 Checker
-	08/17/2016 00:00:00 - Viper 2 Checker
-	08/17/2016 03:00:00 - Viper 2 Checker
-	08/17/2016 06:00:00 - Viper 2 Checker
-	08/17/2016 09:00:00 - Viper 2 Checker
-	08/17/2016 12:00:00 - Viper 2 Checker
-	08/15/2016 14:00:00 - Viper 2 Sentry
-	08/16/2016 06:00:00 - Viper 2 Sentry
-	08/16/2016 09:00:00 - Viper 2 Sentry
-	08/16/2016 12:00:00 - Viper 2 Sentry
-	08/16/2016 15:00:00 - Viper 2 Sentry
-	08/17/2016 12:00:00 - Viper 2 Sentry
-	08/16/2016 06:00:00 - UVSS
-	08/16/2016 15:00:00 - UVSS
-	08/15/2016 14:00:00 - Python Checker
-	08/16/2016 06:00:00 - Python Checker
-	08/16/2016 09:00:00 - Python Checker
-	08/16/2016 12:00:00 - Python Checker
-	08/16/2016 15:00:00 - Python Checker
-	08/17/2016 06:00:00 - Python Checker
-	08/17/2016 09:00:00 - Python Checker
-	08/17/2016 12:00:00 - Python Checker
-	08/15/2016 14:00:00 - Python Sentry
-	08/16/2016 06:00:00 - Python Sentry
-	08/16/2016 09:00:00 - Python Sentry
-	08/16/2016 12:00:00 - Python Sentry
-	08/16/2016 15:00:00 - Python Sentry
-	08/17/2016 06:00:00 - Python Sentry
+	8/15/2016 2:00:00 PM - Viper 2 Checker
+	8/15/2016 6:00:00 PM - Viper 2 Checker
+	8/15/2016 9:00:00 PM - Viper 2 Checker
+	8/16/2016 12:00:00 AM - Viper 2 Checker
+	8/16/2016 3:00:00 AM - Viper 2 Checker
+	8/16/2016 6:00:00 AM - Viper 2 Checker
+	8/16/2016 9:00:00 AM - Viper 2 Checker
+	8/16/2016 12:00:00 PM - Viper 2 Checker
+	8/16/2016 3:00:00 PM - Viper 2 Checker
+	8/16/2016 6:00:00 PM - Viper 2 Checker
+	8/16/2016 9:00:00 PM - Viper 2 Checker
+	8/17/2016 12:00:00 AM - Viper 2 Checker
+	8/17/2016 3:00:00 AM - Viper 2 Checker
+	8/17/2016 6:00:00 AM - Viper 2 Checker
+	8/17/2016 9:00:00 AM - Viper 2 Checker
+	8/17/2016 12:00:00 PM - Viper 2 Checker
+	8/15/2016 2:00:00 PM - Viper 2 Sentry
+	8/16/2016 6:00:00 AM - Viper 2 Sentry
+	8/16/2016 9:00:00 AM - Viper 2 Sentry
+	8/16/2016 12:00:00 PM - Viper 2 Sentry
+	8/16/2016 3:00:00 PM - Viper 2 Sentry
+	8/17/2016 12:00:00 PM - Viper 2 Sentry
+	8/16/2016 6:00:00 AM - UVSS
+	8/16/2016 3:00:00 PM - UVSS
+	8/15/2016 2:00:00 PM - Python Checker
+	8/16/2016 6:00:00 AM - Python Checker
+	8/16/2016 9:00:00 AM - Python Checker
+	8/16/2016 12:00:00 PM - Python Checker
+	8/16/2016 3:00:00 PM - Python Checker
+	8/17/2016 6:00:00 AM - Python Checker
+	8/17/2016 9:00:00 AM - Python Checker
+	8/17/2016 12:00:00 PM - Python Checker
+	8/15/2016 2:00:00 PM - Python Sentry
+	8/16/2016 6:00:00 AM - Python Sentry
+	8/16/2016 9:00:00 AM - Python Sentry
+	8/16/2016 12:00:00 PM - Python Sentry
+	8/16/2016 3:00:00 PM - Python Sentry
+	8/17/2016 6:00:00 AM - Python Sentry
 XZ 25
-	08/15/2016 14:00:00 - Viper 2 Checker
-	08/15/2016 18:00:00 - Viper 2 Checker
-	08/15/2016 21:00:00 - Viper 2 Checker
-	08/16/2016 00:00:00 - Viper 2 Checker
-	08/16/2016 03:00:00 - Viper 2 Checker
-	08/16/2016 06:00:00 - Viper 2 Checker
-	08/16/2016 09:00:00 - Viper 2 Checker
-	08/16/2016 12:00:00 - Viper 2 Checker
-	08/16/2016 15:00:00 - Viper 2 Checker
-	08/16/2016 18:00:00 - Viper 2 Checker
-	08/16/2016 21:00:00 - Viper 2 Checker
-	08/17/2016 00:00:00 - Viper 2 Checker
-	08/17/2016 03:00:00 - Viper 2 Checker
-	08/17/2016 06:00:00 - Viper 2 Checker
-	08/17/2016 09:00:00 - Viper 2 Checker
-	08/17/2016 12:00:00 - Viper 2 Checker
-	08/15/2016 14:00:00 - Viper 2 Sentry
-	08/16/2016 06:00:00 - Viper 2 Sentry
-	08/16/2016 09:00:00 - Viper 2 Sentry
-	08/16/2016 12:00:00 - Viper 2 Sentry
-	08/16/2016 15:00:00 - Viper 2 Sentry
-	08/17/2016 12:00:00 - Viper 2 Sentry
-	08/16/2016 06:00:00 - UVSS
-	08/16/2016 15:00:00 - UVSS
-	08/15/2016 14:00:00 - Python Checker
-	08/16/2016 06:00:00 - Python Checker
-	08/16/2016 09:00:00 - Python Checker
-	08/16/2016 12:00:00 - Python Checker
-	08/16/2016 15:00:00 - Python Checker
-	08/17/2016 06:00:00 - Python Checker
-	08/17/2016 09:00:00 - Python Checker
-	08/17/2016 12:00:00 - Python Checker
-	08/15/2016 14:00:00 - Python Sentry
-	08/16/2016 06:00:00 - Python Sentry
-	08/16/2016 09:00:00 - Python Sentry
-	08/16/2016 12:00:00 - Python Sentry
-	08/16/2016 15:00:00 - Python Sentry
-	08/17/2016 06:00:00 - Python Sentry
+	8/15/2016 2:00:00 PM - Viper 2 Checker
+	8/15/2016 6:00:00 PM - Viper 2 Checker
+	8/15/2016 9:00:00 PM - Viper 2 Checker
+	8/16/2016 12:00:00 AM - Viper 2 Checker
+	8/16/2016 3:00:00 AM - Viper 2 Checker
+	8/16/2016 6:00:00 AM - Viper 2 Checker
+	8/16/2016 9:00:00 AM - Viper 2 Checker
+	8/16/2016 12:00:00 PM - Viper 2 Checker
+	8/16/2016 3:00:00 PM - Viper 2 Checker
+	8/16/2016 6:00:00 PM - Viper 2 Checker
+	8/16/2016 9:00:00 PM - Viper 2 Checker
+	8/17/2016 12:00:00 AM - Viper 2 Checker
+	8/17/2016 3:00:00 AM - Viper 2 Checker
+	8/17/2016 6:00:00 AM - Viper 2 Checker
+	8/17/2016 9:00:00 AM - Viper 2 Checker
+	8/17/2016 12:00:00 PM - Viper 2 Checker
+	8/15/2016 2:00:00 PM - Viper 2 Sentry
+	8/16/2016 6:00:00 AM - Viper 2 Sentry
+	8/16/2016 9:00:00 AM - Viper 2 Sentry
+	8/16/2016 12:00:00 PM - Viper 2 Sentry
+	8/16/2016 3:00:00 PM - Viper 2 Sentry
+	8/17/2016 12:00:00 PM - Viper 2 Sentry
+	8/16/2016 6:00:00 AM - UVSS
+	8/16/2016 3:00:00 PM - UVSS
+	8/15/2016 2:00:00 PM - Python Checker
+	8/16/2016 6:00:00 AM - Python Checker
+	8/16/2016 9:00:00 AM - Python Checker
+	8/16/2016 12:00:00 PM - Python Checker
+	8/16/2016 3:00:00 PM - Python Checker
+	8/17/2016 6:00:00 AM - Python Checker
+	8/17/2016 9:00:00 AM - Python Checker
+	8/17/2016 12:00:00 PM - Python Checker
+	8/15/2016 2:00:00 PM - Python Sentry
+	8/16/2016 6:00:00 AM - Python Sentry
+	8/16/2016 9:00:00 AM - Python Sentry
+	8/16/2016 12:00:00 PM - Python Sentry
+	8/16/2016 3:00:00 PM - Python Sentry
+	8/17/2016 6:00:00 AM - Python Sentry
 XZ 26
-	08/15/2016 14:00:00 - Viper 2 Checker
-	08/15/2016 18:00:00 - Viper 2 Checker
-	08/15/2016 21:00:00 - Viper 2 Checker
-	08/16/2016 00:00:00 - Viper 2 Checker
-	08/16/2016 03:00:00 - Viper 2 Checker
-	08/16/2016 06:00:00 - Viper 2 Checker
-	08/16/2016 09:00:00 - Viper 2 Checker
-	08/16/2016 12:00:00 - Viper 2 Checker
-	08/16/2016 15:00:00 - Viper 2 Checker
-	08/16/2016 18:00:00 - Viper 2 Checker
-	08/16/2016 21:00:00 - Viper 2 Checker
-	08/17/2016 00:00:00 - Viper 2 Checker
-	08/17/2016 03:00:00 - Viper 2 Checker
-	08/17/2016 06:00:00 - Viper 2 Checker
-	08/17/2016 09:00:00 - Viper 2 Checker
-	08/17/2016 12:00:00 - Viper 2 Checker
-	08/15/2016 14:00:00 - Viper 2 Sentry
-	08/16/2016 06:00:00 - Viper 2 Sentry
-	08/16/2016 09:00:00 - Viper 2 Sentry
-	08/16/2016 12:00:00 - Viper 2 Sentry
-	08/16/2016 15:00:00 - Viper 2 Sentry
-	08/17/2016 12:00:00 - Viper 2 Sentry
-	08/16/2016 06:00:00 - UVSS
-	08/16/2016 15:00:00 - UVSS
-	08/15/2016 14:00:00 - Python Checker
-	08/16/2016 06:00:00 - Python Checker
-	08/16/2016 09:00:00 - Python Checker
-	08/16/2016 12:00:00 - Python Checker
-	08/16/2016 15:00:00 - Python Checker
-	08/17/2016 06:00:00 - Python Checker
-	08/17/2016 09:00:00 - Python Checker
-	08/17/2016 12:00:00 - Python Checker
-	08/15/2016 14:00:00 - Python Sentry
-	08/16/2016 06:00:00 - Python Sentry
-	08/16/2016 09:00:00 - Python Sentry
-	08/16/2016 12:00:00 - Python Sentry
-	08/16/2016 15:00:00 - Python Sentry
-	08/17/2016 06:00:00 - Python Sentry
+	8/15/2016 2:00:00 PM - Viper 2 Checker
+	8/15/2016 6:00:00 PM - Viper 2 Checker
+	8/15/2016 9:00:00 PM - Viper 2 Checker
+	8/16/2016 12:00:00 AM - Viper 2 Checker
+	8/16/2016 3:00:00 AM - Viper 2 Checker
+	8/16/2016 6:00:00 AM - Viper 2 Checker
+	8/16/2016 9:00:00 AM - Viper 2 Checker
+	8/16/2016 12:00:00 PM - Viper 2 Checker
+	8/16/2016 3:00:00 PM - Viper 2 Checker
+	8/16/2016 6:00:00 PM - Viper 2 Checker
+	8/16/2016 9:00:00 PM - Viper 2 Checker
+	8/17/2016 12:00:00 AM - Viper 2 Checker
+	8/17/2016 3:00:00 AM - Viper 2 Checker
+	8/17/2016 6:00:00 AM - Viper 2 Checker
+	8/17/2016 9:00:00 AM - Viper 2 Checker
+	8/17/2016 12:00:00 PM - Viper 2 Checker
+	8/15/2016 2:00:00 PM - Viper 2 Sentry
+	8/16/2016 6:00:00 AM - Viper 2 Sentry
+	8/16/2016 9:00:00 AM - Viper 2 Sentry
+	8/16/2016 12:00:00 PM - Viper 2 Sentry
+	8/16/2016 3:00:00 PM - Viper 2 Sentry
+	8/17/2016 12:00:00 PM - Viper 2 Sentry
+	8/16/2016 6:00:00 AM - UVSS
+	8/16/2016 3:00:00 PM - UVSS
+	8/15/2016 2:00:00 PM - Python Checker
+	8/16/2016 6:00:00 AM - Python Checker
+	8/16/2016 9:00:00 AM - Python Checker
+	8/16/2016 12:00:00 PM - Python Checker
+	8/16/2016 3:00:00 PM - Python Checker
+	8/17/2016 6:00:00 AM - Python Checker
+	8/17/2016 9:00:00 AM - Python Checker
+	8/17/2016 12:00:00 PM - Python Checker
+	8/15/2016 2:00:00 PM - Python Sentry
+	8/16/2016 6:00:00 AM - Python Sentry
+	8/16/2016 9:00:00 AM - Python Sentry
+	8/16/2016 12:00:00 PM - Python Sentry
+	8/16/2016 3:00:00 PM - Python Sentry
+	8/17/2016 6:00:00 AM - Python Sentry
 XZ 27
-	08/15/2016 14:00:00 - Viper 2 Checker
-	08/15/2016 18:00:00 - Viper 2 Checker
-	08/15/2016 21:00:00 - Viper 2 Checker
-	08/16/2016 00:00:00 - Viper 2 Checker
-	08/16/2016 03:00:00 - Viper 2 Checker
-	08/16/2016 06:00:00 - Viper 2 Checker
-	08/16/2016 09:00:00 - Viper 2 Checker
-	08/16/2016 12:00:00 - Viper 2 Checker
-	08/16/2016 15:00:00 - Viper 2 Checker
-	08/16/2016 18:00:00 - Viper 2 Checker
-	08/16/2016 21:00:00 - Viper 2 Checker
-	08/17/2016 00:00:00 - Viper 2 Checker
-	08/17/2016 03:00:00 - Viper 2 Checker
-	08/17/2016 06:00:00 - Viper 2 Checker
-	08/17/2016 09:00:00 - Viper 2 Checker
-	08/17/2016 12:00:00 - Viper 2 Checker
-	08/15/2016 14:00:00 - Viper 2 Sentry
-	08/16/2016 06:00:00 - Viper 2 Sentry
-	08/16/2016 09:00:00 - Viper 2 Sentry
-	08/16/2016 12:00:00 - Viper 2 Sentry
-	08/16/2016 15:00:00 - Viper 2 Sentry
-	08/17/2016 12:00:00 - Viper 2 Sentry
-	08/16/2016 06:00:00 - UVSS
-	08/16/2016 15:00:00 - UVSS
-	08/15/2016 14:00:00 - Python Checker
-	08/16/2016 06:00:00 - Python Checker
-	08/16/2016 09:00:00 - Python Checker
-	08/16/2016 12:00:00 - Python Checker
-	08/16/2016 15:00:00 - Python Checker
-	08/17/2016 06:00:00 - Python Checker
-	08/17/2016 09:00:00 - Python Checker
-	08/17/2016 12:00:00 - Python Checker
-	08/15/2016 14:00:00 - Python Sentry
-	08/16/2016 06:00:00 - Python Sentry
-	08/16/2016 09:00:00 - Python Sentry
-	08/16/2016 12:00:00 - Python Sentry
-	08/16/2016 15:00:00 - Python Sentry
-	08/17/2016 06:00:00 - Python Sentry
+	8/15/2016 2:00:00 PM - Viper 2 Checker
+	8/15/2016 6:00:00 PM - Viper 2 Checker
+	8/15/2016 9:00:00 PM - Viper 2 Checker
+	8/16/2016 12:00:00 AM - Viper 2 Checker
+	8/16/2016 3:00:00 AM - Viper 2 Checker
+	8/16/2016 6:00:00 AM - Viper 2 Checker
+	8/16/2016 9:00:00 AM - Viper 2 Checker
+	8/16/2016 12:00:00 PM - Viper 2 Checker
+	8/16/2016 3:00:00 PM - Viper 2 Checker
+	8/16/2016 6:00:00 PM - Viper 2 Checker
+	8/16/2016 9:00:00 PM - Viper 2 Checker
+	8/17/2016 12:00:00 AM - Viper 2 Checker
+	8/17/2016 3:00:00 AM - Viper 2 Checker
+	8/17/2016 6:00:00 AM - Viper 2 Checker
+	8/17/2016 9:00:00 AM - Viper 2 Checker
+	8/17/2016 12:00:00 PM - Viper 2 Checker
+	8/15/2016 2:00:00 PM - Viper 2 Sentry
+	8/16/2016 6:00:00 AM - Viper 2 Sentry
+	8/16/2016 9:00:00 AM - Viper 2 Sentry
+	8/16/2016 12:00:00 PM - Viper 2 Sentry
+	8/16/2016 3:00:00 PM - Viper 2 Sentry
+	8/17/2016 12:00:00 PM - Viper 2 Sentry
+	8/16/2016 6:00:00 AM - UVSS
+	8/16/2016 3:00:00 PM - UVSS
+	8/15/2016 2:00:00 PM - Python Checker
+	8/16/2016 6:00:00 AM - Python Checker
+	8/16/2016 9:00:00 AM - Python Checker
+	8/16/2016 12:00:00 PM - Python Checker
+	8/16/2016 3:00:00 PM - Python Checker
+	8/17/2016 6:00:00 AM - Python Checker
+	8/17/2016 9:00:00 AM - Python Checker
+	8/17/2016 12:00:00 PM - Python Checker
+	8/15/2016 2:00:00 PM - Python Sentry
+	8/16/2016 6:00:00 AM - Python Sentry
+	8/16/2016 9:00:00 AM - Python Sentry
+	8/16/2016 12:00:00 PM - Python Sentry
+	8/16/2016 3:00:00 PM - Python Sentry
+	8/17/2016 6:00:00 AM - Python Sentry
 Keith Fong
 Andrew
 Mervyn
-	08/15/2016 14:00:00 - Viper 2 Checker
-	08/15/2016 18:00:00 - Viper 2 Checker
-	08/15/2016 21:00:00 - Viper 2 Checker
-	08/16/2016 00:00:00 - Viper 2 Checker
-	08/16/2016 03:00:00 - Viper 2 Checker
-	08/16/2016 06:00:00 - Viper 2 Checker
-	08/16/2016 09:00:00 - Viper 2 Checker
-	08/16/2016 12:00:00 - Viper 2 Checker
-	08/16/2016 15:00:00 - Viper 2 Checker
-	08/16/2016 18:00:00 - Viper 2 Checker
-	08/16/2016 21:00:00 - Viper 2 Checker
-	08/17/2016 00:00:00 - Viper 2 Checker
-	08/17/2016 03:00:00 - Viper 2 Checker
-	08/17/2016 06:00:00 - Viper 2 Checker
-	08/17/2016 09:00:00 - Viper 2 Checker
-	08/17/2016 12:00:00 - Viper 2 Checker
-	08/15/2016 14:00:00 - Viper 2 Sentry
-	08/16/2016 06:00:00 - Viper 2 Sentry
-	08/16/2016 09:00:00 - Viper 2 Sentry
-	08/16/2016 12:00:00 - Viper 2 Sentry
-	08/16/2016 15:00:00 - Viper 2 Sentry
-	08/17/2016 12:00:00 - Viper 2 Sentry
-	08/16/2016 06:00:00 - UVSS
-	08/16/2016 15:00:00 - UVSS
-	08/15/2016 14:00:00 - Python Checker
-	08/16/2016 06:00:00 - Python Checker
-	08/16/2016 09:00:00 - Python Checker
-	08/16/2016 12:00:00 - Python Checker
-	08/16/2016 15:00:00 - Python Checker
-	08/17/2016 06:00:00 - Python Checker
-	08/17/2016 09:00:00 - Python Checker
-	08/17/2016 12:00:00 - Python Checker
-	08/15/2016 14:00:00 - Python Sentry
-	08/16/2016 06:00:00 - Python Sentry
-	08/16/2016 09:00:00 - Python Sentry
-	08/16/2016 12:00:00 - Python Sentry
-	08/16/2016 15:00:00 - Python Sentry
-	08/17/2016 06:00:00 - Python Sentry
+	8/15/2016 2:00:00 PM - Viper 2 Checker
+	8/15/2016 6:00:00 PM - Viper 2 Checker
+	8/15/2016 9:00:00 PM - Viper 2 Checker
+	8/16/2016 12:00:00 AM - Viper 2 Checker
+	8/16/2016 3:00:00 AM - Viper 2 Checker
+	8/16/2016 6:00:00 AM - Viper 2 Checker
+	8/16/2016 9:00:00 AM - Viper 2 Checker
+	8/16/2016 12:00:00 PM - Viper 2 Checker
+	8/16/2016 3:00:00 PM - Viper 2 Checker
+	8/16/2016 6:00:00 PM - Viper 2 Checker
+	8/16/2016 9:00:00 PM - Viper 2 Checker
+	8/17/2016 12:00:00 AM - Viper 2 Checker
+	8/17/2016 3:00:00 AM - Viper 2 Checker
+	8/17/2016 6:00:00 AM - Viper 2 Checker
+	8/17/2016 9:00:00 AM - Viper 2 Checker
+	8/17/2016 12:00:00 PM - Viper 2 Checker
+	8/15/2016 2:00:00 PM - Viper 2 Sentry
+	8/16/2016 6:00:00 AM - Viper 2 Sentry
+	8/16/2016 9:00:00 AM - Viper 2 Sentry
+	8/16/2016 12:00:00 PM - Viper 2 Sentry
+	8/16/2016 3:00:00 PM - Viper 2 Sentry
+	8/17/2016 12:00:00 PM - Viper 2 Sentry
+	8/16/2016 6:00:00 AM - UVSS
+	8/16/2016 3:00:00 PM - UVSS
+	8/15/2016 2:00:00 PM - Python Checker
+	8/16/2016 6:00:00 AM - Python Checker
+	8/16/2016 9:00:00 AM - Python Checker
+	8/16/2016 12:00:00 PM - Python Checker
+	8/16/2016 3:00:00 PM - Python Checker
+	8/17/2016 6:00:00 AM - Python Checker
+	8/17/2016 9:00:00 AM - Python Checker
+	8/17/2016 12:00:00 PM - Python Checker
+	8/15/2016 2:00:00 PM - Python Sentry
+	8/16/2016 6:00:00 AM - Python Sentry
+	8/16/2016 9:00:00 AM - Python Sentry
+	8/16/2016 12:00:00 PM - Python Sentry
+	8/16/2016 3:00:00 PM - Python Sentry
+	8/17/2016 6:00:00 AM - Python Sentry
 Brian
 Jun Xiang
-	08/15/2016 14:00:00 - Viper 2 Checker
-	08/15/2016 18:00:00 - Viper 2 Checker
-	08/15/2016 21:00:00 - Viper 2 Checker
-	08/16/2016 00:00:00 - Viper 2 Checker
-	08/16/2016 03:00:00 - Viper 2 Checker
-	08/16/2016 06:00:00 - Viper 2 Checker
-	08/16/2016 09:00:00 - Viper 2 Checker
-	08/16/2016 12:00:00 - Viper 2 Checker
-	08/16/2016 15:00:00 - Viper 2 Checker
-	08/16/2016 18:00:00 - Viper 2 Checker
-	08/16/2016 21:00:00 - Viper 2 Checker
-	08/17/2016 00:00:00 - Viper 2 Checker
-	08/17/2016 03:00:00 - Viper 2 Checker
-	08/17/2016 06:00:00 - Viper 2 Checker
-	08/17/2016 09:00:00 - Viper 2 Checker
-	08/17/2016 12:00:00 - Viper 2 Checker
-	08/15/2016 14:00:00 - Viper 2 Sentry
-	08/16/2016 06:00:00 - Viper 2 Sentry
-	08/16/2016 09:00:00 - Viper 2 Sentry
-	08/16/2016 12:00:00 - Viper 2 Sentry
-	08/16/2016 15:00:00 - Viper 2 Sentry
-	08/17/2016 12:00:00 - Viper 2 Sentry
-	08/16/2016 06:00:00 - UVSS
-	08/16/2016 15:00:00 - UVSS
-	08/15/2016 14:00:00 - Python Checker
-	08/16/2016 06:00:00 - Python Checker
-	08/16/2016 09:00:00 - Python Checker
-	08/16/2016 12:00:00 - Python Checker
-	08/16/2016 15:00:00 - Python Checker
-	08/17/2016 06:00:00 - Python Checker
-	08/17/2016 09:00:00 - Python Checker
-	08/17/2016 12:00:00 - Python Checker
-	08/15/2016 14:00:00 - Python Sentry
-	08/16/2016 06:00:00 - Python Sentry
-	08/16/2016 09:00:00 - Python Sentry
-	08/16/2016 12:00:00 - Python Sentry
-	08/16/2016 15:00:00 - Python Sentry
-	08/17/2016 06:00:00 - Python Sentry
+	8/15/2016 2:00:00 PM - Viper 2 Checker
+	8/15/2016 6:00:00 PM - Viper 2 Checker
+	8/15/2016 9:00:00 PM - Viper 2 Checker
+	8/16/2016 12:00:00 AM - Viper 2 Checker
+	8/16/2016 3:00:00 AM - Viper 2 Checker
+	8/16/2016 6:00:00 AM - Viper 2 Checker
+	8/16/2016 9:00:00 AM - Viper 2 Checker
+	8/16/2016 12:00:00 PM - Viper 2 Checker
+	8/16/2016 3:00:00 PM - Viper 2 Checker
+	8/16/2016 6:00:00 PM - Viper 2 Checker
+	8/16/2016 9:00:00 PM - Viper 2 Checker
+	8/17/2016 12:00:00 AM - Viper 2 Checker
+	8/17/2016 3:00:00 AM - Viper 2 Checker
+	8/17/2016 6:00:00 AM - Viper 2 Checker
+	8/17/2016 9:00:00 AM - Viper 2 Checker
+	8/17/2016 12:00:00 PM - Viper 2 Checker
+	8/15/2016 2:00:00 PM - Viper 2 Sentry
+	8/16/2016 6:00:00 AM - Viper 2 Sentry
+	8/16/2016 9:00:00 AM - Viper 2 Sentry
+	8/16/2016 12:00:00 PM - Viper 2 Sentry
+	8/16/2016 3:00:00 PM - Viper 2 Sentry
+	8/17/2016 12:00:00 PM - Viper 2 Sentry
+	8/16/2016 6:00:00 AM - UVSS
+	8/16/2016 3:00:00 PM - UVSS
+	8/15/2016 2:00:00 PM - Python Checker
+	8/16/2016 6:00:00 AM - Python Checker
+	8/16/2016 9:00:00 AM - Python Checker
+	8/16/2016 12:00:00 PM - Python Checker
+	8/16/2016 3:00:00 PM - Python Checker
+	8/17/2016 6:00:00 AM - Python Checker
+	8/17/2016 9:00:00 AM - Python Checker
+	8/17/2016 12:00:00 PM - Python Checker
+	8/15/2016 2:00:00 PM - Python Sentry
+	8/16/2016 6:00:00 AM - Python Sentry
+	8/16/2016 9:00:00 AM - Python Sentry
+	8/16/2016 12:00:00 PM - Python Sentry
+	8/16/2016 3:00:00 PM - Python Sentry
+	8/17/2016 6:00:00 AM - Python Sentry
 Ming Han
 Louis Ace

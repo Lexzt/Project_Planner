@@ -24,150 +24,30 @@
           ]
         },
         {
-          "Name": "Clement",
-          "IC": "s9123919c",
+          "Name": "xz15",
+          "IC": "s",
           "DOB": "01/01/0001 00:00:00",
           "Roles": [
-            "Checker"
-          ]
-        }
-      ]
-    },
-    {
-      "DoEasy": "true",
-      "BatchName": "XZ2",
-      "ORD Month And Year": "01/01/0001 00:00:00",
-      "Personnels": [
-        {
-          "Name": "Cheong",
-          "IC": "S1234567C",
-          "DOB": "01/01/0001 00:00:00",
-          "Roles": [
-            "Driver"
+            "Checker",
+            "Sentry"
           ]
         },
         {
-          "Name": "Teng Feng",
-          "IC": "S1234567D",
+          "Name": "xz15",
+          "IC": "s",
           "DOB": "01/01/0001 00:00:00",
           "Roles": [
-            "Armorer"
+            "Checker",
+            "Sentry"
           ]
         },
         {
-          "Name": "CH",
-          "IC": "S1234567D",
+          "Name": "xz15",
+          "IC": "s",
           "DOB": "01/01/0001 00:00:00",
           "Roles": [
-            "Giro"
-          ]
-        },
-        {
-          "Name": "XZ 24",
-          "IC": "S1234567D",
-          "DOB": "01/01/0001 00:00:00",
-          "Roles": [
-            "Sentry",
-            "Checker"
-          ]
-        },
-        {
-          "Name": "XZ 25",
-          "IC": "S1234567D",
-          "DOB": "01/01/0001 00:00:00",
-          "Roles": [
-            "Sentry",
-            "Checker"
-          ]
-        },
-        {
-          "Name": "XZ 26",
-          "IC": "S1234567D",
-          "DOB": "01/01/0001 00:00:00",
-          "Roles": [
-            "Sentry",
-            "Checker"
-          ]
-        },
-        {
-          "Name": "XZ 27",
-          "IC": "S1234567D",
-          "DOB": "01/01/0001 00:00:00",
-          "Roles": [
-            "Sentry",
-            "Checker"
-          ]
-        }
-      ]
-    },
-    {
-      "DoEasy": "true",
-      "BatchName": "Team Brian",
-      "ORD Month And Year": "01/01/0001 00:00:00",
-      "Personnels": [
-        {
-          "Name": "Keith Fong",
-          "IC": "S9434749A",
-          "DOB": "01/01/0001 00:00:00",
-          "Roles": [
-            "Console"
-          ]
-        },
-        {
-          "Name": "Andrew",
-          "IC": "S9434749A",
-          "DOB": "01/01/0001 00:00:00",
-          "Roles": [
-            "Driver"
-          ]
-        },
-        {
-          "Name": "Mervyn",
-          "IC": "S9434749A",
-          "DOB": "01/01/0001 00:00:00",
-          "Roles": [
-            "Sentry",
-            "Checker"
-          ]
-        },
-        {
-          "Name": "Brian",
-          "IC": "S9434749A",
-          "DOB": "01/01/0001 00:00:00",
-          "Roles": [
-            "Console"
-          ]
-        },
-        {
-          "Name": "Jun Xiang",
-          "IC": "S1234567B",
-          "DOB": "01/01/0001 00:00:00",
-          "Roles": [
-            "Sentry",
-            "Checker"
-          ]
-        }
-      ]
-    },
-    {
-      "DoEasy": "true",
-      "BatchName": "MinghanLouis",
-      "ORD Month And Year": "01/01/0001 00:00:00",
-      "Personnels": [
-        {
-          "Name": "Ming Han",
-          "IC": "S1234567C",
-          "DOB": "01/01/0001 00:00:00",
-          "Roles": [
-            "Driver"
-          ]
-        },
-        {
-          "Name": "Louis Ace",
-          "IC": "S1234567D",
-          "DOB": "01/01/0001 00:00:00",
-          "Roles": [
-            "Console"
+            "Checker",
+            "Sentry"
           ]
         }
       ]
@@ -194,10 +74,6 @@
       "RemoveStick": [
         {
           "RemoveStart": "2016, 8, 15, 14, 00, 00",
-          "RemoveEnd": "2016, 8, 16, 6, 00, 00"
-        },
-        {
-          "RemoveStart": "2016, 8, 16, 9, 00, 00",
           "RemoveEnd": "2016, 8, 17, 14, 00, 00"
         }
       ]
@@ -209,11 +85,7 @@
       "Easy": "true",
       "RemoveStick": [
         {
-          "RemoveStart": "2016, 8, 15, 18, 00, 00",
-          "RemoveEnd": "2016, 8, 16, 6, 00, 00"
-        },
-        {
-          "RemoveStart": "2016, 8, 16, 18, 00, 00",
+          "RemoveStart": "2016, 8, 15, 14, 00, 00",
           "RemoveEnd": "2016, 8, 17, 14, 00, 00"
         }
       ]
@@ -225,11 +97,7 @@
       "Easy": "true",
       "RemoveStick": [
         {
-          "RemoveStart": "2016, 8, 15, 18, 00, 00",
-          "RemoveEnd": "2016, 8, 16, 6, 00, 00"
-        },
-        {
-          "RemoveStart": "2016, 8, 16, 18, 00, 00",
+          "RemoveStart": "2016, 8, 15, 14, 00, 00",
           "RemoveEnd": "2016, 8, 17, 14, 00, 00"
         }
       ]
@@ -241,7 +109,7 @@
       "Easy": "false",
       "RemoveStick": [
         {
-          "RemoveStart": "2016, 8, 15, 18, 00, 00",
+          "RemoveStart": "2016, 8, 16, 9, 00, 00",
           "RemoveEnd": "2016, 8, 17, 14, 00, 00"
         }
       ]
@@ -253,7 +121,7 @@
       "Easy": "false",
       "RemoveStick": [
         {
-          "RemoveStart": "2016, 8, 16, 18, 00, 00",
+          "RemoveStart": "2016, 8, 16, 9, 00, 00",
           "RemoveEnd": "2016, 8, 17, 14, 00, 00"
         }
       ]
@@ -266,10 +134,6 @@
       "RemoveStick": [
         {
           "RemoveStart": "2016, 8, 15, 14, 00, 00",
-          "RemoveEnd": "2016, 8, 16, 6, 00, 00"
-        },
-        {
-          "RemoveStart": "2016, 8, 16, 9, 00, 00",
           "RemoveEnd": "2016, 8, 17, 14, 00, 00"
         }
       ]

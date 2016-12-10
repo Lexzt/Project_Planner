@@ -323,6 +323,7 @@ public class CombinationAssign : MonoBehaviour
 						Combinations.Add(new Combi(Sticks));
 						c.Unassign(s);
 						s.SetUnassigned();
+						throw new UnityException ("First combination Generated!");
 						continue;
 					}
 

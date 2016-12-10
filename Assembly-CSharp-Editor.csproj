@@ -45,7 +45,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\VSCode\Plugins\Editor\VSCode.cs" />
      <Compile Include="Assets\unity-ui-extensions\Scripts\Accordion\Editor\AccordionElementEditor.cs" />
      <Compile Include="Assets\unity-ui-extensions\Scripts\Editor\CanvasGroupActivator.cs" />
      <Compile Include="Assets\unity-ui-extensions\Scripts\Editor\CompressionTests.cs" />

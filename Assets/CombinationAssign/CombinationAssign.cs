@@ -148,10 +148,11 @@ public class CombinationAssign : MonoBehaviour
                     emp.Reset();
                 }
 
-                //				foreach (TempStick s in Combinations[Random.Range(0,Combinations.Count-1)].Combination) 
-                //				{
-                //					s.StickData.AssignPerson (s.PersonData);
-                //				}
+				foreach (TempStick s in Combinations[0].Combination) 
+				{
+					s.StickData.AssignPerson (s.PersonData);
+				}
+				return;
                 string order = "";
                 int index = 0;
                 foreach (Combi comb in Combinations)
@@ -367,6 +368,10 @@ public class CombinationAssign : MonoBehaviour
             {
                 contiguousSticks.Add(assignedStick);
             }
+			else if(SingleIsRested(assignedStick, s))
+			{
+				return false;
+			}
         }
 		if (contiguousSticks.Count < 2)
         {
@@ -405,4 +410,39 @@ public class CombinationAssign : MonoBehaviour
 		}
 		return false;
     }
+
+	public bool SingleIsRested (TempStick s1, TempStick s2)
+	{
+		int HoursDiff = 0;
+		int FirstStartDiff = (int)(s1.StickData.TimeStart - s2.StickData.TimeStart).TotalHours;
+		// The new stick starts AFTER the old stick starts.
+		//Debug.Log ("0: " + StickStartTiming.ToString() + " - " + lastStick.TimeEnd.ToString());
+		if (FirstStartDiff > 0) 
+		{
+			// The new stick is starting after the old stick starts. 
+			int EndDiff = (int)(s1.StickData.TimeStart - s2.StickData.TimeEnd).TotalHours;
+			//Debug.Log ("1: " + EndDiff + " - " + StickStartTiming.ToString() + " - " + lastStick.TimeEnd.ToString());
+			if (EndDiff > 0) 
+			{
+				// This means the old stick, ends before your new stick starts. 
+				HoursDiff = Mathf.Abs(EndDiff);
+			}
+		}
+		else if(FirstStartDiff < 0)
+		{
+			int EndDiff = (int)(s1.StickData.TimeEnd - s2.StickData.TimeStart).TotalHours;
+			//Debug.Log ("2: " + EndDiff + " - " + StickStartTiming.ToString() + lastStick.TimeEnd.ToString());
+			if (EndDiff < 0) 
+			{
+				// This means my new sticks, ends before my old stick starts.
+				HoursDiff = Mathf.Abs(EndDiff);
+			}
+		}
+		if (HoursDiff < StaticVars.RestAfterSticks * StaticVars.StickInHours) 
+		{
+			return false;
+		}
+		HoursDiff = 0;
+		return true;
+	}
 }

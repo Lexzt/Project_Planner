@@ -52,6 +52,7 @@
      <None Include="Assets\debug2.txt" />
      <None Include="Assets\unity-ui-extensions\Shaders\UISoftAdditive.shader" />
      <None Include="Assets\JsonData.txt" />
+     <None Include="Assets\debug3.txt" />
      <None Include="Assets\unity-ui-extensions\Shaders\UIParticleHidden.shader" />
      <None Include="Assets\unity-ui-extensions\Shaders\SoftMaskShader.shader" />
      <None Include="Assets\unity-ui-extensions\Scripts\Utilities\Serialization\Surrogates\SurrogatesReadMe.txt" />

@@ -92,6 +92,8 @@ public class CombinationAssign : MonoBehaviour
     bool stop = true;
     Job myJob;
 
+	StringBuilder debuglog = new StringBuilder();
+
     void Start()
     {
         ProgressStepSize = (int)Mathf.Pow(2, 31);
@@ -317,6 +319,7 @@ public class CombinationAssign : MonoBehaviour
 
 					if (AllAssigned())
 					{
+						System.IO.File.WriteAllText(Application.dataPath + "/" + "debug3.txt", debuglog.ToString());
 						Combinations.Add(new Combi(Sticks));
 						c.Unassign(s);
 						s.SetUnassigned();
@@ -368,9 +371,9 @@ public class CombinationAssign : MonoBehaviour
             {
                 contiguousSticks.Add(assignedStick);
             }
-			else if(SingleIsRested(assignedStick, s))
+			else if(!SingleIsRested(assignedStick, s))
 			{
-				return false;
+				//return false;
 			}
         }
 		if (contiguousSticks.Count < 2)
@@ -440,6 +443,9 @@ public class CombinationAssign : MonoBehaviour
 		}
 		if (HoursDiff < StaticVars.RestAfterSticks * StaticVars.StickInHours) 
 		{
+			debuglog.AppendLine ("(" + s1.StickData.Parent.NameOfEmplacement + ")(" + s2.StickData.Parent.NameOfEmplacement + ") HoursDiff: " + HoursDiff + " | "); 
+			debuglog.AppendLine ("s1: " + s1.StickData.TimeStart + " - " + s1.StickData.TimeEnd + " | ");
+			debuglog.AppendLine ("s2: " + s2.StickData.TimeStart + " - " + s2.StickData.TimeEnd + " | ");
 			return false;
 		}
 		HoursDiff = 0;

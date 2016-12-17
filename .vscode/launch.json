@@ -3,10 +3,8 @@
 	"configurations":[ 
 		{
 			"name":"Unity",
-			"type":"mono",
-			"request":"attach",
-			"address":"localhost",
-			"port":12568
+			"type":"unity",
+			"request":"launch"
 		}
 	]
 }

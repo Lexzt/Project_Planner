@@ -85,14 +85,9 @@ public class Person : MonoBehaviour {
 
 	public bool IsRested (DateTime StickStartTiming, DateTime StickEndTiming)
 	{
-//		if ((StickStartTiming - lastStickEndTiming).Hours >= (StaticVars.RestAfterSticks * StaticVars.StickInHours) || 
-//			(StickStartTiming - lastStickEndTiming).Days > 0) 
-//		{
 		foreach (Stick lastStick in ListOfSticks) 
 		{
 			int HoursDiff = 0;
-
-			// 
 			int FirstStartDiff = (int)(StickStartTiming - lastStick.TimeStart).TotalHours;
 			// The new stick starts AFTER the old stick starts.
 			//Debug.Log ("0: " + StickStartTiming.ToString() + " - " + lastStick.TimeEnd.ToString());
@@ -105,7 +100,6 @@ public class Person : MonoBehaviour {
 				{
 					// This means the old stick, ends before your new stick starts. 
 					HoursDiff = Mathf.Abs(EndDiff);
-					//if(HoursDiff
 				}
 			}
 			else if(FirstStartDiff < 0)
@@ -126,8 +120,6 @@ public class Person : MonoBehaviour {
 			HoursDiff = 0;
 		}
 		return true;
-		//}
-		//return false;
 	}
 
 	public bool IsRestedExcludingSticks (DateTime StickStartTiming, DateTime StickEndTiming, params Stick[] ExcludeSticks)

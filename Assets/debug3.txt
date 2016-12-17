@@ -1,42 +1,42 @@
-(Viper 2 Checker)(Viper 2 Checker) HoursDiff: 3 | 
+(Viper 2 Sentry)(Viper 2 Sentry) HoursDiff: 3 | 
 s1: 08/15/2016 14:00:00 - 08/15/2016 18:00:00 | 
 s2: 08/15/2016 21:00:00 - 08/16/2016 00:00:00 | 
-(Viper 2 Checker)(Viper 2 Checker) HoursDiff: 3 | 
+(Viper 2 Sentry)(Viper 2 Sentry) HoursDiff: 3 | 
 s1: 08/15/2016 18:00:00 - 08/15/2016 21:00:00 | 
 s2: 08/16/2016 00:00:00 - 08/16/2016 03:00:00 | 
-(Viper 2 Checker)(Viper 2 Sentry) HoursDiff: 3 | 
+(Viper 2 Sentry)(Viper 2 Checker) HoursDiff: 3 | 
 s1: 08/15/2016 21:00:00 - 08/16/2016 00:00:00 | 
 s2: 08/15/2016 14:00:00 - 08/15/2016 18:00:00 | 
-(Viper 2 Checker)(Viper 2 Sentry) HoursDiff: 0 | 
+(Viper 2 Sentry)(Viper 2 Checker) HoursDiff: 0 | 
 s1: 08/15/2016 21:00:00 - 08/16/2016 00:00:00 | 
 s2: 08/15/2016 18:00:00 - 08/15/2016 21:00:00 | 
-(Viper 2 Checker)(Viper 2 Sentry) HoursDiff: 3 | 
+(Viper 2 Sentry)(Viper 2 Checker) HoursDiff: 3 | 
 s1: 08/16/2016 00:00:00 - 08/16/2016 03:00:00 | 
 s2: 08/15/2016 18:00:00 - 08/15/2016 21:00:00 | 
-(Viper 2 Checker)(Viper 2 Sentry) HoursDiff: 0 | 
+(Viper 2 Sentry)(Viper 2 Checker) HoursDiff: 0 | 
 s1: 08/15/2016 21:00:00 - 08/16/2016 00:00:00 | 
 s2: 08/15/2016 21:00:00 - 08/16/2016 00:00:00 | 
-(Viper 2 Checker)(Viper 2 Sentry) HoursDiff: 0 | 
+(Viper 2 Sentry)(Viper 2 Checker) HoursDiff: 0 | 
 s1: 08/16/2016 00:00:00 - 08/16/2016 03:00:00 | 
 s2: 08/15/2016 21:00:00 - 08/16/2016 00:00:00 | 
-(Viper 2 Sentry)(Viper 2 Sentry) HoursDiff: 3 | 
+(Viper 2 Checker)(Viper 2 Checker) HoursDiff: 3 | 
 s1: 08/15/2016 14:00:00 - 08/15/2016 18:00:00 | 
 s2: 08/15/2016 21:00:00 - 08/16/2016 00:00:00 | 
-(Viper 2 Checker)(Viper 2 Sentry) HoursDiff: 0 | 
+(Viper 2 Sentry)(Viper 2 Checker) HoursDiff: 0 | 
 s1: 08/15/2016 21:00:00 - 08/16/2016 00:00:00 | 
 s2: 08/16/2016 00:00:00 - 08/16/2016 03:00:00 | 
-(Viper 2 Checker)(Viper 2 Sentry) HoursDiff: 0 | 
+(Viper 2 Sentry)(Viper 2 Checker) HoursDiff: 0 | 
 s1: 08/16/2016 00:00:00 - 08/16/2016 03:00:00 | 
 s2: 08/16/2016 00:00:00 - 08/16/2016 03:00:00 | 
-(Viper 2 Sentry)(Viper 2 Sentry) HoursDiff: 3 | 
+(Viper 2 Checker)(Viper 2 Checker) HoursDiff: 3 | 
 s1: 08/15/2016 18:00:00 - 08/15/2016 21:00:00 | 
 s2: 08/16/2016 00:00:00 - 08/16/2016 03:00:00 | 
-(Viper 2 Checker)(Viper 2 Sentry) HoursDiff: 3 | 
+(Viper 2 Sentry)(Viper 2 Checker) HoursDiff: 3 | 
 s1: 08/15/2016 21:00:00 - 08/16/2016 00:00:00 | 
 s2: 08/16/2016 03:00:00 - 08/16/2016 06:00:00 | 
-(Viper 2 Checker)(Viper 2 Sentry) HoursDiff: 0 | 
+(Viper 2 Sentry)(Viper 2 Checker) HoursDiff: 0 | 
 s1: 08/16/2016 00:00:00 - 08/16/2016 03:00:00 | 
 s2: 08/16/2016 03:00:00 - 08/16/2016 06:00:00 | 
-(Viper 2 Checker)(Viper 2 Sentry) HoursDiff: 3 | 
+(Viper 2 Sentry)(Viper 2 Checker) HoursDiff: 3 | 
 s1: 08/16/2016 00:00:00 - 08/16/2016 03:00:00 | 
 s2: 08/16/2016 06:00:00 - 08/16/2016 09:00:00 | 

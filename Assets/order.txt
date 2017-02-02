@@ -1,1 +1,1 @@
-No Of Combinations: 0
+No Of Combinations: 70560

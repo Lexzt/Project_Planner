@@ -16,3 +16,9 @@
 /Users/mac/Project_Planner/Temp/bin/Debug/Unity.CecilTools.dll
 /Users/mac/Project_Planner/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/mac/Project_Planner/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/mac/Project_Planner/Temp/bin/Debug/UnityEngine.Advertisements.dll
+/Users/mac/Project_Planner/Temp/bin/Debug/UnityEngine.PlaymodeTestsRunner.dll
+/Users/mac/Project_Planner/Temp/bin/Debug/UnityEngine.Analytics.dll
+/Users/mac/Project_Planner/Temp/bin/Debug/UnityEngine.HoloLens.dll
+/Users/mac/Project_Planner/Temp/bin/Debug/UnityEngine.Purchasing.dll
+/Users/mac/Project_Planner/Temp/bin/Debug/UnityEngine.VR.dll

@@ -11,6 +11,7 @@ public class Person : MonoBehaviour {
 	public DateTime DOB;
 	public Texture2D Photo;
 	public int NoOfSticks = 0;
+	public Color color;
 	public int OriginNoOfSticks = 0;
 	public Batch Parent;
 	public List<Roles> ListOfRoles = new List<Roles>();
@@ -20,6 +21,11 @@ public class Person : MonoBehaviour {
 
 	public Person (string tName, string tIC, DateTime tDOB, JSONNode tRoles)
 	{
+		int id = GetInstanceID ();
+		color.b = 0xFF & id;
+		color.g = 0xFF & id>>8;
+		color.r = 0xFF & id>>16;
+
 		Name = tName;
 		IC = tIC;
 		DOB = tDOB;
@@ -34,6 +40,11 @@ public class Person : MonoBehaviour {
 
 	public void Set (string tName, string tIC, DateTime tDOB, JSONNode tRoles)
 	{
+		int id = GetInstanceID ();
+		color.b = 0xFF & id;
+		color.g = 0xFF & id>>8;
+		color.r = 0xFF & id>>16;
+
 		Name = tName;
 		IC = tIC;
 		DOB = tDOB;
@@ -215,7 +226,16 @@ public class Person : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		UnityEngine.Random.State prevState = UnityEngine.Random.state;
+		UnityEngine.Random.InitState(GetInstanceID ());
+		int id = UnityEngine.Random.Range (0, 0xFFFFFF);
+		UnityEngine.Random.state = prevState;
+		//Debug.Log (id);
+
+		color.a = 1.0f;
+		color.b = (0xF0 & id)/255.0f;
+		color.g = (0xF0 & id>>8)/255.0f;
+		color.r = (0xF0 & id>>16)/255.0f;
 	}
 	
 	// Update is called once per frame

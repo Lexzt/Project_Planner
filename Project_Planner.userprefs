@@ -1,11 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\CombinationAssign\CombinationAssign.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/CombinationAssign/CombinationAssign.cs">
     <Files>
-      <File FileName="Assets\Basic\StaticVars.cs" Line="13" Column="44" />
-      <File FileName="Assets\ChangiAirBaseEast.cs" Line="1" Column="1" />
-      <File FileName="Assets\JsonData.txt" Line="1" Column="1" />
-      <File FileName="Assets\CombinationAssign\CombinationAssign.cs" Line="85" Column="19" />
+      <File FileName="Assets/CombinationAssign/CombinationAssign.cs" Line="256" Column="57" />
+      <File FileName="Assets/JsonData.txt" Line="302" Column="2" />
+      <File FileName="Assets/Basic/StaticVars.cs" Line="13" Column="44" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Combi
 {
+	public List<int> combiIndex = null;
 	public List<TempStick> Combination = new List<TempStick> ();
 	//	public List<TempPerson> Combination = new List<TempPerson>();
 	public Dictionary<Person,List<TempStick>> starters = new Dictionary<Person, List<TempStick>>();
@@ -50,8 +51,10 @@ public class Combi
 			}
 		}
 	}
-	public Combi(List<TempStick> Combinations)
+	public Combi(List<TempStick> Combinations, int index = -1)
 	{
+		combiIndex = new List<int> ();
+		combiIndex.Add(index);
 		if (Combinations != null) {
 			foreach (TempStick s in Combinations) {
 				if (s.IsAssigned ()) {
@@ -98,7 +101,8 @@ public class Combi
 		return true;
 	}
 	//Warning, this will store references.
-	public Combi AddToCombi(Combi c2){
+	public Combi AddToCombi(Combi c2, int index =-1){
+		combiIndex.Insert (0, index);
 		Combi c1 = this;
 		smallestOrder = Math.Min (c1.smallestOrder, c2.smallestOrder);
 		largestOrder = Math.Max (c1.largestOrder, c2.largestOrder);
@@ -139,6 +143,27 @@ public class Combi
 		GenerateEnders ();
 		GenerateStarters ();
 	}
+
+	public static void ReadCombiPath(string combiPath, List<int> oCombiPath){
+		int firstVal = 0;
+		int lastVal = combiPath.IndexOf (' ',firstVal);
+		string sCount = combiPath.Substring (firstVal, lastVal);
+		firstVal = lastVal;
+		int count = int.Parse (sCount);
+		int i = 0;
+		while( (lastVal = combiPath.IndexOf(' ', firstVal)) > firstVal && i++ <= count){
+			oCombiPath.Add(int.Parse (combiPath.Substring (firstVal, lastVal)));
+			firstVal = lastVal;
+		}
+	}
+	public string CombiPath(){
+		string combiStr = combiIndex.Count.ToString()+' ';
+		foreach (int i in combiIndex) {
+			combiStr += i.ToString() + ' ';
+		}
+		return combiStr;
+	}
+
 }
 
 [System.Serializable]
@@ -258,6 +283,7 @@ public class CombinationAssign : MonoBehaviour
 		return -1;
 	}
 	public int startOrder = 0, endOrder = 2, sampleSize = 3;
+	public string CurrCombiPath = "";
 	List<List<Combi>> CombinationSteps = new List<List<Combi>>();
 	void Update()
 	{
@@ -283,17 +309,17 @@ public class CombinationAssign : MonoBehaviour
 				eOrder = startOrder + (combIndex+1) * sampleSize;
 				PrepareAACR(tp,Sticks, sOrder,eOrder);
 				Combinations = CombinationSteps[combIndex];
-//				StringBuilder sb = new StringBuilder();
-//				foreach (TempPerson p in tp)
-//				{
-//					sb.Append(p.PersonData.Name + "\n");
-//					foreach (TempStick s in p.ListOfPossibleSticks)
-//					{
-//						sb.Append("\t" + s.StickData.TimeStart + " - " + s.StickData.Parent.NameOfEmplacement + "\n");
-//					}
-//				}
-//				System.IO.File.WriteAllText(Application.dataPath + "/" + "debug1.txt", sb.ToString());
-//				sb = new StringBuilder(); 
+				//				StringBuilder sb = new StringBuilder();
+				//				foreach (TempPerson p in tp)
+				//				{
+				//					sb.Append(p.PersonData.Name + "\n");
+				//					foreach (TempStick s in p.ListOfPossibleSticks)
+				//					{
+				//						sb.Append("\t" + s.StickData.TimeStart + " - " + s.StickData.Parent.NameOfEmplacement + "\n");
+				//					}
+				//				}
+				//				System.IO.File.WriteAllText(Application.dataPath + "/" + "debug1.txt", sb.ToString());
+				//				sb = new StringBuilder(); 
 				//AssignAndCheckR(tp,sb,0, 0,3);
 
 				AssignAndCheckR(tp, OrderIndex(sOrder), sOrder,eOrder);
@@ -306,13 +332,19 @@ public class CombinationAssign : MonoBehaviour
 
 			stop = true;
 		}
+		if (Input.GetKeyDown (KeyCode.C)) {
+			Combi.ReadCombiPath (CurrCombiPath,fullCombiPath);
+		}
 		if (Input.GetKeyDown(KeyCode.T))
 		{
 			if (Combinations != null) {
 				//StringBuilder sb = new StringBuilder ();
 				//sb.Append ("No Of Combinations: " + Combinations.Count + "\n");
 				Debug.Log (Combinations.Count);
+				IncrementCombiPath (fullCombiPath, CombinationSteps);
 				Combi showCombi = GetFullCombi (Persons, CombinationSteps);//Combinations[0];
+				fullCombiPath = showCombi.combiIndex;
+				CurrCombiPath = showCombi.CombiPath();
 				foreach (Emplacement emp in GetComponent<Base>().Emplacements)
 				{
 					emp.Reset();
@@ -397,8 +429,8 @@ public class CombinationAssign : MonoBehaviour
 					//Connected to the previous stick.
 					if (++span > StaticVars.MaxNoOfDutyInARow)
 						return false;//Too many sticks connected
-					prevOrder = ts.order;
 				}
+				prevOrder = ts.order;
 				/*
 				if ( ((ts.order - prevOrder) <= StaticVars.RestAfterSticks)) {
 					Debug.Log ("IDK WHY MAN");
@@ -408,21 +440,42 @@ public class CombinationAssign : MonoBehaviour
 		}
 		return true;
 	}
+	void IncrementCombiPath(List<int> FullCombiPath,List<List<Combi>> combinationSteps,int combiStepIndex = -2, int incr=1){
+		if (combiStepIndex == -2) {
+			combiStepIndex = combinationSteps.Count-1;
+		}
+
+		if(combiStepIndex <0 || FullCombiPath ==null)
+			return;
+		int num = FullCombiPath [combiStepIndex] + incr;
+		int maxCombiStep = combinationSteps [combiStepIndex].Count ;
+		if (maxCombiStep >= num) {
+			FullCombiPath[combiStepIndex] = num % maxCombiStep  ;
+			IncrementCombiPath(FullCombiPath,combinationSteps,combiStepIndex -1,num/maxCombiStep);
+		}
+	}
+	List<int> fullCombiPath;
 	//To generate the final combi.
 	public Combi GetFullCombi(List<TempPerson> persons, List<List<Combi>> combiSteps, Combi prev = null, int index =0){
 		List<Combi> combis = combiSteps [index];
+
 		//if(prev != null)
 		//	UpdateListFromCombi (prev, persons);
-		foreach (Combi c in combis) {
+		int i=0;
+		if (fullCombiPath != null && index < fullCombiPath.Count)
+			i = fullCombiPath [index];
+		for (; i< combis.Count;++i) {
+			Combi c = combis [i];
 			UpdateListFromCombi (c, persons);
 			if ( (prev == null || prev.CanConnect(c)) &&  
 				ValidatePersons (persons)) {
 				if (index + 1 < combiSteps.Count) {
 					Combi ret = GetFullCombi (persons, combiSteps,c, index + 1);
-					if (ret != null)
-						return ret.AddToCombi(c);
+					if (ret != null) {
+						return ret.AddToCombi (c,combis.IndexOf(c));
+					}
 				} else {
-					return new Combi (c.Combination);
+					return new Combi (c.Combination, combis.IndexOf (c));
 				}
 			}
 
@@ -430,6 +483,8 @@ public class CombinationAssign : MonoBehaviour
 			//if(prev != null)
 			//RevertListFromCombi (prev, persons);
 		}
+		if(fullCombiPath != null)
+			fullCombiPath [index] = 0;
 		return null;
 	}
 	//public List<TempStick> possibleSticks = new List<TempStick>(), allPossibleSticks = new List<TempStick>();

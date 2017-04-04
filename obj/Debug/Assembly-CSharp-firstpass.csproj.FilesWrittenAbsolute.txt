@@ -22,3 +22,5 @@
 /Users/mac/Project_Planner/Temp/bin/Debug/UnityEngine.HoloLens.dll
 /Users/mac/Project_Planner/Temp/bin/Debug/UnityEngine.Purchasing.dll
 /Users/mac/Project_Planner/Temp/bin/Debug/UnityEngine.VR.dll
+/Users/mac/Project_Planner/Temp/bin/Debug/AsyncBridge.Net35.dll
+/Users/mac/Project_Planner/Temp/bin/Debug/System.Threading.dll

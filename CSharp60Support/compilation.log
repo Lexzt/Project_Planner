@@ -1,0 +1,131 @@
+********************************************************************************
+*                       Tuesday, 07 March 2017 21:00:37                        *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 2.0.3.30
+Platform: Mac
+Target assembly: Assembly-CSharp.dll
+Project directory: /Users/mac/Project_Planner
+Target profile directory: /Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity
+Unity 'Data' or 'Frameworks' directory: /Applications/Unity/Unity.app/Contents
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: /Applications/Unity/Unity.app/Contents/MonoBleedingEdge/bin/mono
+Arguments: "/Users/mac/Project_Planner/CSharp60Support/Roslyn/csc.exe" -nostdlib+ -noconfig -nologo -r:"/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/mscorlib.dll" -r:"/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/System.dll" -r:"/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/System.Core.dll" -r:"/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/System.Xml.dll" @Temp/UnityTempFile-5fb03a7ef445e41a8a2f54641e8ac056 -debug-
+Exit code: 0
+Elapsed time: 5.79 sec
+
+- Compiler output (0 lines):
+
+- Compiler errors (30 lines):
+0: Assets/Basic/StaticVars.cs(41,4): warning CS0162: Unreachable code detected
+1: Assets/Basic/StaticVars.cs(44,4): warning CS0162: Unreachable code detected
+2: Assets/Basic/StaticVars.cs(47,4): warning CS0162: Unreachable code detected
+3: Assets/Basic/StaticVars.cs(50,4): warning CS0162: Unreachable code detected
+4: Assets/Basic/StaticVars.cs(53,4): warning CS0162: Unreachable code detected
+5: Assets/Basic/StaticVars.cs(58,4): warning CS0162: Unreachable code detected
+6: Assets/Basic/StaticVars.cs(68,4): warning CS0162: Unreachable code detected
+7: Assets/Basic/StaticVars.cs(71,4): warning CS0162: Unreachable code detected
+8: Assets/Basic/StaticVars.cs(74,4): warning CS0162: Unreachable code detected
+9: Assets/Basic/StaticVars.cs(77,4): warning CS0162: Unreachable code detected
+10: Assets/Basic/StaticVars.cs(80,4): warning CS0162: Unreachable code detected
+11: Assets/Basic/StaticVars.cs(85,4): warning CS0162: Unreachable code detected
+12: Assets/Basic/Emplacement.cs(208,3): warning CS0162: Unreachable code detected
+13: Assets/CombinationAssign/CombinationAssign.cs(88,7): warning CS0219: The variable 'otherP' is assigned but its value is never used
+14: Assets/CombinationAssign/CombinationAssign.cs(480,9): warning CS0219: The variable 'depth' is assigned but its value is never used
+15: Assets/CombinationAssign/CombinationAssign.cs(536,9): warning CS0219: The variable 'counter' is assigned but its value is never used
+16: Assets/CombinationAssign/CombinationAssign.cs(595,12): warning CS0219: The variable 'order' is assigned but its value is never used
+17: Assets/CombinationAssign/CombinationAssign.cs(596,9): warning CS0219: The variable 'index' is assigned but its value is never used
+18: Assets/unity-ui-extensions/Scripts/Effects/UIParticleSystem.cs(73,5): warning CS0618: 'ParticleSystem.scalingMode' is obsolete: 'scalingMode property is deprecated. Use main.scalingMode instead.'
+19: Assets/unity-ui-extensions/Scripts/Effects/UIParticleSystem.cs(78,46): warning CS0618: 'ParticleSystem.maxParticles' is obsolete: 'maxParticles property is deprecated. Use main.maxParticles instead.'
+20: Assets/unity-ui-extensions/Scripts/Effects/UIParticleSystem.cs(131,25): warning CS0618: 'ParticleSystem.simulationSpace' is obsolete: 'simulationSpace property is deprecated. Use main.simulationSpace instead.'
+21: Assets/unity-ui-extensions/Scripts/Effects/UIParticleSystem.cs(138,9): warning CS0618: 'ParticleSystem.scalingMode' is obsolete: 'scalingMode property is deprecated. Use main.scalingMode instead.'
+22: Assets/unity-ui-extensions/Scripts/Effects/UIParticleSystem.cs(145,33): warning CS0618: 'ParticleSystem.Particle.lifetime' is obsolete: 'Please use Particle.remainingLifetime instead. (UnityUpgradable) -> UnityEngine.ParticleSystem/Particle.remainingLifetime'
+23: Assets/CombinationAssign/CombinationAssign.cs(695,12): warning CS0649: Field 'CombinationAssign.fullCombiPath' is never assigned to, and will always have its default value null
+24: Assets/unity-ui-extensions/Scripts/Utilities/UIScrollToSelectionXY.cs(24,31): warning CS0649: Field 'UIScrollToSelectionXY.layoutListGroup' is never assigned to, and will always have its default value null
+25: Assets/unity-ui-extensions/Scripts/ComboBox/DropDownListItem.cs(81,25): warning CS0649: Field 'DropDownListItem.OnUpdate' is never assigned to, and will always have its default value null
+26: Assets/unity-ui-extensions/Scripts/Utilities/ScrollRectLinker.cs(14,20): warning CS0649: Field 'ScrollRectLinker.controllingScrollRect' is never assigned to, and will always have its default value null
+27: Assets/unity-ui-extensions/Scripts/Utilities/UIScrollToSelection.cs(21,28): warning CS0649: Field 'UIScrollToSelection.scrollDirection' is never assigned to, and will always have its default value
+28: Assets/Basic/Emplacement.cs(27,15): warning CS0414: The field 'Emplacement.AllAssigned' is assigned but its value is never used
+29: Assets/CombinationAssign/CombinationAssign.cs(790,6): warning CS0414: The field 'CombinationAssign.count' is assigned but its value is never used
+
+PDB to MDB conversion skipped
+********************************************************************************
+*                       Tuesday, 07 March 2017 21:00:47                        *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 2.0.3.30
+Platform: Mac
+Target assembly: Assembly-CSharp.dll
+Project directory: /Users/mac/Project_Planner
+Target profile directory: /Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity
+Unity 'Data' or 'Frameworks' directory: /Applications/Unity/Unity.app/Contents
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: /Applications/Unity/Unity.app/Contents/MonoBleedingEdge/bin/mono
+Arguments: "/Users/mac/Project_Planner/CSharp60Support/Roslyn/csc.exe" -nostdlib+ -noconfig -nologo -r:"/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/mscorlib.dll" -r:"/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/System.dll" -r:"/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/System.Core.dll" -r:"/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/System.Xml.dll" @Temp/UnityTempFile-f6425e1b6f06848fd9ff02e55f156896 -debug-
+Exit code: 0
+Elapsed time: 4.36 sec
+
+- Compiler output (0 lines):
+
+- Compiler errors (30 lines):
+0: Assets/Basic/StaticVars.cs(41,4): warning CS0162: Unreachable code detected
+1: Assets/Basic/StaticVars.cs(44,4): warning CS0162: Unreachable code detected
+2: Assets/Basic/StaticVars.cs(47,4): warning CS0162: Unreachable code detected
+3: Assets/Basic/StaticVars.cs(50,4): warning CS0162: Unreachable code detected
+4: Assets/Basic/StaticVars.cs(53,4): warning CS0162: Unreachable code detected
+5: Assets/Basic/StaticVars.cs(58,4): warning CS0162: Unreachable code detected
+6: Assets/Basic/StaticVars.cs(68,4): warning CS0162: Unreachable code detected
+7: Assets/Basic/StaticVars.cs(71,4): warning CS0162: Unreachable code detected
+8: Assets/Basic/StaticVars.cs(74,4): warning CS0162: Unreachable code detected
+9: Assets/Basic/StaticVars.cs(77,4): warning CS0162: Unreachable code detected
+10: Assets/Basic/StaticVars.cs(80,4): warning CS0162: Unreachable code detected
+11: Assets/Basic/StaticVars.cs(85,4): warning CS0162: Unreachable code detected
+12: Assets/Basic/Emplacement.cs(208,3): warning CS0162: Unreachable code detected
+13: Assets/CombinationAssign/CombinationAssign.cs(88,7): warning CS0219: The variable 'otherP' is assigned but its value is never used
+14: Assets/CombinationAssign/CombinationAssign.cs(480,9): warning CS0219: The variable 'depth' is assigned but its value is never used
+15: Assets/CombinationAssign/CombinationAssign.cs(536,9): warning CS0219: The variable 'counter' is assigned but its value is never used
+16: Assets/CombinationAssign/CombinationAssign.cs(595,12): warning CS0219: The variable 'order' is assigned but its value is never used
+17: Assets/CombinationAssign/CombinationAssign.cs(596,9): warning CS0219: The variable 'index' is assigned but its value is never used
+18: Assets/unity-ui-extensions/Scripts/Effects/UIParticleSystem.cs(73,5): warning CS0618: 'ParticleSystem.scalingMode' is obsolete: 'scalingMode property is deprecated. Use main.scalingMode instead.'
+19: Assets/unity-ui-extensions/Scripts/Effects/UIParticleSystem.cs(78,46): warning CS0618: 'ParticleSystem.maxParticles' is obsolete: 'maxParticles property is deprecated. Use main.maxParticles instead.'
+20: Assets/unity-ui-extensions/Scripts/Effects/UIParticleSystem.cs(131,25): warning CS0618: 'ParticleSystem.simulationSpace' is obsolete: 'simulationSpace property is deprecated. Use main.simulationSpace instead.'
+21: Assets/unity-ui-extensions/Scripts/Effects/UIParticleSystem.cs(138,9): warning CS0618: 'ParticleSystem.scalingMode' is obsolete: 'scalingMode property is deprecated. Use main.scalingMode instead.'
+22: Assets/unity-ui-extensions/Scripts/Effects/UIParticleSystem.cs(145,33): warning CS0618: 'ParticleSystem.Particle.lifetime' is obsolete: 'Please use Particle.remainingLifetime instead. (UnityUpgradable) -> UnityEngine.ParticleSystem/Particle.remainingLifetime'
+23: Assets/unity-ui-extensions/Scripts/Utilities/ScrollRectLinker.cs(14,20): warning CS0649: Field 'ScrollRectLinker.controllingScrollRect' is never assigned to, and will always have its default value null
+24: Assets/unity-ui-extensions/Scripts/Utilities/UIScrollToSelection.cs(21,28): warning CS0649: Field 'UIScrollToSelection.scrollDirection' is never assigned to, and will always have its default value
+25: Assets/unity-ui-extensions/Scripts/ComboBox/DropDownListItem.cs(81,25): warning CS0649: Field 'DropDownListItem.OnUpdate' is never assigned to, and will always have its default value null
+26: Assets/unity-ui-extensions/Scripts/Utilities/UIScrollToSelectionXY.cs(24,31): warning CS0649: Field 'UIScrollToSelectionXY.layoutListGroup' is never assigned to, and will always have its default value null
+27: Assets/CombinationAssign/CombinationAssign.cs(695,12): warning CS0649: Field 'CombinationAssign.fullCombiPath' is never assigned to, and will always have its default value null
+28: Assets/CombinationAssign/CombinationAssign.cs(790,6): warning CS0414: The field 'CombinationAssign.count' is assigned but its value is never used
+29: Assets/Basic/Emplacement.cs(27,15): warning CS0414: The field 'Emplacement.AllAssigned' is assigned but its value is never used
+
+PDB to MDB conversion skipped
+********************************************************************************
+*                       Tuesday, 07 March 2017 21:00:52                        *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 2.0.3.30
+Platform: Mac
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: /Users/mac/Project_Planner
+Target profile directory: /Applications/Unity/Unity.app/Contents/Mono/lib/mono/2.0
+Unity 'Data' or 'Frameworks' directory: /Applications/Unity/Unity.app/Contents
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: /Applications/Unity/Unity.app/Contents/MonoBleedingEdge/bin/mono
+Arguments: "/Users/mac/Project_Planner/CSharp60Support/Roslyn/csc.exe" -nostdlib+ -noconfig -nologo -r:"/Applications/Unity/Unity.app/Contents/Mono/lib/mono/2.0/mscorlib.dll" -r:"/Applications/Unity/Unity.app/Contents/Mono/lib/mono/2.0/System.dll" -r:"/Applications/Unity/Unity.app/Contents/Mono/lib/mono/2.0/System.Core.dll" -r:"/Applications/Unity/Unity.app/Contents/Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-9ec9fa95148ac4eb499f91f06826fa0c -debug-
+Exit code: 0
+Elapsed time: 3.32 sec
+
+- Compiler output (0 lines):
+
+- Compiler errors (2 lines):
+0: Assets/unity-ui-extensions/Scripts/Editor/UIExtensionsMenuOptions.cs(663,66): warning CS0618: 'InputField.onValueChange' is obsolete: 'onValueChange has been renamed to onValueChanged'
+1: Assets/unity-ui-extensions/Scripts/Editor/UIExtensionsMenuOptions.cs(759,66): warning CS0618: 'InputField.onValueChange' is obsolete: 'onValueChange has been renamed to onValueChanged'
+
+PDB to MDB conversion skipped

@@ -573,7 +573,7 @@ public class ChangiAirBaseEast : Base
 			//System.IO.File.WriteAllText(Application.dataPath + "/" + "JsonData.txt", root.ToString());
 		}
 
-		if (Input.GetKeyDown (KeyCode.P)) 
+		if (Input.GetKeyDown (KeyCode.O)) 
 		{
 			CalculateSticks (true);
 			CalculateSteps ();

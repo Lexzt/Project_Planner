@@ -3,6 +3,8 @@ using System;
 using System.Text;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 [System.Serializable]
 public class Combi
@@ -238,7 +240,7 @@ public class TempStick
 		StickData = s;
 		role = s.Parent.CurrentRole.ToString();
 		_order = (int)(StickData.TimeStart - StaticVars.StartDate).TotalHours / StaticVars.StickInHours;
-		nameOfEmplacement = s.Parent.name;
+		nameOfEmplacement = s.Parent.NameOfEmplacement;
 	}
 	public bool IsAssigned()
 	{
@@ -253,7 +255,172 @@ public class TempStick
 		PersonData = null;
 	}
 }
+public class CombiExplorer {
+	public long pathsQuota = 0;
+	public List < int > fullCombiPath = null;
 
+	//Check if the list of temppersons is still properly rested.
+	public bool ValidatePersons() {
+		//Cycle through all the persons and check if they have enough rest.
+		foreach(KeyValuePair < Person, List < int >> kvp in assignedPersons) {
+			if (kvp.Value.Count > kvp.Key.OriginNoOfSticks) {
+				return false;
+			}
+
+			//Can skip all these because of the additional check when doing CanConnect.
+			List < int > listOfAssignedSticks = kvp.Value;
+			int span = 0;
+			int prevOrder = 0;
+			//p.ListOfAssginedSticks.Sort (new TStickOrderComparer ());
+
+			foreach(int tso in listOfAssignedSticks) {
+				//Not connected to the previous stick
+
+				if (tso > 1 + prevOrder) {
+					span = 0;
+					//     if (tso > 3 || prevOrder > 3) {
+					//      Debug.Log (tso + " " + prevOrder);
+					//      if (!((tso - prevOrder) > StaticVars.RestAfterSticks)) {
+					//       Debug.Log ("Return false");
+					//      }
+					//     }
+					if (!((tso - prevOrder) > StaticVars.RestAfterSticks)) {
+						return false; //Not enough rest
+					}
+				} else {
+					//Connected to the previous stick.
+					if (++span > StaticVars.MaxNoOfDutyInARow)
+						return false; //Too many sticks connected
+				}
+				prevOrder = tso;
+				/*
+    if ( ((tso - prevOrder) <= StaticVars.RestAfterSticks)) {
+     Debug.Log ("IDK WHY MAN");
+     return false;//Not enough rest
+    }*/
+			}
+		}
+		return true;
+	}
+
+	Dictionary < Person, List < int >> assignedPersons = new Dictionary < Person, List < int >> ();
+	public void UpdateListFromCombi(Combi c) {
+
+		foreach(TempStick ts in c.Combination) {
+			if (assignedPersons.ContainsKey(ts.PersonData)) {
+				assignedPersons[ts.PersonData].Add(ts.order);
+			} else {
+				List < int > newList = new List < int > ();
+				newList.Add(ts.order);
+				assignedPersons.Add(ts.PersonData, newList);
+			}
+		}
+		foreach(KeyValuePair < Person, List < int >> kvp in assignedPersons) {
+			kvp.Value.Sort();
+		}
+	}
+	public void RevertListFromCombi(Combi c) {
+		foreach(TempStick ts in c.Combination) {
+			if (assignedPersons.ContainsKey(ts.PersonData)) {
+				assignedPersons[ts.PersonData].Remove(ts.order);
+			}
+		}
+	}
+	int stepsTaken = 0;
+	public List < int > GetFullCombi(List < List < Combi >> combiSteps, Combi prev = null, int index = 0) {
+		List < Combi > combis = combiSteps[index];
+		int i = 0;
+
+		if (fullCombiPath != null) {
+			if (index == combiSteps.Count - 1)
+			if (--pathsQuota <= 0) return null; //Tracks and limits the combis
+			if (index < fullCombiPath.Count)
+				i = fullCombiPath[index];
+		}
+
+		for (; i < combis.Count; ++i) {
+			stepsTaken++;
+			if (stepsTaken > pathsQuota)
+				return null;
+			Combi c = combis[i];
+			UpdateListFromCombi(c);
+			if ((prev == null || prev.CanConnect(c)) &&
+				ValidatePersons()) {
+				if (index + 1 < combiSteps.Count) {
+					List < int > ret = GetFullCombi(combiSteps, c, index + 1);
+					if (ret != null) {
+						ret.Insert(0, combis.IndexOf(c)); //ret.AddToCombi (c,combis.IndexOf(c));
+						fullCombiPath[index] = i;
+						return ret;
+					}
+				} else {
+					List < int > result = new List < int > ();
+					result.Add(combis.IndexOf(c));
+					fullCombiPath[index] = i;
+					return result; //new Combi (c.Combination, combis.IndexOf (c));
+				}
+			}
+
+			RevertListFromCombi(c);
+			//if(prev != null)
+			//RevertListFromCombi (prev, persons);
+		}
+		if (fullCombiPath != null)
+			fullCombiPath[index] = 0;
+		return null;
+	}
+	void IncrementCombiPath(List < int > FullCombiPath, List < List < Combi >> combinationSteps, long incr = 1, int combiStepIndex = -2) {
+		if (combiStepIndex == -2) {
+			combiStepIndex = combinationSteps.Count - 1;
+		}
+		//Debug.Log ("CombiStepIndex: "+combiStepIndex);
+		if (combiStepIndex < 0 || FullCombiPath == null)
+			return;
+		//Debug.Log ("Did not return ");
+		//Debug.Log ("FCP: "+FullCombiPath.Count);
+		//Debug.Log ("FCP: "+FullCombiPath [combiStepIndex]);
+
+		long num = FullCombiPath[combiStepIndex] + incr;
+		//Debug.Log ("num: " + num);
+		int maxCombiStep = combinationSteps[combiStepIndex].Count;
+		// Debug.Log ("maxCombiStep: " + maxCombiStep);
+		//if (maxCombiStep >= num) {
+		FullCombiPath[combiStepIndex] = (int)(num % maxCombiStep);
+		// Debug.Log ("maxCombiStep: " + FullCombiPath[combiStepIndex]);
+		IncrementCombiPath(FullCombiPath, combinationSteps, num / maxCombiStep, combiStepIndex - 1);
+		// Debug.Log ("RecursiveShit" + maxCombiStep);
+
+		//}
+	}
+	public CombiExplorer(List < int > startingCombiPath, List < List < Combi >> combinationSteps, List < TempPerson > persons, long pathOffset, long combiQuota) {
+		//Debug.Log ("New Explorer");
+		if (startingCombiPath != null && startingCombiPath.Count == combinationSteps.Count)
+			fullCombiPath = new List < int > (startingCombiPath);
+		else {
+			fullCombiPath = new List < int > (combinationSteps.Count);
+			int diff = 0;
+			if (fullCombiPath != null && startingCombiPath != null)
+				diff = fullCombiPath.Count - startingCombiPath.Count;
+
+			for (int i = 0; i < combinationSteps.Count; ++i) {
+				fullCombiPath.Add(0);
+			}
+		}
+		//Debug.Log ("New List");
+		IncrementCombiPath(fullCombiPath, combinationSteps, pathOffset);
+		//Debug.Log ("Incr Path to offset");
+		foreach(TempPerson tp in persons) {
+			List < int > newList = new List < int > ();
+			assignedPersons.Add(tp.PersonData, newList);
+			foreach(TempStick ts in tp.ListOfAssginedSticks) {
+				assignedPersons[tp.PersonData].Add(ts.order);
+			}
+		}
+		//Debug.Log ("Assigned peeps");
+
+		pathsQuota = combiQuota;
+	}
+}
 public class CombinationAssign : MonoBehaviour
 {
 	List<TempPerson> Persons;
@@ -267,13 +434,18 @@ public class CombinationAssign : MonoBehaviour
 	bool stop = true;
 	Job myJob;
 	StringBuilder debuglog = new StringBuilder();
+	List<List<int>> ListOfCombinations = new List<List<int>>();
+	public List<Emplacement> Emplacements;
+	public List<Batch> Batches;
 
 	void Start()
 	{
 		ProgressStepSize = (int)Mathf.Pow(2, 31);
 		myJob = new Job();
-		myJob.InData = new Vector3[10]; //myJob.Start(); // Don't touch any data in the job class after you called Start until IsDone is true.
+		myJob.InData = new Vector3[10];
 
+		Batches = GetComponent<Base> ().Batches;
+		Emplacements = GetComponent<Base> ().Emplacements;
 	}
 	public int OrderIndex(int order){
 		for (int i = 0; i < Sticks.Count; ++i) {
@@ -297,63 +469,129 @@ public class CombinationAssign : MonoBehaviour
 		}
 		if (stop == true && Input.GetKeyDown(KeyCode.Y))
 		{
-			Combinations = new List<Combi>();
-			debug = new StringBuilder();
-			stop = false;
-			int combIndex = 0;
-			List<TempPerson> tp = Persons = new List<TempPerson> ();
-			Sticks = new List<TempStick>();
-			int depth = 0, sOrder = 0, eOrder =0;
-			do{
-				sOrder = startOrder + combIndex * sampleSize;
-				eOrder = startOrder + (combIndex+1) * sampleSize;
-				PrepareAACR(tp,Sticks, sOrder,eOrder);
-				Combinations = CombinationSteps[combIndex];
-				//				StringBuilder sb = new StringBuilder();
-				//				foreach (TempPerson p in tp)
-				//				{
-				//					sb.Append(p.PersonData.Name + "\n");
-				//					foreach (TempStick s in p.ListOfPossibleSticks)
-				//					{
-				//						sb.Append("\t" + s.StickData.TimeStart + " - " + s.StickData.Parent.NameOfEmplacement + "\n");
-				//					}
-				//				}
-				//				System.IO.File.WriteAllText(Application.dataPath + "/" + "debug1.txt", sb.ToString());
-				//				sb = new StringBuilder(); 
-				//AssignAndCheckR(tp,sb,0, 0,3);
-
-				AssignAndCheckR(tp, OrderIndex(sOrder), sOrder,eOrder);
-				//depth = Sticks.IndexOf(Combinations[0].Combination[Combinations[0].Combination.Count-1])+1;
-			}while(++combIndex < CombinationSteps.Count);
-			//Combinations = CombinationSteps[0];
-			Debug.Log (Combinations.Count);
-			//Debug.Log(debug);
-			//System.IO.File.WriteAllText(Application.dataPath + "/" + "debug.txt", debug);
-
-			stop = true;
+			Task t = new Task (() => {
+				Debug.Log("Start Calc");
+				Combinations = new List<Combi>();
+				debug = new StringBuilder();
+				stop = false;
+				int combIndex = 0;
+				List<TempPerson> tp = Persons = new List<TempPerson> ();
+				Sticks = new List<TempStick>();
+				int depth = 0, sOrder = 0, eOrder =0;
+				do{
+					sOrder = startOrder + combIndex * sampleSize;
+					eOrder = startOrder + (combIndex+1) * sampleSize;
+					PrepareAACR(tp,Sticks, sOrder,eOrder);
+					Combinations = CombinationSteps[combIndex];
+					AssignAndCheckR(tp, OrderIndex(sOrder), sOrder,eOrder);
+					//depth = Sticks.IndexOf(Combinations[0].Combination[Combinations[0].Combination.Count-1])+1;
+				}while(++combIndex < CombinationSteps.Count);
+				//Combinations = CombinationSteps[0];
+				Debug.Log ("Thread Done!");
+				//System.IO.File.WriteAllText(Application.dataPath + "/" + "debug.txt", debug);
+				stop = true;
+			});
+			t.Start ();
 		}
 		if (Input.GetKeyDown (KeyCode.C)) {
-			Combi.ReadCombiPath (CurrCombiPath,fullCombiPath);
+			//Combi.ReadCombiPath (CurrCombiPath,fullCombiPath);
+			Debug.Log(CombinationSteps.Count);
+		}
+		if (Input.GetKeyDown (KeyCode.V)) {
+			Debug.Log (ListOfCombinations.Count);
+			foreach(List<int> combi in ListOfCombinations)
+			{
+				string fullStringPath = "";
+				foreach (int val in combi) 
+				{
+					fullStringPath += (val + " ");
+				}
+				Debug.Log (fullStringPath);
+			}
+//			for (int i = 0; i < 8; i++) 
+//			{
+//				List<int> vals = ListOfCombinations[UnityEngine.Random.Range(0,ListOfCombinations.Count-1)];
+////				CombinationSteps[i][vals[i]]
+//			}
+
+//			foreach (List<Combi> combiStep in CombinationSteps) 
+//			{
+//				combiStep[0].
+//			}
 		}
 		if (Input.GetKeyDown(KeyCode.T))
 		{
 			if (Combinations != null) {
 				//StringBuilder sb = new StringBuilder ();
 				//sb.Append ("No Of Combinations: " + Combinations.Count + "\n");
-				Debug.Log (Combinations.Count);
-				IncrementCombiPath (fullCombiPath, CombinationSteps);
-				Combi showCombi = GetFullCombi (Persons, CombinationSteps);//Combinations[0];
-				fullCombiPath = showCombi.combiIndex;
-				CurrCombiPath = showCombi.CombiPath();
+//				Debug.Log (Combinations.Count);
+//				Debug.Log ("Persons: ");
+//				for(int i=0;i<Persons.Count;++i)
+//				Debug.Log (Persons[i].ListOfAssginedSticks.Count);
+//				Debug.Log (": End ");
+				//Debug.Break ();
+
+				long TotalCombiSteps = 1;
+				int threadCount = 20;
+				int counter = 0;
+
+				foreach (List<Combi> combiStep in CombinationSteps) 
+				{
+					TotalCombiSteps *= combiStep.Count;
+				}
+				Debug.Log ("Total Steps: " + TotalCombiSteps);
+				Debug.Log ("Quota Per step: " + TotalCombiSteps / (threadCount - 1));
+
+				ParallelOptions po = new ParallelOptions ();
+				po.TaskScheduler = UnityTaskScheduler.Default;
+				po.MaxDegreeOfParallelism = 2;
+
+				Parallel.For (0, threadCount, (f) => {
+					Task t = new Task (() => {
+						int ThreadNo = -1;
+						int LoopAmount = 3;
+						long threadQuota = -1;
+
+						ThreadNo = f;
+
+						// Previous 
+						threadQuota = 1000;
+
+						// Current
+//						threadQuota = TotalCombiSteps / (threadCount - 1);
+//						if(ThreadNo == threadCount -1)
+//							threadQuota = TotalCombiSteps % (threadCount - 1);
+
+						//IncrementCombiPath (fullCombiPath, CombinationSteps,threadQuota*ThreadNo);
+						for(int i = 1; i < LoopAmount; i++)
+						{
+							CombiExplorer combiExplorer = new CombiExplorer(fullCombiPath,CombinationSteps,Persons,threadQuota*ThreadNo + i,threadQuota);
+							Debug.Log (f + ": Done First Func (" + i + ") times");
+							List<int> showCombi = combiExplorer.GetFullCombi (CombinationSteps);
+							Debug.Log (f + ": Done Second Func (" + i + ") times");
+							lock (ListOfCombinations) {
+								ListOfCombinations.Add (showCombi);
+								Debug.Log (f + ": Added Combination " + ThreadNo);
+							}
+						}
+						Debug.Log (f + ": Done with thread " + ThreadNo);
+					});
+					t.Start ();
+				});
+
+				//IncrementCombiPath (fullCombiPath, CombinationSteps);
+				//Combi showCombi = GetFullCombi (Persons, CombinationSteps);//Combinations[0];
+				//fullCombiPath = showCombi.combiIndex;
+				//CurrCombiPath = showCombi.CombiPath();
 				foreach (Emplacement emp in GetComponent<Base>().Emplacements)
 				{
 					emp.Reset();
 				}
-				foreach (TempStick s in showCombi.Combination)
-				{
-					if(s.IsAssigned())
-						s.StickData.AssignPerson(s.PersonData);
-				}
+//				foreach (TempStick s in showCombi.Combination)
+//				{
+//					if(s.IsAssigned())
+//						s.StickData.AssignPerson(s.PersonData);
+//				}
 				string order = "";
 				int index = 0;
 				/*foreach (Combi comb in Combinations)
@@ -440,7 +678,7 @@ public class CombinationAssign : MonoBehaviour
 		}
 		return true;
 	}
-	void IncrementCombiPath(List<int> FullCombiPath,List<List<Combi>> combinationSteps,int combiStepIndex = -2, int incr=1){
+	void IncrementCombiPath(List<int> FullCombiPath,List<List<Combi>> combinationSteps, int incr=1,int combiStepIndex = -2){
 		if (combiStepIndex == -2) {
 			combiStepIndex = combinationSteps.Count-1;
 		}
@@ -451,7 +689,7 @@ public class CombinationAssign : MonoBehaviour
 		int maxCombiStep = combinationSteps [combiStepIndex].Count ;
 		if (maxCombiStep >= num) {
 			FullCombiPath[combiStepIndex] = num % maxCombiStep  ;
-			IncrementCombiPath(FullCombiPath,combinationSteps,combiStepIndex -1,num/maxCombiStep);
+			IncrementCombiPath(FullCombiPath,combinationSteps,num/maxCombiStep,combiStepIndex -1);
 		}
 	}
 	List<int> fullCombiPath;
@@ -491,13 +729,13 @@ public class CombinationAssign : MonoBehaviour
 	List<TempPerson> PrepareAACR(List<TempPerson> c, List<TempStick> s, int StartOrder, int EndOrder)
 	{
 		if (CombinationSteps.Count == 0) {
-			List<Batch> AllBatches = GetComponent<Base> ().Batches;
+			List<Batch> AllBatches = Batches;
 			foreach (Batch b in AllBatches) {
 				foreach (Person p in b.ListOfPeople) {
 					c.Add (new TempPerson (p));
 				}
 			}
-			List<Emplacement> AllEmp = GetComponent<Base> ().Emplacements;
+			List<Emplacement> AllEmp = Emplacements;
 			int curOrder = 0;
 			foreach (Emplacement emp in AllEmp) {
 				if (!emp.IsSpecialRole ()) {
